@@ -1,0 +1,26 @@
+.profile-dropdown {
+    position: absolute;
+    top: 60%;
+    right: 1%;
+    z-index: 1; /* Ensure the dropdown is above other content */
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.profile-dropdown div {
+    margin-bottom: 0.3em; /* Add space between each item in the dropdown */
+    border-bottom: 1px solid black;
+}
+
+.profile-dropdown div:last-child {
+    border-bottom: none; /* Remove border-bottom for the button */
+}
+
+.profile-dropdown a { /* This selector will work for <Link> components
+    because they render as <a> elements under the hood ⛅️☀️ */
+    color: rgb(41, 116, 207);
+    text-decoration: none;
+}
