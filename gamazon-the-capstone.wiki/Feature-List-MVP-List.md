@@ -1,4 +1,4 @@
-# 1. Store
+# 1. Stores
 * Users should be able to view their store.
 * Users should be able to create a store.
 * Users should be able to update their store.

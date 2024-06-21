@@ -16,6 +16,9 @@ router.post('/test', (req, res) => {
     res.json({ requestBody: req.body });
 });
 
+const storesRouter = require('./stores.js');
+router.use('/stores', storesRouter);
+
 module.exports = router;
 
 
