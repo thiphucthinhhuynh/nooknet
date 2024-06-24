@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // --------------------------------------------------------------------------------------//
-//                  View the store owned by the Current User                            //
+//                  View the Store owned by the Current User                            //
 // ------------------------------------------------------------------------------------//
 router.get('/current', requireAuth, async (req, res, next) => {
     try {

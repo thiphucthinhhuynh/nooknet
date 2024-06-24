@@ -43,7 +43,7 @@ export const createNewItem = (formData) => async (dispatch) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData);
+        body: JSON.stringify(formData)
     });
 
     if (response.ok) {
@@ -61,7 +61,7 @@ export const deleteItem = (itemId) => async (dispatch) => {
     }
 };
 
-export const updateItem = (formData) => async (dispatch) => {
+export const updateItem = (formData, itemId) => async (dispatch) => {
     const response = await csrfFetch(`/api/items/${itemId}`, {
         method: "PUT",
         headers: {
