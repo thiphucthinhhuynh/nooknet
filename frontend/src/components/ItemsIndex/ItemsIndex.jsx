@@ -1,4 +1,5 @@
 import './ItemsIndex.css';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllItems } from '../../store/item.js';
@@ -13,12 +14,15 @@ const ItemsIndex = () => {
 
     return (
         <div>
+            <h1>Hi from ItemIndex</h1>
             {items.map((item) => (
-                <div key={item.id}>
-                    <h3>{item.name}</h3>
-                    <p>{item.category}</p>
-                    <p>{item.price}</p>
-                </div>
+                <span key={item.id}>
+                    <Link to={`/items/${item.id}`}>
+                        <span>{item.name}</span>
+                        <span>{item.category}</span>
+                        <span>{item.price}</span>
+                    </Link>
+                </span>
             ))}
         </div>
     );
