@@ -1,22 +1,20 @@
 .navigation {
     position: sticky;
-    top: 0; /* We must set at least one threshold value using top, right, bottom or left in order for sticky positioning to work.
-    A sticky element will start off as relatively positioned until you scroll past its original position
-    (While fix positioned element is removed from the page flow,
-    like an absolutely positioned element) 🌅🌅 */
-
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color:  rgba(229, 229, 229, 0.7);
-    border-bottom: 2px solid rgb(252, 96, 96);
+    background-color: rgba(229, 229, 229, 0.7);
+    border-bottom: 2px solid rgb(47, 210, 90);
+    ;
 }
 
 #app-logo {
     width: 100px;
     height: 50px;
-    margin-right: auto; /* Pushes the logo to the left */
+    margin-right: auto;
+    /* Pushes the logo to the left */
 }
 
 .create-spot-link {
@@ -29,7 +27,7 @@
 .profile-button {
     height: 40px;
     width: 70px;
-    background: rgb(60, 56, 56);
-    color: rgb(252, 96, 96);
+    background: transparent;
+    color: rgb(47, 210, 90);
     font-size: 1.1em;
 }
