@@ -14,9 +14,9 @@ const addItem = (item) => ({
     item
 });
 
-const removeItem = (item) => ({
+const removeItem = (itemId) => ({
     type: REMOVE_ITEM,
-    item
+    itemId
 });
 
 export const fetchAllItems = () => async (dispatch) => {
@@ -38,7 +38,7 @@ export const getItemsByCurrentUser = () => async (dispatch) => {
 };
 
 export const createNewItem = (formData) => async (dispatch) => {
-    const response = csrfFetch(`/api/items`, {
+    const response = await csrfFetch(`/api/items`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
