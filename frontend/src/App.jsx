@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
+import ItemsIndex from './components/ItemsIndex';
+import ItemDetails from './components/ItemDetails';
+import Sidebar from './components/Sidebar';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -15,10 +18,14 @@ function Layout() {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
-    </>
+
+      <div>
+        <Sidebar />
+      </div>
+    </div>
   );
 }
 
@@ -28,7 +35,29 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <ItemsIndex />
+      },
+      {
+        path: 'items',
+        element: <Outlet />,
+        children: [
+          {
+            path: ':itemId',
+            element: <ItemDetails />
+          }
+        ]
+      },
+      {
+        path: 'profile',
+        element: <Profile />
+      },
+      {
+        path: 'stores',
+        element: <Stores />
+      },
+      {
+        path: 'likes',
+        element: <Likes />
       }
     ]
   }
