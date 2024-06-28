@@ -48,7 +48,7 @@ export const createNewStore = (formData) => async (dispatch) => {
 
     if (response.ok) {
         const newStore = await response.json();
-        dispatch(addStore(store));
+        dispatch(addStore(newStore));
         return newStore;
     }
 };
