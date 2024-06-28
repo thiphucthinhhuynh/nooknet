@@ -9,7 +9,7 @@ import CreateStore from '../CreateStore';
 
 const Profile = () => {
     const dispatch = useDispatch();
-    const userStore = useSelector((state) => state.userStoreState.allStores[0]);
+    const userStore = useSelector((state) => state.userStoreState.allStores.length > 0 ? state.userStoreState.allStores[0] : null);
     const sessionUser = useSelector((state) => state.session.user);
     const items = useSelector((state) => state.itemState.allItems);
 
@@ -24,7 +24,7 @@ const Profile = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (userStore) {
+        if (userStore && userStore.id) {
             dispatch(getItemsByStore(userStore.id));
         }
     }, [dispatch, userStore]);

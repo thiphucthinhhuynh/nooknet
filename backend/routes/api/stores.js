@@ -24,7 +24,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         const store = await Store.findOne({ where: { ownerId: userId } });
 
         if (!store) {
-            return res.status(404).json({ message: "Store not found." });
+            return res.status(200).json(null);
         }
 
         return res.status(200).json(store);
