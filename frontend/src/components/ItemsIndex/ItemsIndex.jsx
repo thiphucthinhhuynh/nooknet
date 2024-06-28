@@ -1,6 +1,6 @@
 import './ItemsIndex.css';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllItems } from '../../store/item.js';
 

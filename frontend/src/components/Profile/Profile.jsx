@@ -1,10 +1,10 @@
 import './Profile.css';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 
 const Profile = () => {
-    const dispatch = useDispatch();
-    const userStore = useSelector((state) => state.userStoreState.allStores);
-    const sessionUser = useSelector((state) => state.session.user);
+    // const dispatch = useDispatch();
+    // const userStore = useSelector((state) => state.userStoreState.allStores);
+    // const sessionUser = useSelector((state) => state.session.user);
 
     return (
         <div>
