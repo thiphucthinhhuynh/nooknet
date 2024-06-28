@@ -6,6 +6,10 @@ import * as sessionActions from './store/session';
 import ItemsIndex from './components/ItemsIndex';
 import ItemDetails from './components/ItemDetails';
 import Sidebar from './components/Sidebar';
+import Profile from './components/Profile';
+import Stores from './components/Stores';
+import Likes from './components/Likes';
+
 
 function Layout() {
   const dispatch = useDispatch();
@@ -49,7 +53,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile',
-        element: <Profile />
+        element:
+          <Profile />
       },
       {
         path: 'stores',
