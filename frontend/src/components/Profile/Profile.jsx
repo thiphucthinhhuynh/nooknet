@@ -1,21 +1,33 @@
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
+import CreateStore from '../CreateStore';
 
 
 const Profile = () => {
     const dispatch = useDispatch();
-    const userStore = useSelector((state) => state.userStoreState.allStores);
+    const userStore = useSelector((state) => state.userStoreState.allStores[0]);
     const sessionUser = useSelector((state) => state.session.user);
     const items = useSelector((state) => state.itemState.allItems);
 
+    const [showCreateStore, setShowCreateStore] = useState(false);
+
+    const handleCreateStoreClick = () => {
+        setShowCreateStore(true);
+    };
+
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
-        dispatch(getItemsByStore(userStore.id));
     }, [dispatch]);
+
+    useEffect(() => {
+        if (userStore) {
+            dispatch(getItemsByStore(userStore.id));
+        }
+    }, [dispatch, userStore]);
 
     return (
         <div>
@@ -25,23 +37,28 @@ const Profile = () => {
                 <div>{sessionUser.username}</div>
             </div>
 
-            <div className="store-section">
-                <div>{userStore.name}</div>
-                <div>{userStore.location}</div>
-                <div>{userStore.description}</div>
-            </div>
+            {userStore ?
+                <>
+                    <div className="store-section">
+                        <div>{userStore.name}</div>
+                        <div>{userStore.location}</div>
+                        <div>{userStore.description}</div>
+                    </div>
 
-            <div className="item-section">
-                {items.map((item) => (
-                    <span key={item.id}>
-                        <Link to={`/items/${item.id}`}>
-                            <span>{item.name}</span>
-                            <span>{item.category}</span>
-                            <span>{item.price}</span>
-                        </Link>
-                    </span>
-                ))}
-            </div>
+                    <div className="item-section">
+                        {items.map((item) => (
+                            <span key={item.id}>
+                                <Link to={`/items/${item.id}`}>
+                                    <span>{item.name}</span>
+                                    <span>{item.category}</span>
+                                    <span>{item.price}</span>
+                                </Link>
+                            </span>
+                        ))}
+                    </div>
+                </>
+                : (!showCreateStore ? <div onClick={handleCreateStoreClick}>Create a Store </div> : <CreateStore />)
+            }
         </div>
     );
 };
