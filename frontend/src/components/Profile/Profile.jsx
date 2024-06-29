@@ -1,10 +1,12 @@
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
 import CreateStore from '../CreateStore';
+import DeleteStore from '../DeleteStore';
 
 
 const Profile = () => {
@@ -12,12 +14,6 @@ const Profile = () => {
     const userStore = useSelector((state) => state.userStoreState.allStores.length > 0 ? state.userStoreState.allStores[0] : null);
     const sessionUser = useSelector((state) => state.session.user);
     const items = useSelector((state) => state.itemState.allItems);
-
-    const [showCreateStore, setShowCreateStore] = useState(false);
-
-    const handleCreateStoreClick = () => {
-        setShowCreateStore(true);
-    };
 
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
@@ -40,6 +36,8 @@ const Profile = () => {
             {userStore ?
                 <>
                     <div className="store-section">
+                        <OpenModalMenuItem itemText="Delete Store" modalComponent={<DeleteStore storeId={userStore.id} />} />
+
                         <div>{userStore.name}</div>
                         <div>{userStore.location}</div>
                         <div>{userStore.description}</div>
@@ -57,7 +55,7 @@ const Profile = () => {
                         ))}
                     </div>
                 </>
-                : (!showCreateStore ? <div onClick={handleCreateStoreClick}>Create a Store </div> : <CreateStore />)
+                : (<OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} />)
             }
         </div>
     );

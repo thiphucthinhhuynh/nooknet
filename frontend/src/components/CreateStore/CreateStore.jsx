@@ -1,8 +1,8 @@
 import './CreateStore.css';
+import { useModal } from '../../context/Modal';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
-import { createNewStore } from '../../store/userStore.js';
+import { createNewStore, getStoreByCurrentUser } from '../../store/userStore.js';
 
 const CreateStore = () => {
     const [name, setName] = useState('');
@@ -11,7 +11,7 @@ const CreateStore = () => {
     const [validationErrors, setValidationErrors] = useState({});
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const { closeModal } = useModal();
     const sessionUser = useSelector((state) => state.session.user);
 
     useEffect(() => {
@@ -45,8 +45,10 @@ const CreateStore = () => {
         const newStore = await dispatch(createNewStore(newStoreData));
 
         if (newStore) {
-            navigate('/profile');
+            await dispatch(getStoreByCurrentUser());
         }
+
+        closeModal();
     };
 
     return (
@@ -77,7 +79,7 @@ const CreateStore = () => {
                 />
 
                 <button type="submit" disabled={Object.values(validationErrors).length}>Create Your Store</button>
-                <button type="button" onClick={() => navigate("/profile")}>Cancel</button>
+                <button type="button" onClick={closeModal}>Cancel</button>
 
             </form>
 

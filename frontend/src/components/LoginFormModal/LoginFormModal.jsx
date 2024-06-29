@@ -31,7 +31,7 @@ function LoginFormModal() {
         e.preventDefault();
         setErrors({});
 
-        return dispatch(sessionActions.login({ credential: 'demo_user', password: 'demoUserPassword' }))
+        return dispatch(sessionActions.login({ credential: 'demo_user', password: 'password' }))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
