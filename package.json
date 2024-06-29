@@ -1,5 +1,5 @@
 {
-  "name": "gamazon-the-capstone",
+  "name": "nooknet",
   "version": "1.0.0",
   "description": "## Link to Live Site",
   "main": "index.js",
@@ -13,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thiphucthinhhuynh/gamazon-the-capstone.git"
+    "url": "git+https://github.com/thiphucthinhhuynh/nooknet.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thiphucthinhhuynh/gamazon-the-capstone/issues"
+    "url": "https://github.com/thiphucthinhhuynh/nooknet/issues"
   },
-  "homepage": "https://github.com/thiphucthinhhuynh/gamazon-the-capstone#readme"
+  "homepage": "https://github.com/thiphucthinhhuynh/nooknet#readme"
 }

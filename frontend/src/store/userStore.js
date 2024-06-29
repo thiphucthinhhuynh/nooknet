@@ -84,7 +84,7 @@ const userStoreReducer = (state = initialState, action) => {
         case LOAD_ALL_STORES:
             return {
                 ...state,
-                allStores: action.stores
+                allStores: [action.stores]
             };
         case ADD_STORE: {
             const newState = {
