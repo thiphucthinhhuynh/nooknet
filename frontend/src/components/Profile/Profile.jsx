@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
+import UpdateStore from '../UpdateStore';
 import CreateStore from '../CreateStore';
 import DeleteStore from '../DeleteStore';
 
@@ -36,6 +37,7 @@ const Profile = () => {
             {userStore ?
                 <>
                     <div className="store-section">
+                        <OpenModalMenuItem itemText="Update Store" modalComponent={<UpdateStore storeId={userStore.id} sessionUser={sessionUser} userStore={userStore} />} />
                         <OpenModalMenuItem itemText="Delete Store" modalComponent={<DeleteStore storeId={userStore.id} />} />
 
                         <div>{userStore.name}</div>

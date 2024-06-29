@@ -1,18 +1,17 @@
-import './CreateStore.css';
+import './UpdateStore.css';
 import { useModal } from '../../context/Modal';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createNewStore, getStoreByCurrentUser } from '../../store/userStore.js';
+import { updateStore, getStoreByCurrentUser } from '../../store/userStore.js';
 
-const CreateStore = () => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [location, setLocation] = useState('');
-    const [validationErrors, setValidationErrors] = useState({});
-
-    const dispatch = useDispatch();
+const UpdateStore = ({ storeId, sessionUser, userStore }) => {
     const { closeModal } = useModal();
-    const sessionUser = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
+
+    const [name, setName] = useState(userStore.name);
+    const [description, setDescription] = useState(userStore.description);
+    const [location, setLocation] = useState(userStore.location);
+    const [validationErrors, setValidationErrors] = useState({});
 
     useEffect(() => {
         const errors = {};
@@ -35,27 +34,27 @@ const CreateStore = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newStoreData = {
+        const updatedStoreData = {
             ownerId: sessionUser.id,
             name,
             description,
             location
         };
 
-        const newStore = await dispatch(createNewStore(newStoreData));
+        const updatedStore = await dispatch(updateStore(updatedStoreData, storeId));
 
-        if (newStore) {
-            await dispatch(getStoreByCurrentUser());
+        if (updatedStore) {
+            await dispatch(getStoreByCurrentUser())
         }
 
         closeModal();
     };
 
     return (
-        <div className="create-store-container">
-            <h1>Hi from CreateStore</h1>
+        <div className="update-store-container">
+            <h1>Hi from UpdateStore</h1>
 
-            <form onSubmit={handleSubmit} className="create-store-form">
+            <form onSubmit={handleSubmit} className="update-store-form">
                 <input
                     name="name"
                     placeholder="Name"
@@ -78,13 +77,11 @@ const CreateStore = () => {
                     onChange={(e) => setLocation(e.target.value)}
                 />
 
-                <button type="button" onClick={closeModal}>Cancel</button>
-                <button type="submit" disabled={Object.values(validationErrors).length}>Create Your Store</button>
-
+                <button type="button" onClick={closeModal}>Close</button>
+                <button type="submit" disabled={Object.values(validationErrors).length}>Save</button>
             </form>
-
         </div>
     );
 };
 
-export default CreateStore;
+export default UpdateStore;
