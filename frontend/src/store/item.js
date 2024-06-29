@@ -28,8 +28,8 @@ export const fetchAllItems = () => async (dispatch) => {
     }
 };
 
-export const getItemsByCurrentUser = () => async (dispatch) => {
-    const response = await csrfFetch(`/api/items/current`);
+export const getItemsByStore = (storeId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/stores/${storeId}/items`);
 
     if (response.ok) {
         const items = await response.json();

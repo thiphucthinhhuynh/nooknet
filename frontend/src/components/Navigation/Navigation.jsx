@@ -11,7 +11,7 @@ function Navigation({ isLoaded }) {
         <div className="navigation">
 
             <div>
-                <Link to="/"><img id="app-logo" src="./gamazon-logo.png" alt="Gamazon Logo" /></Link>
+                <Link to="/"><img id="app-logo" src="./nooknet-logo.png" alt="Nooknet Logo" /></Link>
             </div>
 
             <div>

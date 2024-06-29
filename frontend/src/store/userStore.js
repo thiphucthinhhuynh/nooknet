@@ -84,9 +84,9 @@ const userStoreReducer = (state = initialState, action) => {
         case LOAD_ALL_STORES:
             return {
                 ...state,
-                allStores: action.stores
+                allStores: [action.stores]
             };
-        case ADD_STORE:
+        case ADD_STORE: {
             const newState = {
                 ...state,
                 allStores: state.allStores.map((store) =>
@@ -94,6 +94,7 @@ const userStoreReducer = (state = initialState, action) => {
                 )
             };
             return newState;
+        }
         case REMOVE_STORE:
             return {
                 ...state,

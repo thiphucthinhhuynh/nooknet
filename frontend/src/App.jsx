@@ -52,13 +52,13 @@ const router = createBrowserRouter([
         ]
       },
       {
+        path: 'stores',
+        element: <Stores />
+      },
+      {
         path: 'profile',
         element:
           <Profile />
-      },
-      {
-        path: 'stores',
-        element: <Stores />
       },
       {
         path: 'likes',
