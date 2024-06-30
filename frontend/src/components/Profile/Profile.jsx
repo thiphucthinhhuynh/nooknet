@@ -27,7 +27,7 @@ const Profile = () => {
     }, [dispatch, userStore]);
 
     return (
-        <div>
+        <div className="profile-page">
             <h1>Hi from Profile</h1>
 
             <div className="profile-section">

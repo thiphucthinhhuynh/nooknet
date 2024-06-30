@@ -1,1 +1,15 @@
 /* TODO: Add sitewide styles */
+* {
+    font-family: "Baloo 2", sans-serif;
+    font-optical-sizing: auto;
+    /* color: black */
+}
+
+.layout {
+    position: relative
+}
+
+h1,
+h2 {
+    font-weight: bold;
+}

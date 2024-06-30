@@ -1,0 +1,12 @@
+.items-index-page {
+    max-width: 50%;
+    margin: 0 auto;
+    border: 1px solid pink;
+    display: flex;
+    flex-direction: row;
+}
+
+.item-tile {
+    display: flex;
+    flex-direction: column;
+}

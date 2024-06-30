@@ -23,7 +23,7 @@ function Layout() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="layout">
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
 

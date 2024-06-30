@@ -13,11 +13,11 @@ const Stores = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className="stores-page">
             <h1>Hi from Stores</h1>
             {stores.map((store) => (
                 <span key={store.id}>
-                    <Link to={`/stores/${store.id}`}>
+                    <Link to={`/stores/${store.id}`} className="store-tile">
                         <div>{store.name}</div>
                         <div>{store.location}</div>
                     </Link>

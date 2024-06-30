@@ -13,11 +13,11 @@ const ItemsIndex = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className="items-index-page">
             <h1>Hi from ItemsIndex</h1>
             {items.map((item) => (
-                <span key={item.id}>
-                    <Link to={`/items/${item.id}`}>
+                <span key={item.id} >
+                    <Link to={`/items/${item.id}`} className="item-tile">
                         <span>{item.name}</span>
                         <span>{item.category}</span>
                         <span>{item.price}</span>

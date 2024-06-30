@@ -1,0 +1,19 @@
+.sidebar {
+    /* border: 1px solid pink; */
+    border: 1px solid transparent;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 20%;
+    gap: 20px;
+    font-size: 1.2em;
+    max-width: 25%;
+    padding: 30px 70px 30px 30px;
+    background-color: rgba(109, 109, 109, 0.167);
+}
+
+.active {
+    color: rgb(0, 171, 0);
+    font-weight: bold;
+}
