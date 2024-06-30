@@ -1,7 +1,7 @@
 import './DeleteStore.css';
 import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';
-import { deleteStore, getStoreByCurrentUser } from '../../store/userStore.js';
+import { deleteStore } from '../../store/userStore.js';
 
 const DeleteStore = ({ storeId }) => {
     const { closeModal } = useModal();

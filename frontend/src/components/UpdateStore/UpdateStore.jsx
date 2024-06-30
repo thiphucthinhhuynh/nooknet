@@ -1,7 +1,7 @@
 import './UpdateStore.css';
 import { useModal } from '../../context/Modal';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateStore, getStoreByCurrentUser } from '../../store/userStore.js';
 
 const UpdateStore = ({ storeId, sessionUser, userStore }) => {

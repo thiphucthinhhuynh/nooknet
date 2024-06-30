@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const LOAD_ALL_STORES = 'userStore/LOAD_ALL_STORES';
 const ADD_STORE = 'userStore/ADD_STORE';
 const REMOVE_STORE = 'userStore/REMOVE_STORE';
+const GET_CURRENT_STORE = 'userStore/GET_CURRENT_STORE';
 
 const loadAllStores = (stores) => ({
     type: LOAD_ALL_STORES,
@@ -19,6 +20,11 @@ const removeStore = (storeId) => ({
     storeId
 });
 
+const getCurrentStore = (store) => ({
+    type: GET_CURRENT_STORE,
+    store
+});
+
 export const fetchAllStores = () => async (dispatch) => {
     const response = await csrfFetch(`/api/stores`);
 
@@ -33,7 +39,7 @@ export const getStoreByCurrentUser = () => async (dispatch) => {
 
     if (response.ok) {
         const store = await response.json();
-        dispatch(loadAllStores(store));
+        dispatch(getCurrentStore(store));
     }
 };
 
@@ -84,7 +90,7 @@ const userStoreReducer = (state = initialState, action) => {
         case LOAD_ALL_STORES:
             return {
                 ...state,
-                allStores: [action.stores]
+                allStores: action.stores
             };
         case ADD_STORE: {
             const newState = {
@@ -101,6 +107,11 @@ const userStoreReducer = (state = initialState, action) => {
                 allStores: state.allStores.filter((store) =>
                     store.id !== action.storeId
                 )
+            };
+        case GET_CURRENT_STORE:
+            return {
+                ...state,
+                currentStore: action.store
             };
         default:
             return state;

@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar';
 import Profile from './components/Profile';
 import Stores from './components/Stores';
 import Likes from './components/Likes';
+import StoreDetails from './components/StoreDetails';
 
 
 function Layout() {
@@ -53,7 +54,17 @@ const router = createBrowserRouter([
       },
       {
         path: 'stores',
-        element: <Stores />
+        element: <Outlet />,
+        children: [
+          {
+            index: true,
+            element: <Stores />
+          },
+          {
+            path: ':storeId',
+            element: <StoreDetails />
+          }
+        ]
       },
       {
         path: 'profile',
