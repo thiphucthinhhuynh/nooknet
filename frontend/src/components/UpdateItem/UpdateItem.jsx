@@ -1,21 +1,17 @@
-import './CreateItem.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import './UpdateItem.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createNewItem } from '../../store/item.js';
+import { updateItem } from '../../store/item.js';
 
-const CreateItem = () => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [category, setCategory] = useState('');
+const UpdateItem = ({ item, onCancel }) => {
+    const [name, setName] = useState(item.name);
+    const [description, setDescription] = useState(item.description);
+    const [price, setPrice] = useState(item.price);
+    const [quantity, setQuantity] = useState(item.quantity);
+    const [category, setCategory] = useState(item.category);
     const [validationErrors, setValidationErrors] = useState({});
 
-    const { storeId } = useParams();
-
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
         const errors = {};
@@ -37,7 +33,7 @@ const CreateItem = () => {
         }
 
         if (!category) {
-            errors.category = "Please enter a category."
+            errors.category = "Please enter a category.";
         }
 
         setValidationErrors(errors);
@@ -46,8 +42,7 @@ const CreateItem = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newItemData = {
-            storeId,
+        const updatedItemData = {
             name,
             description,
             price,
@@ -55,19 +50,18 @@ const CreateItem = () => {
             category
         };
 
-        const newItem = await dispatch(createNewItem(newItemData, storeId));
+        const updatedItem = await dispatch(updateItem(updatedItemData, item.id));
 
-        if (newItem) {
-            navigate(`/items/${newItem.id}`);
+        if (updatedItem) {
+            onCancel();
         }
-
     };
 
     return (
-        <div className="create-item-container">
-            <h1>Hi from CreateItem</h1>
+        <div className="update-item-container">
+            <h1>Hi from UpdateItem</h1>
 
-            <form onSubmit={handleSubmit} className="create-item-form">
+            <form onSubmit={handleSubmit} className="update-item-form">
                 <input
                     name="name"
                     placeholder="Name"
@@ -103,12 +97,12 @@ const CreateItem = () => {
                     onChange={(e) => setCategory(e.target.value)}
                 />
 
-                <button type="button" onClick={() => navigate('/profile')}>❌</button>
-                <button type="submit" disabled={Object.values(validationErrors).length}>Create Now</button>
-
+                <button type="button" onClick={onCancel}>❌</button>
+                <button type="submit" disabled={Object.values(validationErrors).length}>Update Now</button>
             </form>
+
         </div>
     );
 };
 
-export default CreateItem;
+export default UpdateItem;

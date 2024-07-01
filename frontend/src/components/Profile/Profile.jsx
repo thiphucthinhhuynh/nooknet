@@ -8,6 +8,7 @@ import { getItemsByStore } from '../../store/item.js';
 import CreateStore from '../CreateStore';
 import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
+import UpdateItem from '../UpdateItem';
 
 
 const Profile = () => {
@@ -15,6 +16,8 @@ const Profile = () => {
     const userStore = useSelector((state) => state.userStoreState.currentStore);
     const sessionUser = useSelector((state) => state.session.user);
     const items = useSelector((state) => state.itemState.allItems);
+
+    const [updatingItemId, setUpdatingItemId] = useState(null);
 
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
@@ -25,6 +28,14 @@ const Profile = () => {
             dispatch(getItemsByStore(userStore.id));
         }
     }, [dispatch, userStore]);
+
+    const handleUpdateItemClick = (itemId) => {
+        setUpdatingItemId(itemId);
+    };
+
+    const handleCancelUpdateItem = () => {
+        setUpdatingItemId(null);
+    };
 
 
     return (
@@ -51,13 +62,19 @@ const Profile = () => {
 
                         {items.map((item) => (
                             <span key={item.id}>
-                                <Link to={`/items/${item.id}`}>
-                                    <span>{item.name}</span>
-                                    <span>{item.category}</span>
-                                    <span>{item.price}</span>
-                                </Link>
 
-                                <div>Update Item</div>
+                                {updatingItemId === item.id ? (
+                                    <UpdateItem item={item} onCancel={handleCancelUpdateItem} />
+                                ) : (<>
+                                    <Link to={`/items/${item.id}`}>
+                                        <span>{item.name}</span>
+                                        <span>{item.category}</span>
+                                        <span>{item.price}</span>
+                                    </Link>
+
+                                    <div onClick={() => handleUpdateItemClick(item.id)}>Update Item</div>
+                                </>)}
+
                             </span>
                         ))}
                     </div>

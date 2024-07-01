@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 router.put('/:itemId', requireAuth, async (req, res, next) => {
     try {
         const { itemId } = req.params;
-        const { name, description, category, price } = req.body;
+        const { name, description, price, quantity, category } = req.body;
 
         let item = await Item.findByPk(itemId);
 
@@ -35,7 +35,7 @@ router.put('/:itemId', requireAuth, async (req, res, next) => {
             return res.status(403).json({ message: "Unauthorized. Item doesn't belong to a store owned by the current user." })
         }
 
-        await item.update({ name, description, category, price });
+        await item.update({ name, description, price, quantity, category });
         return res.status(200).json(item);
     } catch (error) {
         next(error);

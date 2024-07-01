@@ -1,7 +1,6 @@
 .sidebar {
     /* border: 1px solid pink; */
-    border: 1px solid transparent;
-    border-radius: 5%;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -11,6 +10,7 @@
     max-width: 25%;
     padding: 30px 70px 30px 30px;
     background-color: rgba(109, 109, 109, 0.167);
+    height: 70vh;
 }
 
 .active {
