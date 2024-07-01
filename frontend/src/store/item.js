@@ -37,8 +37,8 @@ export const getItemsByStore = (storeId) => async (dispatch) => {
     }
 };
 
-export const createNewItem = (formData) => async (dispatch) => {
-    const response = await csrfFetch(`/api/items`, {
+export const createNewItem = (formData, storeId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/stores/${storeId}/items`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

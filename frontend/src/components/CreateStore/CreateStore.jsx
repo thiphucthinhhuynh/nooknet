@@ -18,15 +18,15 @@ const CreateStore = () => {
         const errors = {};
 
         if (!name) {
-            errors.name = "Please enter a name";
+            errors.name = "Please enter a name.";
         }
 
         if (!description) {
-            errors.description = "Please enter description";
+            errors.description = "Please enter description.";
         }
 
         if (!location) {
-            errors.location = "Please enter a location";
+            errors.location = "Please enter a location.";
         }
 
         setValidationErrors(errors);

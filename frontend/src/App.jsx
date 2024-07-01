@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import Stores from './components/Stores';
 import Likes from './components/Likes';
 import StoreDetails from './components/StoreDetails';
+import CreateItem from './components/CreateItem';
 
 
 function Layout() {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
           {
             path: ':storeId',
             element: <StoreDetails />
+          },
+          {
+            path: ':storeId/create-item',
+            element: <CreateItem />
           }
         ]
       },

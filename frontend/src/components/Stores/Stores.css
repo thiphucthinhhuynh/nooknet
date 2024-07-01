@@ -4,6 +4,7 @@
     border: 1px solid pink;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .store-tile {

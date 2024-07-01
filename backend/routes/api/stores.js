@@ -124,7 +124,7 @@ router.get('/:storeId/items', async (req, res, next) => {
 router.post('/:storeId/items', requireAuth, async (req, res, next) => {
     try {
         const { storeId } = req.params;
-        const { name, description, category, price } = req.body;
+        const { name, description, price, quantity, category } = req.body;
 
         const store = await Store.findByPk(storeId);
 
@@ -137,7 +137,7 @@ router.post('/:storeId/items', requireAuth, async (req, res, next) => {
             return res.status(403).json({ message: "Unauthorized. Store doesn't belong to the current user." });
         }
 
-        const newItem = await Item.create({ storeId, name, description, category, price });
+        const newItem = await Item.create({ storeId, name, description, price, quantity, category });
         return res.status(201).json(newItem);
     } catch (error) {
         next(error);

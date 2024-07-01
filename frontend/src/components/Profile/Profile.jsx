@@ -1,12 +1,12 @@
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
-import UpdateStore from '../UpdateStore';
 import CreateStore from '../CreateStore';
+import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
 
 
@@ -25,6 +25,7 @@ const Profile = () => {
             dispatch(getItemsByStore(userStore.id));
         }
     }, [dispatch, userStore]);
+
 
     return (
         <div className="profile-page">
@@ -46,6 +47,8 @@ const Profile = () => {
                     </div>
 
                     <div className="item-section">
+                        <Link to={`/stores/${userStore.id}/create-item`}>Add Listing</Link>
+
                         {items.map((item) => (
                             <span key={item.id}>
                                 <Link to={`/items/${item.id}`}>
@@ -53,6 +56,8 @@ const Profile = () => {
                                     <span>{item.category}</span>
                                     <span>{item.price}</span>
                                 </Link>
+
+                                <div>Update Item</div>
                             </span>
                         ))}
                     </div>
