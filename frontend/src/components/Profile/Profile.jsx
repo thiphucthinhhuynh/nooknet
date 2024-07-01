@@ -1,6 +1,6 @@
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
@@ -18,6 +18,7 @@ const Profile = () => {
     const items = useSelector((state) => state.itemState.allItems);
 
     const [updatingItemId, setUpdatingItemId] = useState(null);
+    const updateItemRef = useRef(null); // Ref for the UpdateItem component
 
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
@@ -36,6 +37,21 @@ const Profile = () => {
     const handleCancelUpdateItem = () => {
         setUpdatingItemId(null);
     };
+
+    // Detect clicks outside the UpdateItem component
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (updateItemRef.current && !updateItemRef.current.contains(event.target)) {
+                setUpdatingItemId(null);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [updateItemRef]);
 
 
     return (
@@ -64,7 +80,9 @@ const Profile = () => {
                             <span key={item.id}>
 
                                 {updatingItemId === item.id ? (
-                                    <UpdateItem item={item} onCancel={handleCancelUpdateItem} />
+                                    <div ref={updateItemRef}>
+                                        <UpdateItem item={item} onCancel={handleCancelUpdateItem} />
+                                    </div>
                                 ) : (<>
                                     <Link to={`/items/${item.id}`}>
                                         <span>{item.name}</span>
