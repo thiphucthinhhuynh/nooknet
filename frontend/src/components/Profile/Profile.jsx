@@ -9,6 +9,7 @@ import CreateStore from '../CreateStore';
 import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
 import UpdateItem from '../UpdateItem';
+import DeleteItem from '../DeleteItem';
 
 
 const Profile = () => {
@@ -56,7 +57,6 @@ const Profile = () => {
 
     return (
         <div className="profile-page">
-            <h1>Hi from Profile</h1>
 
             <div className="profile-section">
                 <div>{sessionUser.username}</div>
@@ -85,12 +85,13 @@ const Profile = () => {
                                     </div>
                                 ) : (<>
                                     <Link to={`/items/${item.id}`}>
-                                        <span>{item.name}</span>
-                                        <span>{item.category}</span>
-                                        <span>{item.price}</span>
+                                        <div>{item.name}</div>
+                                        <div>{item.category}</div>
+                                        <div>{item.price}</div>
                                     </Link>
 
                                     <div onClick={() => handleUpdateItemClick(item.id)}>Update Item</div>
+                                    <OpenModalMenuItem itemText="Delete Item" modalComponent={<DeleteItem item={item} storeId={userStore.id} />} />
                                 </>)}
 
                             </span>

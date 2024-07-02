@@ -97,7 +97,7 @@ const UpdateItem = ({ item, onCancel }) => {
                     onChange={(e) => setCategory(e.target.value)}
                 />
 
-                <button type="button" onClick={onCancel}>❌</button>
+                <button type="button" onClick={onCancel}>Cancel</button>
                 <button type="submit" disabled={Object.values(validationErrors).length}>Update Now</button>
             </form>
 

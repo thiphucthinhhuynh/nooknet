@@ -103,7 +103,7 @@ const CreateItem = () => {
                     onChange={(e) => setCategory(e.target.value)}
                 />
 
-                <button type="button" onClick={() => navigate('/profile')}>❌</button>
+                <button type="button" onClick={() => navigate('/profile')}>Cancel</button>
                 <button type="submit" disabled={Object.values(validationErrors).length}>Create Now</button>
 
             </form>
