@@ -16,6 +16,24 @@ router.get('/', async (req, res, next) => {
 });
 
 // --------------------------------------------------------------------------------------//
+//                       Get details of an Item from an Item id                         //
+// ------------------------------------------------------------------------------------//
+router.get('/:itemId', async (req, res, next) => {
+    try {
+        const { itemId } = req.params;
+        const item = await Item.findByPk(itemId);
+
+        if (!item) {
+            return res.status(404).json({ message: "Item not found." });
+        }
+
+        return res.status(200).json(item);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
 //                                   Update an Item                                     //
 // ------------------------------------------------------------------------------------//
 router.put('/:itemId', requireAuth, async (req, res, next) => {
