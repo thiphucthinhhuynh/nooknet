@@ -59,7 +59,6 @@ const UpdateItem = ({ item, onCancel }) => {
 
     return (
         <div className="update-item-container">
-            <h1>Hi from UpdateItem</h1>
 
             <form onSubmit={handleSubmit} className="update-item-form">
                 <input

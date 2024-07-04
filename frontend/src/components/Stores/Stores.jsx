@@ -14,7 +14,7 @@ const Stores = () => {
 
     return (
         <div className="stores-page">
-            <h1>Hi from Stores</h1>
+
             {stores.map((store) => (
                 <span key={store.id}>
                     <Link to={`/stores/${store.id}`} className="store-tile">

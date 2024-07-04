@@ -53,7 +53,6 @@ const CreateStore = () => {
 
     return (
         <div className="create-store-container">
-            <h1>Hi from CreateStore</h1>
 
             <form onSubmit={handleSubmit} className="create-store-form">
                 <input

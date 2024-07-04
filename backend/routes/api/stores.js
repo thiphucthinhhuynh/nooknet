@@ -24,6 +24,24 @@ router.get('/current', requireAuth, async (req, res, next) => {
         const store = await Store.findOne({ where: { ownerId: userId } });
 
         if (!store) {
+            return res.status(200).json(null);
+        }
+
+        return res.status(200).json(store);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
+//                       Get details of a Store from a Store id                         //
+// ------------------------------------------------------------------------------------//
+router.get('/:storeId', async (req, res, next) => {
+    try {
+        const { storeId } = req.params;
+        const store = await Store.findByPk(storeId);
+
+        if (!store) {
             return res.status(404).json({ message: "Store not found." });
         }
 
@@ -108,9 +126,9 @@ router.get('/:storeId/items', async (req, res, next) => {
         const store = await Store.findByPk(storeId);
 
         if (!store) {
-            const storeId = req.storeId;
             return res.status(404).json({ message: "Store not found." });
         }
+
         const items = await Item.findAll({ where: { storeId } });
         return res.status(200).json(items);
     } catch (error) {

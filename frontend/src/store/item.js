@@ -1,4 +1,4 @@
-import { csrfFetch } from './csrf';
+import { csrfFetch } from './csrf.js';
 
 const LOAD_ALL_ITEMS = 'item/LOAD_ALL_ITEMS';
 const ADD_ITEM = 'item/ADD_ITEM';
@@ -60,7 +60,7 @@ export const createNewItem = (formData, storeId) => async (dispatch) => {
 };
 
 export const deleteItem = (itemId) => async (dispatch) => {
-    const response = csrfFetch(`/api/items/${itemId}`, { method: "DELETE" });
+    const response = await csrfFetch(`/api/items/${itemId}`, { method: "DELETE" });
 
     if (response.ok) {
         dispatch(removeItem(itemId));
@@ -92,9 +92,7 @@ export const fetchItemDetails = (itemId) => async (dispatch) => {
     }
 };
 
-const initialState = {
-    allItems: []
-};
+const initialState = { allItems: [] };
 
 const itemReducer = (state = initialState, action) => {
     switch (action.type) {

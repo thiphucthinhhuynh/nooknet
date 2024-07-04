@@ -1,9 +1,10 @@
-import { csrfFetch } from './csrf';
+import { csrfFetch } from './csrf.js';
 
 const LOAD_ALL_STORES = 'userStore/LOAD_ALL_STORES';
 const ADD_STORE = 'userStore/ADD_STORE';
 const REMOVE_STORE = 'userStore/REMOVE_STORE';
 const GET_CURRENT_STORE = 'userStore/GET_CURRENT_STORE';
+const GET_STORE_DETAILS = 'userStore/GET_STORE_DETAILS';
 
 const loadAllStores = (stores) => ({
     type: LOAD_ALL_STORES,
@@ -22,6 +23,11 @@ const removeStore = (storeId) => ({
 
 const getCurrentStore = (store) => ({
     type: GET_CURRENT_STORE,
+    store
+});
+
+const getStoreDetails = (store) => ({
+    type: GET_STORE_DETAILS,
     store
 });
 
@@ -83,6 +89,15 @@ export const updateStore = (formData, storeId) => async (dispatch) => {
     }
 };
 
+export const fetchStoreDetails = (storeId) => async (dispatch) => {
+    const response = await fetch(`/api/stores/${storeId}`);
+
+    if (response.ok) {
+        const store = await response.json();
+        dispatch(getStoreDetails(store));
+    }
+};
+
 const initialState = { allStores: [] };
 
 const userStoreReducer = (state = initialState, action) => {
@@ -112,6 +127,11 @@ const userStoreReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentStore: action.store
+            };
+        case GET_STORE_DETAILS:
+            return {
+                ...state,
+                storeDetails: action.store
             };
         default:
             return state;

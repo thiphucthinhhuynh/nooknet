@@ -65,7 +65,6 @@ const CreateItem = () => {
 
     return (
         <div className="create-item-container">
-            <h1>Hi from CreateItem</h1>
 
             <form onSubmit={handleSubmit} className="create-item-form">
                 <input

@@ -52,7 +52,6 @@ const UpdateStore = ({ storeId, sessionUser, userStore }) => {
 
     return (
         <div className="update-store-container">
-            <h1>Hi from UpdateStore</h1>
 
             <form onSubmit={handleSubmit} className="update-store-form">
                 <input
