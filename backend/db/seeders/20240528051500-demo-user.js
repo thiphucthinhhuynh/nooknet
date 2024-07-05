@@ -25,22 +25,26 @@ module.exports = {
       {
         email: 'demo@user.io',
         username: 'demo_user',
-        hashedPassword: bcrypt.hashSync('password')
+        hashedPassword: bcrypt.hashSync('password'),
+        profile_pic: 'https://i.imghippo.com/files/nx94B1720077160.png'
       },
       {
         email: 'lily@user.io',
         username: 'lily',
-        hashedPassword: bcrypt.hashSync('password')
+        hashedPassword: bcrypt.hashSync('password'),
+        profile_pic: 'https://i.imghippo.com/files/nx94B1720077160.png'
       },
       {
         email: 'winter@user.io',
         username: 'winter',
-        hashedPassword: bcrypt.hashSync('password')
+        hashedPassword: bcrypt.hashSync('password'),
+        profile_pic: 'https://i.imghippo.com/files/nx94B1720077160.png'
       },
       {
         email: 'yuru@user.io',
         username: 'yuru',
-        hashedPassword: bcrypt.hashSync('password')
+        hashedPassword: bcrypt.hashSync('password'),
+        profile_pic: 'https://i.imghippo.com/files/nx94B1720077160.png'
       }
     ], { validate: true });
 

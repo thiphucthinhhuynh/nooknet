@@ -16,12 +16,30 @@ router.get('/', async (req, res, next) => {
 });
 
 // --------------------------------------------------------------------------------------//
+//                       Get details of an Item from an Item id                         //
+// ------------------------------------------------------------------------------------//
+router.get('/:itemId', async (req, res, next) => {
+    try {
+        const { itemId } = req.params;
+        const item = await Item.findByPk(itemId);
+
+        if (!item) {
+            return res.status(404).json({ message: "Item not found." });
+        }
+
+        return res.status(200).json(item);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
 //                                   Update an Item                                     //
 // ------------------------------------------------------------------------------------//
 router.put('/:itemId', requireAuth, async (req, res, next) => {
     try {
         const { itemId } = req.params;
-        const { name, description, category, price } = req.body;
+        const { name, description, price, quantity, category } = req.body;
 
         let item = await Item.findByPk(itemId);
 
@@ -35,7 +53,7 @@ router.put('/:itemId', requireAuth, async (req, res, next) => {
             return res.status(403).json({ message: "Unauthorized. Item doesn't belong to a store owned by the current user." })
         }
 
-        await item.update({ name, description, category, price });
+        await item.update({ name, description, price, quantity, category });
         return res.status(200).json(item);
     } catch (error) {
         next(error);

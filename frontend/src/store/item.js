@@ -1,8 +1,9 @@
-import { csrfFetch } from './csrf';
+import { csrfFetch } from './csrf.js';
 
 const LOAD_ALL_ITEMS = 'item/LOAD_ALL_ITEMS';
 const ADD_ITEM = 'item/ADD_ITEM';
 const REMOVE_ITEM = 'item/REMOVE_ITEM';
+const GET_ITEM_DETAILS = 'item/GET_ITEM_DETAILS';
 
 const loadAllItems = (items) => ({
     type: LOAD_ALL_ITEMS,
@@ -17,6 +18,11 @@ const addItem = (item) => ({
 const removeItem = (itemId) => ({
     type: REMOVE_ITEM,
     itemId
+});
+
+const getItemDetails = (item) => ({
+    type: GET_ITEM_DETAILS,
+    item
 });
 
 export const fetchAllItems = () => async (dispatch) => {
@@ -37,8 +43,8 @@ export const getItemsByStore = (storeId) => async (dispatch) => {
     }
 };
 
-export const createNewItem = (formData) => async (dispatch) => {
-    const response = await csrfFetch(`/api/items`, {
+export const createNewItem = (formData, storeId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/stores/${storeId}/items`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -54,7 +60,7 @@ export const createNewItem = (formData) => async (dispatch) => {
 };
 
 export const deleteItem = (itemId) => async (dispatch) => {
-    const response = csrfFetch(`/api/items/${itemId}`, { method: "DELETE" });
+    const response = await csrfFetch(`/api/items/${itemId}`, { method: "DELETE" });
 
     if (response.ok) {
         dispatch(removeItem(itemId));
@@ -77,9 +83,16 @@ export const updateItem = (formData, itemId) => async (dispatch) => {
     }
 };
 
-const initialState = {
-    allItems: []
+export const fetchItemDetails = (itemId) => async (dispatch) => {
+    const response = await fetch(`/api/items/${itemId}`);
+
+    if (response.ok) {
+        const item = await response.json();
+        dispatch(getItemDetails(item));
+    }
 };
+
+const initialState = { allItems: [] };
 
 const itemReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -101,6 +114,11 @@ const itemReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allItems: state.allItems.filter((item) => item.id !== action.itemId)
+            };
+        case GET_ITEM_DETAILS:
+            return {
+                ...state,
+                itemDetails: action.item
             };
         default:
             return state;

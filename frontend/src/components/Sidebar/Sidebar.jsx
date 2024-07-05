@@ -1,4 +1,4 @@
-import './Sidebar';
+import './Sidebar.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { GoHome } from "react-icons/go";
@@ -11,8 +11,7 @@ const Sidebar = () => {
     const sessionUser = useSelector((state) => state.session.user);
 
     return (
-        <div>
-            <h1>Hi from Sidebar</h1>
+        <div className="sidebar">
             <NavLink to="/"><GoHome /> Home</NavLink>
             <NavLink to="/stores"><PiStorefrontLight /> Stores</NavLink>
             {sessionUser &&

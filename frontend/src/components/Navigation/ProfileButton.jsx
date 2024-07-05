@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaUserCircle } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
@@ -53,9 +53,8 @@ function ProfileButton({ user }) {
                     <>
                         <div>Hello, {user.firstName}</div>
                         <div>{user.username}</div>
-                        <div>{user.firstName} {user.lastName}</div>
+                        {/* <div>{user.firstName} {user.lastName}</div> */}
                         <div>{user.email}</div>
-                        <div><Link to="/spots/current">Manage Spots</Link></div>
                         <div><button onClick={logout}>Log Out</button></div>
                     </>
                 ) : (

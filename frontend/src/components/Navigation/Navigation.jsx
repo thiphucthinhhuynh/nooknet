@@ -5,7 +5,8 @@ import ProfileButton from './ProfileButton';
 
 
 function Navigation({ isLoaded }) {
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector((state) => state.session.user);
+    const userStore = useSelector((state) => state.userStoreState.currentStore);
 
     return (
         <div className="navigation">
@@ -15,7 +16,7 @@ function Navigation({ isLoaded }) {
             </div>
 
             <div>
-                {isLoaded && sessionUser && <Link to="/items/new" className="create-item-button">Add Listing</Link>}
+                {isLoaded && sessionUser && userStore && <Link to={`/stores/${userStore.id}/create-item`} className="create-item-button">Add Listing</Link>}
                 {isLoaded && <ProfileButton className="profile-button" user={sessionUser} />}
             </div>
 

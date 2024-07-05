@@ -1,0 +1,45 @@
+.profile-page {
+    max-width: 60%;
+    margin: 0 auto;
+    border: 1px solid pink;
+}
+
+.store-section {
+    display: flex;
+    flex-direction: row;
+    padding: 3%;
+}
+
+#store-stat {
+    display: inline-flex;
+    flex-direction: column;
+    max-width: 20%;
+    gap: 2vh
+}
+
+#store-info {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2vh
+}
+
+#store-info> :first-child {
+    display: flex;
+    flex-direction: row;
+    gap: 2vh
+}
+
+.update-button,
+.keep-button {
+    list-style-type: none;
+    border: 1.5px solid green;
+    border-radius: 15px;
+    padding: 8px;
+    width: 28%;
+    height: 15%;
+}
+
+.profile-pic {
+    max-width: 80%;
+    border-radius: 50%;
+}
