@@ -49,6 +49,10 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [60, 60]
         }
+      },
+      profile_pic: {
+        type: DataTypes.STRING,
+        allowNull: true
       }
     },
     {

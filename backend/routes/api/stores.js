@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
-const { Store, Item } = require('../../db/models');
+const { Store, Item, User } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //                                   View all Stores                                    //
@@ -21,10 +21,31 @@ router.get('/', async (req, res, next) => {
 router.get('/current', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const store = await Store.findOne({ where: { ownerId: userId } });
+        const store = await Store.findOne({
+            where: { ownerId: userId },
+            include: [{ model: User, as: 'Owner', attributes: ['profile_pic'] }]
+        });
 
         if (!store) {
             return res.status(200).json(null);
+        }
+
+        return res.status(200).json(store);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
+//                       Get details of a Store from a Store id                         //
+// ------------------------------------------------------------------------------------//
+router.get('/:storeId', async (req, res, next) => {
+    try {
+        const { storeId } = req.params;
+        const store = await Store.findByPk(storeId);
+
+        if (!store) {
+            return res.status(404).json({ message: "Store not found." });
         }
 
         return res.status(200).json(store);
@@ -108,9 +129,9 @@ router.get('/:storeId/items', async (req, res, next) => {
         const store = await Store.findByPk(storeId);
 
         if (!store) {
-            const storeId = req.storeId;
             return res.status(404).json({ message: "Store not found." });
         }
+
         const items = await Item.findAll({ where: { storeId } });
         return res.status(200).json(items);
     } catch (error) {
@@ -124,7 +145,7 @@ router.get('/:storeId/items', async (req, res, next) => {
 router.post('/:storeId/items', requireAuth, async (req, res, next) => {
     try {
         const { storeId } = req.params;
-        const { name, description, category, price } = req.body;
+        const { name, description, price, quantity, category } = req.body;
 
         const store = await Store.findByPk(storeId);
 
@@ -137,7 +158,7 @@ router.post('/:storeId/items', requireAuth, async (req, res, next) => {
             return res.status(403).json({ message: "Unauthorized. Store doesn't belong to the current user." });
         }
 
-        const newItem = await Item.create({ storeId, name, description, category, price });
+        const newItem = await Item.create({ storeId, name, description, price, quantity, category });
         return res.status(201).json(newItem);
     } catch (error) {
         next(error);

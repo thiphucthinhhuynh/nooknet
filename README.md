@@ -1,4 +1,4 @@
-# GAMAZON The Capstone
+# NOOKNET
 
 ## Link to Live Site
 
@@ -7,7 +7,7 @@
 ## Getting Started
 
 * Clone this repository
-  * `git clone https://github.com/thiphucthinhhuynh/gamazon-the-capstone.git`
+  * `https://github.com/thiphucthinhhuynh/nooknet`
 
 * Navigate to the backend directory, and install all dependencies
   * `cd backend && npm install`
