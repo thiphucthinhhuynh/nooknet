@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
-const { Store, Item } = require('../../db/models');
+const { Store, Item, User } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //                                   View all Stores                                    //
@@ -21,7 +21,10 @@ router.get('/', async (req, res, next) => {
 router.get('/current', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const store = await Store.findOne({ where: { ownerId: userId } });
+        const store = await Store.findOne({
+            where: { ownerId: userId },
+            include: [{ model: User, as: 'Owner', attributes: ['profile_pic'] }]
+        });
 
         if (!store) {
             return res.status(200).json(null);

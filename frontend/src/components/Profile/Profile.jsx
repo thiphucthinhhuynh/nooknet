@@ -17,6 +17,7 @@ const Profile = () => {
     const userStore = useSelector((state) => state.userStoreState.currentStore);
     const sessionUser = useSelector((state) => state.session.user);
     const items = useSelector((state) => state.itemState.allItems);
+    const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
 
     const [updatingItemId, setUpdatingItemId] = useState(null);
     const updateItemRef = useRef(null); // Ref for the UpdateItem component
@@ -56,51 +57,51 @@ const Profile = () => {
 
 
     return (
-        <div className="profile-page">
+        userStore ?
+            <div className="profile-page">
+                <div className="store-section">
+                    <div id="store-stat">
+                        <img src={userStore.Owner?.profile_pic ? userStore.Owner.profile_pic : defaultProfilePic} alt={`${sessionUser.username}'s Profile Picture`} className="profile-pic" />
+                        <div>{sessionUser.username}</div>
+                    </div>
 
-            <div className="profile-section">
-                <div>{sessionUser.username}</div>
-            </div>
-
-            {userStore ?
-                <>
-                    <div className="store-section">
-                        <OpenModalMenuItem itemText="Update Store" modalComponent={<UpdateStore storeId={userStore.id} sessionUser={sessionUser} userStore={userStore} />} />
-                        <OpenModalMenuItem itemText="Delete Store" modalComponent={<DeleteStore storeId={userStore.id} />} />
-
-                        <div>{userStore.name}</div>
+                    <div id="store-info">
+                        <div>
+                            <div>{userStore.name}</div>
+                            <div className="update-button"><OpenModalMenuItem itemText="Update Store" modalComponent={<UpdateStore storeId={userStore.id} sessionUser={sessionUser} userStore={userStore} />} /></div>
+                            <div className="keep-button"><OpenModalMenuItem itemText="Delete Store" modalComponent={<DeleteStore storeId={userStore.id} />} /></div>
+                        </div>
                         <div>{userStore.location}</div>
                         <div>{userStore.description}</div>
                     </div>
+                </div>
 
-                    <div className="item-section">
-                        <Link to={`/stores/${userStore.id}/create-item`}>Add Listing</Link>
+                <div className="item-section">
+                    <Link to={`/stores/${userStore.id}/create-item`}>Add Listing</Link>
 
-                        {items.map((item) => (
-                            <span key={item.id}>
+                    {items.map((item) => (
+                        <span key={item.id}>
 
-                                {updatingItemId === item.id ? (
-                                    <div ref={updateItemRef}>
-                                        <UpdateItem item={item} onCancel={handleCancelUpdateItem} />
-                                    </div>
-                                ) : (<>
-                                    <Link to={`/items/${item.id}`}>
-                                        <div>{item.name}</div>
-                                        <div>{item.category}</div>
-                                        <div>{item.price}</div>
-                                    </Link>
+                            {updatingItemId === item.id ? (
+                                <div ref={updateItemRef}>
+                                    <UpdateItem item={item} onCancel={handleCancelUpdateItem} />
+                                </div>
+                            ) : (<>
+                                <Link to={`/items/${item.id}`}>
+                                    <div>{item.name}</div>
+                                    <div>{item.category}</div>
+                                    <div>{item.price}</div>
+                                </Link>
 
-                                    <div onClick={() => handleUpdateItemClick(item.id)}>Update Item</div>
-                                    <OpenModalMenuItem itemText="Delete Item" modalComponent={<DeleteItem item={item} storeId={userStore.id} />} />
-                                </>)}
+                                <div onClick={() => handleUpdateItemClick(item.id)}>Update Item</div>
+                                <OpenModalMenuItem itemText="Delete Item" modalComponent={<DeleteItem item={item} storeId={userStore.id} />} />
+                            </>)}
 
-                            </span>
-                        ))}
-                    </div>
-                </>
-                : (<OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} />)
-            }
-        </div>
+                        </span>
+                    ))}
+                </div>
+            </div>
+            : (<OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} />)
     );
 };
 
