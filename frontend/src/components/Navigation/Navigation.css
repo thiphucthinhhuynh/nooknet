@@ -1,3 +1,9 @@
+#app-logo {
+    width: 100px;
+    height: 50px;
+    margin-right: auto; /* Pushes the logo to the left */
+}
+
 .navigation {
     position: sticky;
     top: 0;
@@ -10,24 +16,37 @@
     ;
 }
 
-#app-logo {
-    width: 100px;
-    height: 50px;
-    margin-right: auto;
-    /* Pushes the logo to the left */
+.navigation>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.create-spot-link {
-    color: rgb(41, 116, 207);
-    font-size: 1.5em;
-    padding-right: 0.5em;
-    text-decoration: none;
+.navigation .profile-pic {
+    max-width: 4%;
+    border-radius: 50%;
+    margin-left: 1vw;
 }
 
 .profile-button {
-    height: 40px;
-    width: 70px;
+    height: 4vw;
+    width: 2vw;
     background: transparent;
-    color: rgb(47, 210, 90);
-    font-size: 1.1em;
+    color: black;
+    border: none;
+    font-size: 1.5em;
+    transform: translatey(6px)
+}
+
+.create-item-button {
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    padding: 6px 10px;
+}
+
+.pencil-icon {
+    position: relative;
+    top: 0.5vh;
 }

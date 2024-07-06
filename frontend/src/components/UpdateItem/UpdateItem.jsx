@@ -61,6 +61,7 @@ const UpdateItem = ({ item, onCancel }) => {
         <div className="update-item-container">
 
             <form onSubmit={handleSubmit} className="update-item-form">
+                <label>Item you&apos;re offering</label>
                 <input
                     name="name"
                     placeholder="Name"
@@ -68,6 +69,7 @@ const UpdateItem = ({ item, onCancel }) => {
                     onChange={(e) => setName(e.target.value)}
                 />
 
+                <label>Description</label>
                 <textarea
                     name="description"
                     placeholder="Description"
@@ -76,6 +78,7 @@ const UpdateItem = ({ item, onCancel }) => {
                     onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
 
+                <label>Pricing</label>
                 <input
                     name="price"
                     type="number"
@@ -83,6 +86,8 @@ const UpdateItem = ({ item, onCancel }) => {
                     onChange={(e) => setPrice(e.target.value)}
                 />
 
+
+                <label>Amount</label>
                 <input
                     name="quantity"
                     type="number"
@@ -90,6 +95,7 @@ const UpdateItem = ({ item, onCancel }) => {
                     onChange={(e) => setQuantity(e.target.value)}
                 />
 
+                <label>Category</label>
                 <input
                     name="category"
                     value={category}

@@ -112,7 +112,6 @@ module.exports = {
      * }], {});
     */
     await Item.bulkCreate(demoItems, { validate: true });
-
   },
 
   async down(queryInterface, Sequelize) {

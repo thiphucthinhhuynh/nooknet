@@ -1,0 +1,20 @@
+.create-item-container {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 3%;
+}
+
+.create-item-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-item-container button {
+    border-radius: 20px;
+    border: none;
+    background-color: green;
+    color: white;
+    width: fit-content;
+    margin: 8px;
+    padding: 5px 10px;
+}

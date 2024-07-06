@@ -66,46 +66,62 @@ const CreateItem = () => {
     return (
         <div className="create-item-container">
 
-            <form onSubmit={handleSubmit} className="create-item-form">
-                <input
-                    name="name"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+            <form onSubmit={handleSubmit} >
+                <div className="create-item-input">
+                    <label>Item you&apos;re offering</label>
+                    <input
+                        name="name"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
 
-                <textarea
-                    name="description"
-                    placeholder="Description"
-                    rows="4"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
+                    <label>Description</label>
+                    <textarea
+                        name="description"
+                        placeholder="Description"
+                        rows="4"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    ></textarea>
 
-                <input
-                    name="price"
-                    type="number"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                />
+                    <label>Pricing</label>
+                    <input
+                        name="price"
+                        type="number"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
 
-                <input
-                    name="quantity"
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                />
+                    <label>Amount</label>
+                    <input
+                        name="quantity"
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                    />
 
-                <input
-                    name="category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                />
+                    <select
+                        name="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="" disabled>Select a Category</option>
+                        <option value="weapons">Weapons</option>
+                        <option value="food">Food</option>
+                        <option value="potions">Potions</option>
+                        <option value="armors">Armor</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="tools">Tools</option>
+                    </select>
+                </div>
 
-                <button type="button" onClick={() => navigate('/profile')}>Cancel</button>
-                <button type="submit" disabled={Object.values(validationErrors).length}>Create Now</button>
-
+                <div>
+                    <button type="button" onClick={() => navigate('/profile')}>Cancel</button>
+                    <button type="submit" disabled={Object.values(validationErrors).length}>Create Now</button>
+                </div>
             </form>
+
         </div>
     );
 };

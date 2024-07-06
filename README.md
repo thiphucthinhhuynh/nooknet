@@ -7,7 +7,7 @@
 ## Getting Started
 
 * Clone this repository
-  * `https://github.com/thiphucthinhhuynh/nooknet`
+  * `git clone https://github.com/thiphucthinhhuynh/nooknet`
 
 * Navigate to the backend directory, and install all dependencies
   * `cd backend && npm install`

@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60]
         }
       },
-      profile_pic: {
+      profilePic: {
         type: DataTypes.STRING,
         allowNull: true
       }

@@ -8,6 +8,11 @@
 }
 
 .item-tile {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
+    border: 1px solid pink;
+}
+
+.item-tile .item-pic {
+    max-width: 30%;
 }
