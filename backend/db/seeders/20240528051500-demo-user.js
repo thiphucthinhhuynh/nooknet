@@ -32,19 +32,19 @@ module.exports = {
         email: 'lily@user.io',
         username: 'lily',
         hashedPassword: bcrypt.hashSync('password'),
-        profilePic: 'https://i.imghippo.com/files/nx94B1720077160.png'
+        profilePic: 'https://i.imghippo.com/files/FNCVC1720385889.jpg'
       },
       {
         email: 'winter@user.io',
         username: 'winter',
         hashedPassword: bcrypt.hashSync('password'),
-        profilePic: 'https://i.imghippo.com/files/nx94B1720077160.png'
+        profilePic: 'https://i.imghippo.com/files/nQm7E1720340410.png'
       },
       {
         email: 'yuru@user.io',
         username: 'yuru',
         hashedPassword: bcrypt.hashSync('password'),
-        profilePic: 'https://i.imghippo.com/files/nx94B1720077160.png'
+        profilePic: 'https://i.imghippo.com/files/JHl8L1720340351.png'
       }
     ], { validate: true });
 
