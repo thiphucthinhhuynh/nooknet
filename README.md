@@ -7,10 +7,7 @@
 ## Getting Started
 
 * Clone this repository
-<<<<<<< HEAD
 
-=======
->>>>>>> a5b6cfe (Add more contents to StoreDetails component)
   * `git clone https://github.com/thiphucthinhhuynh/nooknet.git`
 
 * Navigate to the backend directory, and install all dependencies
