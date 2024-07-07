@@ -1,9 +1,9 @@
 import './UpdateItem.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateItem } from '../../store/item.js';
+import { updateItem, getItemsByStore } from '../../store/item.js';
 
-const UpdateItem = ({ item, onCancel }) => {
+const UpdateItem = ({ item, onCancel, storeId }) => {
     const [name, setName] = useState(item.name);
     const [description, setDescription] = useState(item.description);
     const [price, setPrice] = useState(item.price);
@@ -53,6 +53,7 @@ const UpdateItem = ({ item, onCancel }) => {
         const updatedItem = await dispatch(updateItem(updatedItemData, item.id));
 
         if (updatedItem) {
+            await dispatch(getItemsByStore(storeId));
             onCancel();
         }
     };

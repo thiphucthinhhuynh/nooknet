@@ -90,14 +90,21 @@ const Profile = () => {
                             {updatingItemId === item.id ?
                                 (
                                     <div ref={updateItemRef}>
-                                        <UpdateItem item={item} onCancel={handleCancelUpdateItem} />
+                                        <UpdateItem item={item} onCancel={handleCancelUpdateItem} storeId={userStore.id} />
                                     </div>
                                 ) :
                                 (
 
                                     <div id="item-tile">
                                         <Link to={`/items/${item.id}`} className="item-info">
-                                            <img src={item.ItemImages[0]?.url ? item.ItemImages[0]?.url : defaultItemPic} className="item-pic" />
+                                            {/* <img src={item.ItemImages[0]?.url ? item.ItemImages[0]?.url : defaultItemPic} className="item-pic" /> */}
+                                            <img
+                                                src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
+                                                    ? item.ItemImages[0].url
+                                                    : defaultItemPic}
+                                                className="item-pic"
+                                            />
+
 
                                             <div>
                                                 <div>{item.name}</div>
