@@ -97,7 +97,7 @@ const Profile = () => {
 
                                     <div id="item-tile">
                                         <Link to={`/items/${item.id}`} className="item-info">
-                                            <img src={item.ItemImages[0].url ? item.ItemImages[0].url : defaultItemPic} className="item-pic" />
+                                            <img src={item.ItemImages[0]?.url ? item.ItemImages[0]?.url : defaultItemPic} className="item-pic" />
 
                                             <div>
                                                 <div>{item.name}</div>

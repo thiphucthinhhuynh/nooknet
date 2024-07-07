@@ -93,7 +93,7 @@
 } */
 
 #item-tile .item-pic {
-    max-width: 30%;
+    max-width: 40%;
     width: 100%; /* Make the image take the full width of its container */
     height: auto; /* Maintain the aspect ratio */
     object-fit: cover; /* Ensure the image covers the container without distortion */

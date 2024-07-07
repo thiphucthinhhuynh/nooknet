@@ -4,17 +4,48 @@
     padding: 3%;
 }
 
-.create-item-input {
+.create-item-form {
     display: flex;
     flex-direction: column;
 }
 
+.create-item-form>:first-child {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.create-item-form label {
+    font-size: large;
+}
+
+.create-item-form select {
+    font-size: large;
+}
+
 .create-item-container button {
+    width: fit-content;
+    max-width: 30%;
     border-radius: 20px;
-    border: none;
+    margin-left: 2vw;
+    margin-top: 2vw;
+    padding: 0 20px;
+}
+
+.create-item-container button#cancel {
+    border: 2px solid black;
+    background-color: transparent;
+    color: black;
+}
+
+.create-item-container button#create-item {
+    border: 2px solid green;
     background-color: green;
     color: white;
-    width: fit-content;
-    margin: 8px;
-    padding: 5px 10px;
+}
+
+.create-item-container button#create-item:disabled {
+    background-color: grey;
+    border: 2px solid grey;
+    color: white;
+    cursor: not-allowed
 }

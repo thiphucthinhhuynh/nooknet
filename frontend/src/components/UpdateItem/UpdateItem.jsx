@@ -59,53 +59,65 @@ const UpdateItem = ({ item, onCancel }) => {
 
     return (
         <div className="update-item-container">
+            <form className="update-item-form" onSubmit={handleSubmit} >
 
-            <form onSubmit={handleSubmit} className="update-item-form">
-                <label>Item you&apos;re offering</label>
-                <input
-                    name="name"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                <div id="header">
+                    <label>Item you&apos;re offering</label>
+                    <input
+                        name="name"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
 
-                <label>Description</label>
-                <textarea
-                    name="description"
-                    placeholder="Description"
-                    rows="4"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
+                    <label>Description</label>
+                    <textarea
+                        name="description"
+                        placeholder="Description"
+                        rows="5"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    ></textarea>
+                </div>
 
-                <label>Pricing</label>
-                <input
-                    name="price"
-                    type="number"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                />
+                <div id="body">
+                    <label>Pricing</label>
+                    <input
+                        name="price"
+                        type="number"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
 
+                    <label>Amount</label>
+                    <input
+                        name="quantity"
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                    />
 
-                <label>Amount</label>
-                <input
-                    name="quantity"
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                />
+                    <label>Category</label>
+                    <select
+                        name="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="" disabled>Select a Category</option>
+                        <option value="weapons">Weapons</option>
+                        <option value="food">Food</option>
+                        <option value="potions">Potions</option>
+                        <option value="armors">Armor</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="tools">Tools</option>
+                    </select>
+                </div>
 
-                <label>Category</label>
-                <input
-                    name="category"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                />
-
-                <button type="button" onClick={onCancel}>Cancel</button>
-                <button type="submit" disabled={Object.values(validationErrors).length}>Update Now</button>
+                <div id="button">
+                    <button id="cancel" type="button" onClick={onCancel}>Cancel</button>
+                    <button id="update-item" type="submit" disabled={Object.values(validationErrors).length}>Update Now</button>
+                </div>
             </form>
-
         </div>
     );
 };
