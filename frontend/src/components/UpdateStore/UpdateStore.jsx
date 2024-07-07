@@ -52,7 +52,7 @@ const UpdateStore = ({ storeId, sessionUser, userStore }) => {
 
     return (
         <div className="update-store-container">
-
+            <p>Update Your Store</p>
             <form onSubmit={handleSubmit} className="update-store-form">
                 <input
                     name="name"
@@ -76,8 +76,10 @@ const UpdateStore = ({ storeId, sessionUser, userStore }) => {
                     onChange={(e) => setLocation(e.target.value)}
                 />
 
-                <button type="button" onClick={closeModal}>Close</button>
-                <button type="submit" disabled={Object.values(validationErrors).length}>Save</button>
+                <div>
+                    <button id="cancel" type="button" onClick={closeModal}>Close</button>
+                    <button id="update-store" type="submit" disabled={Object.values(validationErrors).length}>Save</button>
+                </div>
             </form>
         </div>
     );

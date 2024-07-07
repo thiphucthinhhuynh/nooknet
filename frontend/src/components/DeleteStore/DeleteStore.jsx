@@ -15,12 +15,12 @@ const DeleteStore = ({ storeId }) => {
     };
 
     return (
-        <div className="delete-store-modal">
-            <h1>Are you sure you want to delete your store?</h1>
+        <div className="delete-store-container">
+            <p>Are you sure you want to delete your store?</p>
             <p>Delete your store will also remove all of your items</p>
-            <div className="delete-store-btn-container">
+            <div>
                 <button id="keep-store" onClick={closeModal}>Cancel</button>
-                <button id="delete-store" onClick={handleDelete}>OK</button>
+                <button id="delete-store" onClick={handleDelete}>Delete</button>
             </div>
         </div>
     );

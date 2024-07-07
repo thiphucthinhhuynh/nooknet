@@ -9,8 +9,9 @@
     font-size: 1.2em;
     max-width: 25%;
     padding: 30px 70px 30px 30px;
-    background-color: rgba(109, 109, 109, 0.167);
+    background-color: rgba(241, 241, 241, 0.5);
     height: 70vh;
+    margin: 2.5vh 0
 }
 
 .active {

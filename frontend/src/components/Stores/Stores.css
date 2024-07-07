@@ -1,13 +1,25 @@
 .stores-page {
     max-width: 50%;
-    margin: 0 auto;
-    border: 1px solid pink;
+    margin: 4vh auto;
+    /* border: 1px solid pink; */
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
 .store-tile {
     display: flex;
     flex-direction: column;
+    width: calc(50% - 10px); /* 10px is the gap between the tiles */
+    border: 1px solid transparent;
+    border-radius: 15px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+    padding-left: 20px;
+}
+
+.store-tile .profile-pic {
+    max-width: 25%;
+    border-radius: 50%;
 }

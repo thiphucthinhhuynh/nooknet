@@ -65,8 +65,8 @@ const CreateItem = () => {
 
     return (
         <div className="create-item-container">
-
-            <form onSubmit={handleSubmit} className="create-item-form">
+            <form className="create-item-form" onSubmit={handleSubmit} >
+                <label>Item you&apos;re offering</label>
                 <input
                     name="name"
                     placeholder="Name"
@@ -74,6 +74,7 @@ const CreateItem = () => {
                     onChange={(e) => setName(e.target.value)}
                 />
 
+                <label>Description</label>
                 <textarea
                     name="description"
                     placeholder="Description"
@@ -82,6 +83,7 @@ const CreateItem = () => {
                     onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
 
+                <label>Pricing</label>
                 <input
                     name="price"
                     type="number"
@@ -89,6 +91,7 @@ const CreateItem = () => {
                     onChange={(e) => setPrice(e.target.value)}
                 />
 
+                <label>Amount</label>
                 <input
                     name="quantity"
                     type="number"
@@ -96,16 +99,27 @@ const CreateItem = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                 />
 
-                <input
+                <label>Category</label>
+                <select
                     name="category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                />
+                >
+                    <option value="" disabled>Select a Category</option>
+                    <option value="weapons">Weapons</option>
+                    <option value="food">Food</option>
+                    <option value="potions">Potions</option>
+                    <option value="armors">Armor</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="tools">Tools</option>
+                </select>
 
-                <button type="button" onClick={() => navigate('/profile')}>Cancel</button>
-                <button type="submit" disabled={Object.values(validationErrors).length}>Create Now</button>
-
+                <div>
+                    <button id="cancel" type="button" onClick={() => navigate('/profile')}>Cancel</button>
+                    <button id="create-item" type="submit" disabled={Object.values(validationErrors).length}>Create Now</button>
+                </div>
             </form>
+
         </div>
     );
 };

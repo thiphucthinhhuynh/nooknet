@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       Item.belongsTo(models.Store, {
         foreignKey: 'storeId'
       });
-
+      Item.hasMany(models.ItemImage, {
+        foreignKey: 'itemId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Item.init({

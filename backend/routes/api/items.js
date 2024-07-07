@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
-const { Item, Store } = require('../../db/models');
+const { Item, ItemImage, Store } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //                                  View all Items                                      //
 // ------------------------------------------------------------------------------------//
 router.get('/', async (req, res, next) => {
     try {
-        const items = await Item.findAll();
+        const items = await Item.findAll({
+            include: [{ model: ItemImage }]
+        });
         return res.status(200).json(items);
     } catch (error) {
         next(error);

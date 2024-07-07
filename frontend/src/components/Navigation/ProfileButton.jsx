@@ -1,8 +1,7 @@
 import './ProfileButton.css';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { GiHamburgerMenu } from "react-icons/gi";
-import { FaUserCircle } from 'react-icons/fa';
+import { HiOutlineDotsVertical } from "react-icons/hi";
 import { useNavigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
@@ -46,7 +45,7 @@ function ProfileButton({ user }) {
     return (
         <>
             <button className="profile-button" onClick={toggleMenu}>
-                <GiHamburgerMenu />  <FaUserCircle />
+                <HiOutlineDotsVertical />
             </button>
             {showMenu && <ul className="profile-dropdown" ref={ulRef}>
                 {user ? (
@@ -55,7 +54,7 @@ function ProfileButton({ user }) {
                         <div>{user.username}</div>
                         {/* <div>{user.firstName} {user.lastName}</div> */}
                         <div>{user.email}</div>
-                        <div><button onClick={logout}>Log Out</button></div>
+                        <button onClick={logout}>Log Out</button>
                     </>
                 ) : (
                     <>

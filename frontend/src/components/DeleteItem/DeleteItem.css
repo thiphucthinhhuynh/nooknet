@@ -1,0 +1,60 @@
+.delete-item-container {
+    /* border: 1px solid palevioletred; */
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 3vw;
+    box-sizing: border-box;
+}
+
+.delete-item-container .item-pic {
+    max-width: 90%;
+    width: 100%; /* Make the image take the full width of its container */
+    height: auto; /* Maintain the aspect ratio */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+}
+
+.delete-item-container #body {
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 5%;
+    border-radius: 20px;
+    width: 14vw;
+    height: 19vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.delete-item-container button {
+    list-style-type: none;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 0 15px;
+    margin: 2vw 0;
+}
+
+.delete-item-container>:last-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2vw
+}
+
+.delete-item-container #keep-item {
+    border: 2px solid black;
+    background-color: transparent;
+    color: black;
+}
+
+.delete-item-container #delete-item {
+    border: 2px solid green;
+    background-color: green;
+    color: white;
+}
