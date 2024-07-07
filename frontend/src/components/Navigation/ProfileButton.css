@@ -12,15 +12,17 @@
 
 .profile-dropdown div {
     margin-bottom: 0.3em; /* Add space between each item in the dropdown */
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid gray;
 }
 
 .profile-dropdown div:last-child {
     border-bottom: none; /* Remove border-bottom for the button */
 }
 
-.profile-dropdown a { /* This selector will work for <Link> components
-    because they render as <a> elements under the hood ⛅️☀️ */
-    color: rgb(41, 116, 207);
-    text-decoration: none;
+.profile-dropdown button {
+    border-radius: 20px;
+    border: none;
+    background-color: green;
+    color: white;
+    width: 10vw;
 }

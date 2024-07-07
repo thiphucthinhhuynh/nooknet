@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
-const { Store, Item, User } = require('../../db/models');
+const { Store, Item, ItemImage, User } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //                                   View all Stores                                    //
 // ------------------------------------------------------------------------------------//
 router.get('/', async (req, res, next) => {
     try {
-        const stores = await Store.findAll();
+        const stores = await Store.findAll({
+            include: [{ model: User, as: 'Owner', attributes: ['profilePic', 'username'] }]
+        });
         return res.status(200).json(stores);
     } catch (error) {
         next(error);
@@ -23,7 +25,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         const userId = req.user.id;
         const store = await Store.findOne({
             where: { ownerId: userId },
-            include: [{ model: User, as: 'Owner', attributes: ['profile_pic'] }]
+            include: [{ model: User, as: 'Owner', attributes: ['profilePic'] }]
         });
 
         if (!store) {
@@ -132,7 +134,10 @@ router.get('/:storeId/items', async (req, res, next) => {
             return res.status(404).json({ message: "Store not found." });
         }
 
-        const items = await Item.findAll({ where: { storeId } });
+        const items = await Item.findAll({
+            where: { storeId },
+            include: [{ model: ItemImage }]
+        });
         return res.status(200).json(items);
     } catch (error) {
         next(error);
