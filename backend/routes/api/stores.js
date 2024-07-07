@@ -44,7 +44,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
 router.get('/:storeId', async (req, res, next) => {
     try {
         const { storeId } = req.params;
-        const store = await Store.findByPk(storeId);
+        const store = await Store.findByPk(storeId, {
+            include: [{ model: User, as: 'Owner', attributes: ['profilePic'] }]
+        });
 
         if (!store) {
             return res.status(404).json({ message: "Store not found." });
