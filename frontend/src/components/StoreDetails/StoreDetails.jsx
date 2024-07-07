@@ -21,10 +21,14 @@ const StoreDetails = () => {
     }, [dispatch, storeId]);
 
     useEffect(() => {
-        if (store?.id) {
+        if (store && store.id) {
             dispatch(getItemsByStore(store.id));
         }
     }, [dispatch, store]);
+
+    if (!store) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="store-details">
