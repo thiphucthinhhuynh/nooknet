@@ -10,6 +10,30 @@ if (process.env.NODE_ENV === 'production') {
 const demoItems = [
   {
     storeId: 1,
+    name: 'Dragon Armor',
+    description: 'Armor made from dragon scales, provides superior protection.',
+    price: 300.00,
+    quantity: 5,
+    category: 'armor'
+  },
+  {
+    storeId: 1,
+    name: 'Mana Potion',
+    description: 'Restores 30 MP.',
+    price: 8.00,
+    quantity: 200,
+    category: 'potion'
+  },
+  {
+    storeId: 1,
+    name: 'Healing Herb',
+    description: 'A herb that restores health when consumed.',
+    price: 5.00,
+    quantity: 50,
+    category: 'food'
+  },
+  {
+    storeId: 2,
     name: 'Magic Sword',
     description: 'A powerful sword imbued with magical properties.',
     price: 150.00,
@@ -17,7 +41,7 @@ const demoItems = [
     category: 'weapon'
   },
   {
-    storeId: 1,
+    storeId: 2,
     name: 'Health Potion',
     description: 'Restores 50 HP.',
     price: 10.00,
@@ -33,22 +57,6 @@ const demoItems = [
     category: 'armor'
   },
   {
-    storeId: 2,
-    name: 'Mana Potion',
-    description: 'Restores 30 MP.',
-    price: 8.00,
-    quantity: 200,
-    category: 'potion'
-  },
-  {
-    storeId: 3,
-    name: 'Dragon Armor',
-    description: 'Armor made from dragon scales, provides superior protection.',
-    price: 300.00,
-    quantity: 5,
-    category: 'armor'
-  },
-  {
     storeId: 3,
     name: 'Elven Bow',
     description: 'A bow crafted by elves, known for its precision and power.',
@@ -57,7 +65,7 @@ const demoItems = [
     category: 'weapon'
   },
   {
-    storeId: 4,
+    storeId: 3,
     name: 'Phoenix Feather',
     description: 'A rare feather with magical healing properties.',
     price: 500.00,
@@ -65,7 +73,7 @@ const demoItems = [
     category: 'accessory'
   },
   {
-    storeId: 4,
+    storeId: 3,
     name: 'Enchanted Cloak',
     description: 'A cloak that provides invisibility for a short period.',
     price: 250.00,
@@ -79,14 +87,6 @@ const demoItems = [
     price: 400.00,
     quantity: 5,
     category: 'accessory'
-  },
-  {
-    storeId: 4,
-    name: 'Healing Herb',
-    description: 'A herb that restores health when consumed.',
-    price: 5.00,
-    quantity: 50,
-    category: 'food'
   },
   {
     storeId: 4,

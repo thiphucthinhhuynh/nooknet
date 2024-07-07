@@ -80,7 +80,7 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div><FaNewspaper /> Listings</div>
+                <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
                 <div className="item-section">
                     {/* <Link to={`/stores/${userStore.id}/create-item`} className="create-item-button"><HiMiniPencilSquare className="pencil-icon" /> Add Listing</Link> */}
 
@@ -94,8 +94,9 @@ const Profile = () => {
                                     </div>
                                 ) :
                                 (
-                                    <Link to={`/items/${item.id}`}>
-                                        <div id="item-tile">
+
+                                    <div id="item-tile">
+                                        <Link to={`/items/${item.id}`} className="item-info">
                                             <img src={item.ItemImages[0].url ? item.ItemImages[0].url : defaultItemPic} className="item-pic" />
 
                                             <div>
@@ -103,20 +104,21 @@ const Profile = () => {
                                                 <div>{item.category}</div>
                                                 <div>{item.price}</div>
                                             </div>
+                                        </Link>
 
-                                            <div>
-                                                <div onClick={() => handleUpdateItemClick(item.id)}>Update Item</div>
-                                                <OpenModalMenuItem itemText="Delete Item" modalComponent={<DeleteItem item={item} storeId={userStore.id} />} />
-                                            </div>
+                                        <div>
+                                            <div className="update-item-button" onClick={() => handleUpdateItemClick(item.id)}>Update Item</div>
+                                            <div className="delete-item-button"><OpenModalMenuItem itemText="Delete Item" modalComponent={<DeleteItem item={item} storeId={userStore.id} />} /></div>
                                         </div>
-                                    </Link>
+                                    </div>
+
                                 )}
 
                         </span>
                     ))}
                 </div>
             </div>
-            : (<OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} />)
+            : (<div className="create-store-button"><OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} /></div>)
     );
 };
 

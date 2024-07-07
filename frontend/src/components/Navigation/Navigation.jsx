@@ -1,15 +1,22 @@
 import './Navigation.css';
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import { getStoreByCurrentUser } from '../../store/userStore.js';
 
 
 function Navigation({ isLoaded }) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const sessionUser = useSelector((state) => state.session.user);
     const userStore = useSelector((state) => state.userStoreState.currentStore);
-    const navigate = useNavigate();
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
+
+    useEffect(() => {
+        dispatch(getStoreByCurrentUser())
+    }, [dispatch]);
 
     return (
         <div className="navigation">

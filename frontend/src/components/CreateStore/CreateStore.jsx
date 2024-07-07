@@ -53,7 +53,7 @@ const CreateStore = () => {
 
     return (
         <div className="create-store-container">
-
+            <p>Create a New Store</p>
             <form onSubmit={handleSubmit} className="create-store-form">
                 <input
                     name="name"
@@ -77,11 +77,11 @@ const CreateStore = () => {
                     onChange={(e) => setLocation(e.target.value)}
                 />
 
-                <button type="button" onClick={closeModal}>Cancel</button>
-                <button type="submit" disabled={Object.values(validationErrors).length}>Create Your Store</button>
-
+                <div>
+                    <button id="cancel" type="button" onClick={closeModal}>Cancel</button>
+                    <button id="create-store" type="submit" disabled={Object.values(validationErrors).length}>Create Your Store</button>
+                </div>
             </form>
-
         </div>
     );
 };
