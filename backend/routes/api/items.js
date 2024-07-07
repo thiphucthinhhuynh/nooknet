@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:itemId', async (req, res, next) => {
     try {
         const { itemId } = req.params;
-        const item = await Item.findByPk(itemId);
+        const item = await Item.findByPk(itemId, { include: [{ model: ItemImage }] });
 
         if (!item) {
             return res.status(404).json({ message: "Item not found." });

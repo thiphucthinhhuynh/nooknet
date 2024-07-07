@@ -1,24 +1,70 @@
 import './StoreDetails.css';
+import { FaNewspaper } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchStoreDetails } from '../../store/userStore.js';
+import { getItemsByStore } from '../../store/item.js';
 
 const StoreDetails = () => {
     const { storeId } = useParams();
     const dispatch = useDispatch();
-    const store = useSelector((state) => state.userStore?.storeDetails);
+    const store = useSelector((state) => state.userStoreState.storeDetails);
+    const items = useSelector((state) => state.itemState.allItems);
+    const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
+    const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
 
     useEffect(() => {
         dispatch(fetchStoreDetails(storeId));
     }, [dispatch, storeId]);
 
+    useEffect(() => {
+        if (store?.id) {
+            dispatch(getItemsByStore(store.id));
+        }
+    }, [dispatch, store]);
+
     return (
-        <div>
-            <h1>Hi from StoreDetails</h1>
-            <div>{store?.name}</div>
-            <div>{store?.location}</div>
-            <div>{store?.description}</div>
+        <div className="store-details">
+            <div className="store-section">
+                <div id="store-stat">
+                    <img src={store.Owner?.profilePic ? store.Owner.profilePic : defaultProfilePic} alt={`${store.username}'s Profile Picture`} className="profile-pic" />
+                    <div>{store.Owner?.username}</div>
+                </div>
+
+                <div id="store-info">
+                    <div>{store.name}</div>
+                    <div><FaLocationDot style={{ color: '#FC3A90' }} /> {store.location}</div>
+                    <div className="bubble-container">{store.description}</div>
+                </div>
+            </div>
+
+            <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
+            <div className="item-section">
+                {items.map((item) => (
+                    <span key={item.id}>
+                        <div id="item-tile">
+                            <Link to={`/items/${item.id}`} className="item-info">
+                                <img
+                                    src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
+                                        ? item.ItemImages[0].url
+                                        : defaultItemPic}
+                                    className="item-pic"
+                                />
+
+                                <div>
+                                    <div>{item.name}</div>
+                                    <div>{item.category}</div>
+                                    <div>{item.price}</div>
+                                </div>
+                            </Link>
+                        </div>
+                    </span>
+                ))}
+            </div>
+
         </div>
     );
 };

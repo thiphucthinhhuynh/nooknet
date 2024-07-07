@@ -1,0 +1,17 @@
+.item-details-container {
+    max-width: 60%;
+    margin: 0 auto;
+    /* border: 1px solid pink; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 5vh;
+    gap: 2vw;
+}
+
+.item-details-container .item-pic {
+    max-width: 50%;
+    width: 100%; /* Make the image take the full width of its container */
+    height: auto; /* Maintain the aspect ratio */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+}
