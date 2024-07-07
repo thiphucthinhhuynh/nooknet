@@ -18,11 +18,14 @@ const ItemsIndex = () => {
 
             {items.map((item) => (
                 <span key={item.id} >
-                    <Link to={`/items/${item.id}`} className="item-tile">
+                    <Link to={`/items/${item.id}`} className="items-index-tile">
                         <img src={item.ItemImages[0].url ? item.ItemImages[0].url : defaultItemPic} className="item-pic" />
-                        <div>{item.name}</div>
-                        <div>{item.category}</div>
-                        <div>{item.price}</div>
+
+                        <div>
+                            <div className="item-name">{item.name}</div>
+                            <div>{item.category}</div>
+                            <div>{item.price}</div>
+                        </div>
                     </Link>
                 </span>
             ))}
