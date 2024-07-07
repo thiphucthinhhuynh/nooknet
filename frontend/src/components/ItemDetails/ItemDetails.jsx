@@ -9,6 +9,7 @@ const ItemDetails = () => {
     const { itemId } = useParams();
     const dispatch = useDispatch();
     const item = useSelector((state) => state.itemState.itemDetails);
+    const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
 
     useEffect(() => {
         dispatch(fetchItemDetails(itemId))
@@ -17,13 +18,21 @@ const ItemDetails = () => {
 
     return (
         isLoaded &&
-        <div>
+        <div className="item-details-container">
+            <img
+                src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
+                    ? item.ItemImages[0].url
+                    : defaultItemPic}
+                className="item-pic"
+            />
 
-            <div>{item.name}</div>
-            <div>{item.description}</div>
-            <div>{item.price}</div>
-            <div>{item.quantity}</div>
-            <div>{item.category}</div>
+            <div>
+                <div>{item.name}</div>
+                <div>{item.category}</div>
+                <div>{item.description}</div>
+                <div>{item.price}</div>
+                <div>{item.quantity}</div>
+            </div>
         </div>
     );
 };

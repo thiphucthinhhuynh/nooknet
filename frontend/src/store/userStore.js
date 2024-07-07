@@ -32,7 +32,7 @@ const getStoreDetails = (store) => ({
 });
 
 export const fetchAllStores = () => async (dispatch) => {
-    const response = await csrfFetch(`/api/stores`);
+    const response = await fetch(`/api/stores`);
 
     if (response.ok) {
         const stores = await response.json();

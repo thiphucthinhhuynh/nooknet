@@ -28,6 +28,7 @@ const DeleteItem = ({ item, storeId }) => {
                         : defaultItemPic}
                     className="item-pic"
                 />
+
                 <div>
                     <div className="item-name">{item.name}</div>
                     <div>{item.category}</div>
