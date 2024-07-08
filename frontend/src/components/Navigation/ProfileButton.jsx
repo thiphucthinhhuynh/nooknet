@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
             <button className="profile-button" onClick={toggleMenu}>
                 <HiOutlineDotsVertical />
             </button>
-            {showMenu && <ul className="profile-dropdown" ref={ulRef}>
+            {showMenu && <div className="profile-dropdown" ref={ulRef}>
                 {user ? (
                     <>
                         <div>Hello, {user.firstName}</div>
@@ -57,20 +57,24 @@ function ProfileButton({ user }) {
                         <button onClick={logout}>Log Out</button>
                     </>
                 ) : (
-                    <>
-                        <OpenModalMenuItem
-                            itemText="Log In"
-                            onItemClick={closeMenu}
-                            modalComponent={<LoginFormModal />}
-                        />
-                        <OpenModalMenuItem
-                            itemText="Sign Up"
-                            onItemClick={closeMenu}
-                            modalComponent={<SignupFormModal />}
-                        />
-                    </>
+                    <div className="button-container">
+                        <button>
+                            <OpenModalMenuItem
+                                itemText="Log In"
+                                onItemClick={closeMenu}
+                                modalComponent={<LoginFormModal />}
+                            />
+                        </button>
+                        <button>
+                            <OpenModalMenuItem
+                                itemText="Sign Up"
+                                onItemClick={closeMenu}
+                                modalComponent={<SignupFormModal />}
+                            />
+                        </button>
+                    </div>
                 )}
-            </ul>}
+            </div>}
         </>
     );
 }

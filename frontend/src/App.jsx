@@ -11,6 +11,7 @@ import Stores from './components/Stores';
 import Likes from './components/Likes';
 import StoreDetails from './components/StoreDetails';
 import CreateItem from './components/CreateItem';
+import SearchResults from './components/SearchResults';
 
 
 function Layout() {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: 'likes',
         element: <Likes />
+      },
+      {
+        path: 'search',
+        element: <SearchResults />
       }
     ]
   }
