@@ -6,7 +6,7 @@ const setSearchResults = (results) => ({
 });
 
 export const fetchSearchResults = (type, query) => async (dispatch) => {
-    const response = await fetch(`/api/search?type=${type}&query=${query}`);
+    const response = await fetch(`/api/search?type=${type}&query=${query}/`);
 
     if (response.ok) {
         const results = await response.json();
@@ -14,10 +14,15 @@ export const fetchSearchResults = (type, query) => async (dispatch) => {
     }
 };
 
-const searchReducer = (state = [], action) => {
+const initialState = { allResults: [] };
+
+const searchReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_SEARCH_RESULTS:
-            return action.results;
+            return {
+                ...state,
+                allResults: action.results
+            };
         default:
             return state;
     }
