@@ -1,0 +1,48 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 5px 10px;
+    height: 40px;
+    margin-right: 5vw;
+}
+
+.search-bar #selection {
+    border: none;
+    border-radius: 20px;
+    background-color: pink;
+    padding: 5px 10px;
+    font-size: 1em;
+    padding: 5px 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.search-bar #input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 1.2em;
+    position: relative;
+    top: 5px;
+}
+
+.search-bar #icon {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.search-bar button {
+    position: relative;
+    top: 2px
+}

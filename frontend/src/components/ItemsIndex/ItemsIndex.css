@@ -19,6 +19,7 @@
 
 .items-index-tile .item-pic {
     max-width: 40%;
+    padding: 1.5vw;
 }
 
 @media (max-width: 500px) {
