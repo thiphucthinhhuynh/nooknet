@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import SearchBar from '../SearchBar';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 
 
@@ -24,6 +25,7 @@ function Navigation({ isLoaded }) {
             <Link to="/"><img id="app-logo" src="./nooknet-logo.png" alt="Nooknet Logo" /></Link>
 
             <div>
+                <SearchBar />
                 {isLoaded && sessionUser && userStore &&
                     <>
                         <Link to={`/stores/${userStore.id}/create-item`} className="create-item-button"><HiMiniPencilSquare className="pencil-icon" /> Add Listing</Link>

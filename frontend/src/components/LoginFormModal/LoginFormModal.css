@@ -13,6 +13,12 @@
     margin-top: 10px;
 }
 
+.login-modal>:last-child {
+    font-weight: bold;
+    font-size: 2em;
+    color: green
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -29,16 +35,6 @@ input {
     border-radius: 3px;
 }
 
-button {
-    width: 260px;
-    background: rgb(60, 56, 56);
-    color: rgb(252, 96, 96);
-    font-size: 1.1em;
-    list-style-type: none;
-    border-radius: 3px;
-    padding: 5px;
-}
-
 button:hover {
     cursor: pointer;
 }
@@ -46,8 +42,4 @@ button:hover {
 .errors {
     color: rgb(252, 96, 96);
     padding: 5px;
-}
-
-.login-modal a {
-    margin: 15px;
 }
