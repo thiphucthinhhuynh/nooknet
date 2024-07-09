@@ -41,12 +41,11 @@ function LoginFormModal() {
             });
     };
 
-
     return (
         <div className="login-modal">
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
-                <div className="login-form">
+                <div className="login-input">
                     <label>Username or Email</label>
                     <input
                         type="text"

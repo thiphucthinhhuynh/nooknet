@@ -1,11 +1,13 @@
 .update-store-container {
-    padding: 20px
+    border: 1px solid pink;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .update-store-container>:first-child {
     font-weight: bold;
     font-size: 1.7em;
-    margin: 20px;
+    margin-left: 40px;
 }
 
 .update-store-form {
@@ -16,8 +18,8 @@
 
 .update-store-form input,
 .update-store-form textarea {
-    border: none;
-    outline: none;
+    border: 1px solid pink;
+    margin: 10px
 }
 
 .update-store-form>:first-child {

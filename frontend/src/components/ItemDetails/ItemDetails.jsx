@@ -1,4 +1,5 @@
 import './ItemDetails.css';
+import BearCoin from '../BearCoin';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -30,8 +31,8 @@ const ItemDetails = () => {
                 <div>{item.name}</div>
                 <div>{item.category}</div>
                 <div>{item.description}</div>
-                <div>{item.price}</div>
-                <div>{item.quantity}</div>
+                <div>{item.price === 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
+                <div>Quantity: {item.quantity}</div>
             </div>
         </div>
     );
