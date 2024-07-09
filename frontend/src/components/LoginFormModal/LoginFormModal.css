@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    border: 2px solid rgb(78, 78, 78);
+    border: 1px solid pink;
     border-radius: 20px;
 }
 
@@ -19,11 +19,29 @@
     color: green
 }
 
-.login-form {
+.login-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+}
+
+.login-modal button {
+    border-radius: 20px;
+    border: 2px solid green;
+    background-color: green;
+    color: white;
+}
+
+.login-modal button:disabled {
+    background-color: grey;
+    border: 2px solid grey;
+    color: white;
+    cursor: not-allowed
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 input {
@@ -33,10 +51,6 @@ input {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
-}
-
-button:hover {
-    cursor: pointer;
 }
 
 .errors {

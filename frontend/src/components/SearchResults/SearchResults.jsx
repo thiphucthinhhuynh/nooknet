@@ -22,12 +22,15 @@ const SearchResults = () => {
 
     return (
         <div>
-            <h1>Search Results</h1>
-            <div>
-                {searchResults.map((result) => (
+            {type === 'items' ? (
+                searchResults.map((result) => (
                     <div key={result.id}>{result.name}</div>
-                ))}
-            </div>
+                ))
+            ) : (
+                searchResults.map((result) => (
+                    <div key={result.id}>{result.username}</div>
+                ))
+            )}
         </div>
     );
 };

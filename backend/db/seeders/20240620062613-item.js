@@ -13,23 +13,23 @@ const demoItems = [
     name: 'Dragon Armor',
     description: 'Armor made from dragon scales, provides superior protection.',
     price: 300.00,
-    quantity: 5,
+    quantity: 1,
     category: 'armor'
   },
   {
     storeId: 1,
     name: 'Mana Potion',
     description: 'Restores 30 MP.',
-    price: 8.00,
-    quantity: 200,
+    price: 80.00,
+    quantity: 21,
     category: 'potion'
   },
   {
     storeId: 1,
     name: 'Healing Herb',
     description: 'A herb that restores health when consumed.',
-    price: 5.00,
-    quantity: 50,
+    price: 55.00,
+    quantity: 34,
     category: 'food'
   },
   {
@@ -37,15 +37,15 @@ const demoItems = [
     name: 'Magic Sword',
     description: 'A powerful sword imbued with magical properties.',
     price: 150.00,
-    quantity: 10,
+    quantity: 3,
     category: 'weapon'
   },
   {
     storeId: 2,
     name: 'Health Potion',
     description: 'Restores 50 HP.',
-    price: 10.00,
-    quantity: 100,
+    price: 40.00,
+    quantity: 10,
     category: 'potion'
   },
   {
@@ -53,7 +53,7 @@ const demoItems = [
     name: 'Shield of Valor',
     description: 'Provides excellent defense against all attacks.',
     price: 120.00,
-    quantity: 15,
+    quantity: 2,
     category: 'armor'
   },
   {
@@ -61,7 +61,7 @@ const demoItems = [
     name: 'Elven Bow',
     description: 'A bow crafted by elves, known for its precision and power.',
     price: 200.00,
-    quantity: 20,
+    quantity: 6,
     category: 'weapon'
   },
   {
@@ -92,8 +92,8 @@ const demoItems = [
     storeId: 4,
     name: 'Iron Hammer',
     description: 'A tool used for crafting and repair.',
-    price: 30.00,
-    quantity: 25,
+    price: 350.00,
+    quantity: 2,
     category: 'tool'
   }
 ];

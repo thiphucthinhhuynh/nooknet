@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
 
     try {
         let results;
+
         if (type === 'items') {
             results = await Item.findAll({
                 where: {
