@@ -1,4 +1,5 @@
 import './ItemsIndex.css';
+import BearCoin from '../BearCoin';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +25,7 @@ const ItemsIndex = () => {
                         <div>
                             <div className="item-name">{item.name}</div>
                             <div>{item.category}</div>
-                            <div>{item.price}</div>
+                            <div>{item.price === 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
                         </div>
                     </Link>
                 </span>

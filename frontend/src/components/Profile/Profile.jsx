@@ -1,5 +1,6 @@
 import './Profile.css';
 // import { HiMiniPencilSquare } from "react-icons/hi2";
+import BearCoin from '../BearCoin';
 import { FaNewspaper } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
@@ -109,7 +110,7 @@ const Profile = () => {
                                             <div>
                                                 <div>{item.name}</div>
                                                 <div>{item.category}</div>
-                                                <div>{item.price}</div>
+                                                <div>{item.price === 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
                                             </div>
                                         </Link>
 

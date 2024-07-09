@@ -48,14 +48,14 @@ function SignupFormModal() {
         <div className="signup-modal">
             <h1>Sign Up</h1>
             <form onSubmit={handleSubmit}>
-                <div className="signup-form">
+                <div className="signup-input">
                     <label>Email</label>
                     <input
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required />
-                    {errors.email && <p>{errors.email}</p>}
+                    {errors.email && <p className="errors">{errors.email}</p>}
 
                     <label>Username</label>
                     <input
@@ -63,7 +63,7 @@ function SignupFormModal() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required />
-                    {errors.username && <p>{errors.username}</p>}
+                    {errors.username && <p className="errors">{errors.username}</p>}
 
                     <label>First Name</label>
                     <input
@@ -71,7 +71,7 @@ function SignupFormModal() {
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required />
-                    {errors.firstName && <p>{errors.firstName}</p>}
+                    {errors.firstName && <p className="errors">{errors.firstName}</p>}
 
                     <label>Last Name</label>
                     <input
@@ -79,7 +79,7 @@ function SignupFormModal() {
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required />
-                    {errors.lastName && <p>{errors.lastName}</p>}
+                    {errors.lastName && <p className="errors">{errors.lastName}</p>}
 
                     <label>Password</label>
                     <input
@@ -87,7 +87,7 @@ function SignupFormModal() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required />
-                    {errors.password && <p>{errors.password}</p>}
+                    {errors.password && <p className="errors">{errors.password}</p>}
 
                     <label>Confirm Password</label>
                     <input
@@ -95,7 +95,7 @@ function SignupFormModal() {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required />
-                    {errors.confirmPassword && (<p>{errors.confirmPassword}</p>)}
+                    {errors.confirmPassword && (<p className="errors">{errors.confirmPassword}</p>)}
                 </div>
 
                 <button type="submit" disabled={isFormInvalid}>Sign Up</button>

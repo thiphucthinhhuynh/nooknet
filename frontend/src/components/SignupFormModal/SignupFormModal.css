@@ -1,6 +1,6 @@
 .signup-modal {
     padding: 10px 20px;
-    border: 2px solid rgb(78, 78, 78);
+    border: 1px solid pink;
     border-radius: 20px;
 }
 
@@ -9,7 +9,30 @@
     margin-top: 10px;
 }
 
-.signup-form {
+button {
+    list-style-type: none;
+    width: 260px;
+    font-size: 1.1em;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.signup-modal button {
+    border-radius: 20px;
+    border: 2px solid green;
+    background-color: green;
+    color: white;
+}
+
+.signup-modal button:disabled {
+    background-color: grey;
+    border: 2px solid grey;
+    color: white;
+    cursor: not-allowed
+}
+
+.signup-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,23 +41,11 @@
 
 input {
     width: 250px;
-    padding: 5px;
+    /* padding: 5px; */
     margin-top: 4px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
-}
-
-button {
-    width: 260px;
-    background: rgb(60, 56, 56);
-    color: rgb(252, 96, 96);
-    font-size: 1.1em;
-    list-style-type: none;
-    border-radius: 3px;
-    padding: 5px;
-    margin-top: 10px;
-    margin-bottom: 15px;
 }
 
 button:hover {
@@ -42,6 +53,9 @@ button:hover {
 }
 
 .errors {
+    display: flex;
     color: rgb(252, 96, 96);
-    padding: 5px;
+    max-width: 250px;
+    word-wrap: break-word; /* Ensure long words break to the next line */
+    white-space: normal; /* Allow wrapping */
 }

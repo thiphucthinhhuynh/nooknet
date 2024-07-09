@@ -6,7 +6,7 @@ const setSearchResults = (results) => ({
 });
 
 export const fetchSearchResults = (type, query) => async (dispatch) => {
-    const response = await fetch(`/api/search?type=${type}&query=${query}/`);
+    const response = await fetch(`/api/search?type=${type}&query=${query}`);
 
     if (response.ok) {
         const results = await response.json();
