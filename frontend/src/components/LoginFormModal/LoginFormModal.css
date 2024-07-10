@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    border: 1px solid pink;
+    border: 1px solid black;
     border-radius: 20px;
 }
 
@@ -15,8 +15,9 @@
 
 .login-modal>:last-child {
     font-weight: bold;
-    font-size: 2em;
-    color: green
+    font-size: 1.8em;
+    color: #0044CC;
+    text-decoration: underline;
 }
 
 .login-input {

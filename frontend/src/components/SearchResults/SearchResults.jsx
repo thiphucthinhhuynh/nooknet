@@ -22,14 +22,18 @@ const SearchResults = () => {
 
     return (
         <div>
-            {type === 'items' ? (
-                searchResults.map((result) => (
-                    <div key={result.id}>{result.name}</div>
-                ))
+            {searchResults.length === 0 ? (
+                <div>No results could be found</div>
             ) : (
-                searchResults.map((result) => (
-                    <div key={result.id}>{result.username}</div>
-                ))
+                type === 'items' ? (
+                    searchResults.map((result) => (
+                        <div key={result.id}>{result.name}</div>
+                    ))
+                ) : (
+                    searchResults.map((result) => (
+                        <div key={result.id}>{result.username}</div>
+                    ))
+                )
             )}
         </div>
     );

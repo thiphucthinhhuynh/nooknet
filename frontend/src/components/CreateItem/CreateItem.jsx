@@ -13,35 +13,23 @@ const CreateItem = () => {
     const [validationErrors, setValidationErrors] = useState({});
 
     const { storeId } = useParams();
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const isFormInvalid = !name || !price || !quantity || !category;
+
     useEffect(() => {
-        const errors = {};
+        const resetForm = () => {
+            setName(''),
+                setDescription(''),
+                setPrice(''),
+                setQuantity(1),
+                setCategory(''),
+                setValidationErrors({})
+        };
 
-        if (!name) {
-            errors.name = "Please enter a name.";
-        }
-
-        if (!description) {
-            errors.description = "Please enter description.";
-        }
-
-        if (!price) {
-            errors.price = "Please enter a price.";
-        }
-
-        if (!quantity) {
-            errors.quantity = "Please enter quantity.";
-        }
-
-        if (!category) {
-            errors.category = "Please enter a category."
-        }
-
-        setValidationErrors(errors);
-    }, [name, description, price, quantity, category]);
+        return resetForm;
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,7 +43,13 @@ const CreateItem = () => {
             category
         };
 
-        const newItem = await dispatch(createNewItem(newItemData, storeId));
+        const newItem = await dispatch(createNewItem(newItemData, storeId))
+            .catch(async (response) => {
+                const data = await response.json();
+                if (data?.errors) {
+                    setValidationErrors(data.errors);
+                }
+            });
 
         if (newItem) {
             navigate(`/items/${newItem.id}`);
@@ -73,6 +67,7 @@ const CreateItem = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+                {validationErrors.name && <p className="errors">{validationErrors.name}</p>}
 
                 <label>Description</label>
                 <textarea
@@ -90,6 +85,7 @@ const CreateItem = () => {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                 />
+                {validationErrors.price && <p className="errors">{validationErrors.price}</p>}
 
                 <label>Amount</label>
                 <input
@@ -98,6 +94,7 @@ const CreateItem = () => {
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                 />
+                {validationErrors.quantity && <p className="errors">{validationErrors.quantity}</p>}
 
                 <label>Category</label>
                 <select
@@ -113,10 +110,11 @@ const CreateItem = () => {
                     <option value="accessories">Accessories</option>
                     <option value="tools">Tools</option>
                 </select>
+                {validationErrors.category && <p className="errors">{validationErrors.category}</p>}
 
                 <div>
                     <button id="cancel" type="button" onClick={() => navigate('/profile')}>Cancel</button>
-                    <button id="create-item" type="submit" disabled={Object.values(validationErrors).length}>Create Now</button>
+                    <button id="create-item" type="submit" disabled={isFormInvalid} >Create Now</button>
                 </div>
             </form>
 

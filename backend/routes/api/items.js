@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
+const { validateItem } = require('../../utils/validation');
 const { Item, ItemImage, Store } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
@@ -38,7 +39,7 @@ router.get('/:itemId', async (req, res, next) => {
 // --------------------------------------------------------------------------------------//
 //                                   Update an Item                                     //
 // ------------------------------------------------------------------------------------//
-router.put('/:itemId', requireAuth, async (req, res, next) => {
+router.put('/:itemId', requireAuth, validateItem, async (req, res, next) => {
     try {
         const { itemId } = req.params;
         const { name, description, price, quantity, category } = req.body;

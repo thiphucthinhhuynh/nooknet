@@ -1,4 +1,5 @@
 import './DeleteItem.css';
+import BearCoin from '../BearCoin';
 import { useModal } from '../../context/Modal';
 import { useDispatch } from 'react-redux';
 import { deleteItem, getItemsByStore } from '../../store/item.js';
@@ -32,7 +33,7 @@ const DeleteItem = ({ item, storeId }) => {
                 <div>
                     <div className="item-name">{item.name}</div>
                     <div>{item.category}</div>
-                    <div>{item.price}</div>
+                    <div>{item.price === 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
                 </div>
             </div>
 
