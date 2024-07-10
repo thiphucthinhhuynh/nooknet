@@ -96,7 +96,7 @@
     max-width: 40%;
     width: 100%; /* Make the image take the full width of its container */
     height: auto; /* Maintain the aspect ratio */
-    object-fit: cover; /* Ensure the image covers the container without distortion */
+    object-fit: cover /* Ensure the image covers the container without distortion */
 }
 
 #item-tile {
@@ -121,8 +121,10 @@
 
 .newspaper {
     color: green;
+    /* color: rgb(254, 108, 133); */
     font-size: 1.5em;
     border-bottom: 1px dashed green;
+    /* border-bottom: 1px dashed rgb(254, 108, 133); */
 }
 
 .newspaper #icon {

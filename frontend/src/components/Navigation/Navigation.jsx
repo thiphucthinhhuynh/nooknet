@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
     return (
         <div className="navigation">
 
-            <Link to="/"><img id="app-logo" src="./nooknet-logo.png" alt="Nooknet Logo" /></Link>
+            <Link to="/"><img id="app-logo" src="https://i.imghippo.com/files/Z7N0r1720514830.png" alt="Nooknet Logo" /></Link>
 
             <div>
                 <SearchBar />

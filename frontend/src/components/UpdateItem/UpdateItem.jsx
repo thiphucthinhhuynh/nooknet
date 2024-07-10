@@ -1,5 +1,5 @@
 import './UpdateItem.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateItem, getItemsByStore } from '../../store/item.js';
 
@@ -13,31 +13,7 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const errors = {};
-
-        if (!name) {
-            errors.name = "Please enter a name.";
-        }
-
-        if (!description) {
-            errors.description = "Please enter description.";
-        }
-
-        if (!price) {
-            errors.price = "Please enter a price.";
-        }
-
-        if (!quantity) {
-            errors.quantity = "Please enter quantity.";
-        }
-
-        if (!category) {
-            errors.category = "Please enter a category.";
-        }
-
-        setValidationErrors(errors);
-    }, [name, description, price, quantity, category]);
+    const isFormInvalid = !name || !price || !quantity || !category;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,7 +26,13 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
             category
         };
 
-        const updatedItem = await dispatch(updateItem(updatedItemData, item.id));
+        const updatedItem = await dispatch(updateItem(updatedItemData, item.id))
+            .catch(async (response) => {
+                const data = await response.json();
+                if (data?.errors) {
+                    setValidationErrors(data.errors);
+                }
+            });
 
         if (updatedItem) {
             await dispatch(getItemsByStore(storeId));
@@ -70,7 +52,7 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-
+                    {validationErrors.name && <p className="errors">{validationErrors.name}</p>}
                     <label>Description</label>
                     <textarea
                         name="description"
@@ -89,6 +71,7 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
+                    {validationErrors.price && <p className="errors">{validationErrors.price}</p>}
 
                     <label>Amount</label>
                     <input
@@ -97,6 +80,7 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
                     />
+                    {validationErrors.quantity && <p className="errors">{validationErrors.quantity}</p>}
 
                     <label>Category</label>
                     <select
@@ -112,11 +96,12 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
                         <option value="accessories">Accessories</option>
                         <option value="tools">Tools</option>
                     </select>
+                    {validationErrors.category && <p className="errors">{validationErrors.category}</p>}
                 </div>
 
                 <div id="button">
                     <button id="cancel" type="button" onClick={onCancel}>Cancel</button>
-                    <button id="update-item" type="submit" disabled={Object.values(validationErrors).length}>Update Now</button>
+                    <button id="update-item" type="submit" disabled={isFormInvalid}>Update Now</button>
                 </div>
             </form>
         </div>

@@ -1,19 +1,18 @@
 #app-logo {
     width: 100px;
-    height: 50px;
     margin-right: auto; /* Pushes the logo to the left */
 }
 
 .navigation {
     position: sticky;
     top: 0;
+    padding: 0 2vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
     background-color: rgba(229, 229, 229, 0.7);
     border-bottom: 2px solid rgb(47, 210, 90);
-    ;
+    z-index: 5;
 }
 
 .navigation>div {
