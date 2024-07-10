@@ -20,7 +20,7 @@ const ItemsIndex = () => {
             {items.map((item) => (
                 <span key={item.id} >
                     <Link to={`/items/${item.id}`} className="items-index-tile">
-                        <img src={item.ItemImages[0].url ? item.ItemImages[0].url : defaultItemPic} className="item-pic" />
+                        <img src={item.ItemImages[0]?.url ? item.ItemImages[0].url : defaultItemPic} className="item-pic" />
 
                         <div>
                             <div className="item-name">{item.name}</div>

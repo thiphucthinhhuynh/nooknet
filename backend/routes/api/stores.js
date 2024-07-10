@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
+const { validateItem } = require('../../utils/validation');
 const { Store, Item, ItemImage, User } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
@@ -45,7 +46,7 @@ router.get('/:storeId', async (req, res, next) => {
     try {
         const { storeId } = req.params;
         const store = await Store.findByPk(storeId, {
-            include: [{ model: User, as: 'Owner', attributes: ['profilePic'] }]
+            include: [{ model: User, as: 'Owner', attributes: ['profilePic', 'username'] }]
         });
 
         if (!store) {
@@ -149,7 +150,7 @@ router.get('/:storeId/items', async (req, res, next) => {
 // --------------------------------------------------------------------------------------//
 //                              Create an Item for a Store                              //
 // ------------------------------------------------------------------------------------//
-router.post('/:storeId/items', requireAuth, async (req, res, next) => {
+router.post('/:storeId/items', requireAuth, validateItem, async (req, res, next) => {
     try {
         const { storeId } = req.params;
         const { name, description, price, quantity, category } = req.body;

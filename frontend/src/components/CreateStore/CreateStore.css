@@ -1,5 +1,7 @@
 .create-store-container {
     padding: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
 }
 
 .create-store-container>:first-child {
@@ -16,12 +18,17 @@
 
 .create-store-form input,
 .create-store-form textarea {
-    border: none;
-    outline: none;
+    margin-bottom: 3vh;
 }
 
+/* .create-store-form input,
+.create-store-form textarea {
+    border: none;
+    outline: none;
+} */
+
 .create-store-form>:first-child {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .create-store-form button {
