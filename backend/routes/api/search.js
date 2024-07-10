@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Op } = require("sequelize");
-const { User, Item, ItemImage, Store, sequelize } = require('../../db/models');
+const { User, Item, ItemImage, Store } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //      Get results of searching for Item or User by their name (for PostgreSQL)        //
@@ -27,7 +27,8 @@ router.get('/', async (req, res, next) => {
                     username: {
                         [Op.iLike]: `%${query}%`
                     }
-                }
+                },
+                include: [{ model: Store }]
             });
         }
 
@@ -40,6 +41,8 @@ router.get('/', async (req, res, next) => {
 // --------------------------------------------------------------------------------------//
 //         Get results of searching for Item or User by their name (for SQLite)         //
 // ------------------------------------------------------------------------------------//
+// const { User, Item, ItemImage, Store, sequelize } = require('../../db/models');
+
 // router.get('/', async (req, res, next) => {
 //     const { type, query } = req.query;
 
