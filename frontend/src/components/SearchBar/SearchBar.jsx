@@ -11,6 +11,12 @@ const SearchBar = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
+
+                // Check if query is empty
+                if (!query.trim()) {
+                    return;
+                }
+
         navigate(`/search?type=${type}&query=${query}`);
     };
 
