@@ -1,5 +1,5 @@
 import './UpdateItem.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateItem, getItemsByStore } from '../../store/item.js';
 

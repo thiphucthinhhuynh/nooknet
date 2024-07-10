@@ -1,6 +1,6 @@
 import './UpdateStore.css';
 import { useModal } from '../../context/Modal';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateStore, getStoreByCurrentUser } from '../../store/userStore.js';
 
@@ -11,25 +11,8 @@ const UpdateStore = ({ storeId, sessionUser, userStore }) => {
     const [name, setName] = useState(userStore.name);
     const [description, setDescription] = useState(userStore.description);
     const [location, setLocation] = useState(userStore.location);
-    const [validationErrors, setValidationErrors] = useState({});
 
-    useEffect(() => {
-        const errors = {};
-
-        if (!name) {
-            errors.name = "Please enter a name";
-        }
-
-        if (!description) {
-            errors.description = "Please enter description";
-        }
-
-        if (!location) {
-            errors.location = "Please enter a location";
-        }
-
-        setValidationErrors(errors);
-    }, [name, description, location]);
+    const isFormInvalid = !name || !location;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -78,7 +61,7 @@ const UpdateStore = ({ storeId, sessionUser, userStore }) => {
 
                 <div>
                     <button id="cancel" type="button" onClick={closeModal}>Close</button>
-                    <button id="update-store" type="submit" disabled={Object.values(validationErrors).length}>Save</button>
+                    <button id="update-store" type="submit" disabled={isFormInvalid}>Save</button>
                 </div>
             </form>
         </div>

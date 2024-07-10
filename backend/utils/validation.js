@@ -20,7 +20,9 @@ const handleValidationErrors = (req, _res, next) => {
     next();
 };
 
-// Middleware for validating the body of request in the Item routes
+// --------------------------------------------------------------------------------------//
+//            Middleware for validating the body of request in the Item routes          //
+// ------------------------------------------------------------------------------------//
 const validateItem = [
     check('name')
         .exists({ checkFalsy: true })

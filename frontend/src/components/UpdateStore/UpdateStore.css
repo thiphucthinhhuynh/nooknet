@@ -44,7 +44,7 @@
     color: white;
 }
 
-.update-store-form button#create-store:disabled {
+.update-store-form button#update-store:disabled {
     background-color: grey;
     border: 2px solid grey;
     color: white;
