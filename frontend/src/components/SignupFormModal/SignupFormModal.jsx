@@ -15,8 +15,7 @@ function SignupFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
-    const isFormInvalid = !email || !username || !firstName || !lastName || !password || !confirmPassword
-        || (username.length < 4) || (password.length < 6);
+    const isFormInvalid = !email || !username || !firstName || !lastName || !password || !confirmPassword;
 
     const handleSubmit = (e) => {
         e.preventDefault();
