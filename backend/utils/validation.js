@@ -32,8 +32,8 @@ const validateItem = [
         .exists({ checkFalsy: true })
         .withMessage('Please enter a price.')
         .bail() // Bail if price is not provided
-        .isFloat({ min: 0 })
-        .withMessage('Price cannot be negative.'),
+        .isFloat({ min: 1 })
+        .withMessage('Price cannot be zero, or negative.'),
     check('quantity')
         .exists({ checkFalsy: true })
         .withMessage('Please enter a quantity.')
@@ -41,8 +41,8 @@ const validateItem = [
         .isInt()
         .withMessage('Please enter an integer for quantity.')
         .bail() // Bail if quantity is not an integer
-        .isInt({ min: 0 })
-        .withMessage('Quantity cannot be negative.'),
+        .isInt({ min: 1 })
+        .withMessage('Quantity cannot be zero, or negative.'),
     check('category')
         .exists({ checkFalsy: true })
         .withMessage('Please select a category.'),

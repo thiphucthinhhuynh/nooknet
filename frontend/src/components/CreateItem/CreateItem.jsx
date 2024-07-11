@@ -16,7 +16,7 @@ const CreateItem = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const isFormInvalid = !name || !price || !quantity || !category;
+    // const isFormInvalid = !name || !price || !quantity || !category;
 
     useEffect(() => {
         const resetForm = () => {
@@ -69,7 +69,7 @@ const CreateItem = () => {
                 />
                 {validationErrors.name && <p className="errors">{validationErrors.name}</p>}
 
-                <label>Description</label>
+                <label>Description (Optional)</label>
                 <textarea
                     name="description"
                     placeholder="Description"
@@ -114,7 +114,8 @@ const CreateItem = () => {
 
                 <div>
                     <button id="cancel" type="button" onClick={() => navigate('/profile')}>Cancel</button>
-                    <button id="create-item" type="submit" disabled={isFormInvalid} >Create Now</button>
+                    {/* <button id="create-item" type="submit" disabled={isFormInvalid} >Create Now</button> */}
+                    <button id="create-item" type="submit" >Create Now</button>
                 </div>
             </form>
 

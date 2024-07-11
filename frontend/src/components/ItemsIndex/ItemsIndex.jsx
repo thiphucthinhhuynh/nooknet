@@ -25,7 +25,7 @@ const ItemsIndex = () => {
                         <div>
                             <div className="item-name">{item.name}</div>
                             <div>{item.category}</div>
-                            <div>{item.price === 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
+                            <div>{item.price === 1 ? <div>1<BearCoin />coin</div> : <div>{item.price}<BearCoin />coins</div>}</div>
                         </div>
                     </Link>
                 </span>
