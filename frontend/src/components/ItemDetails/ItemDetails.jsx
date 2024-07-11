@@ -17,6 +17,17 @@ const ItemDetails = () => {
             .then(() => { setIsLoaded(true) });
     }, [dispatch, itemId]);
 
+    useEffect(() => {
+        if (isLoaded && item) {
+            console.log('Item Price:', item.price);
+            console.log('Type of Item Price:', typeof item.price);
+        }
+    }, [isLoaded, item]);
+
+    if (!isLoaded || !item) {
+        return <div>Loading...</div>;
+    }
+
     return (
         isLoaded &&
         <div className="item-details-container">
