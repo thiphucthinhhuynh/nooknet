@@ -23,7 +23,7 @@ const Stores = () => {
                         <div>{store.name}</div>
                         <img src={store.Owner?.profilePic ? store.Owner.profilePic : defaultProfilePic} alt={`${store.username}'s Profile Picture`} className="profile-pic" />
                         <div>{store.Owner?.username}</div>
-                        <div><FaLocationDot style={{ color: '#FC3A90' }} /> {store.location}</div>
+                        {store.location && <div><FaLocationDot style={{ color: '#FC3A90' }} /> {store.location}</div>}
                     </Link>
                 </span>
             ))

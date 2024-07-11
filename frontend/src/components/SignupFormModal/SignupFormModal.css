@@ -2,6 +2,8 @@
     padding: 10px 20px;
     border: 1px solid black;
     border-radius: 20px;
+    max-height: 65vh; /* Set maximum height to 70% of the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
 }
 
 .signup-modal h1 {
