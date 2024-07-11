@@ -41,8 +41,8 @@ const StoreDetails = () => {
 
                 <div id="store-info">
                     <div>{store.name}</div>
-                    <div><FaLocationDot style={{ color: '#FC3A90' }} /> {store.location}</div>
-                    <div className="bubble-container">{store.description}</div>
+                    {store.location && <div><FaLocationDot style={{ color: '#FC3A90' }} /> {store.location}</div>}
+                    <div className="bubble-container">{store.description ? store.description : `Welcome to ${store.name}!~~`}</div>
                 </div>
             </div>
 

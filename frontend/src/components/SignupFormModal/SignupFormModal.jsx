@@ -15,21 +15,44 @@ function SignupFormModal() {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
-    const isFormInvalid = !email || !username || !firstName || !lastName || !password || !confirmPassword;
+    const isFormInvalid = !email || !username || !password || !confirmPassword;
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const trimmedUsername = username.trim();
+        const trimmedFirstName = firstName.trim();
+        const trimmedLastName = lastName.trim();
+
+        let validationErrors = {};
+
+        if (!trimmedUsername) {
+            validationErrors.username = "Username cannot be empty, or contain only spaces";
+        }
+
+        if (firstName && !trimmedFirstName) {
+            validationErrors.firstName = "First name cannot contain only spaces";
+        }
+
+        if (lastName && !trimmedLastName) {
+            validationErrors.lastName = "Last name cannot contain only spaces";
+        }
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+
         if (password === confirmPassword) {
             setErrors({});
             return dispatch(
                 sessionActions.signup({
                     email,
-                    username,
-                    firstName,
-                    lastName,
+                    username: trimmedUsername,
+                    firstName: trimmedFirstName,
+                    lastName: trimmedLastName,
                     password
-                })
-            )
+                }))
                 .then(closeModal)
                 .catch(async (res) => {
                     const data = await res.json();
@@ -64,20 +87,20 @@ function SignupFormModal() {
                         required />
                     {errors.username && <p className="errors">{errors.username}</p>}
 
-                    <label>First Name</label>
+                    <label>First Name (Optional)</label>
                     <input
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        required />
+                    />
                     {errors.firstName && <p className="errors">{errors.firstName}</p>}
 
-                    <label>Last Name</label>
+                    <label>Last Name (Optional)</label>
                     <input
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
-                        required />
+                    />
                     {errors.lastName && <p className="errors">{errors.lastName}</p>}
 
                     <label>Password</label>
