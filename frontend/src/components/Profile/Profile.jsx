@@ -76,8 +76,8 @@ const Profile = () => {
                             <div className="update-button"><OpenModalMenuItem itemText="Update Store" modalComponent={<UpdateStore storeId={userStore.id} sessionUser={sessionUser} userStore={userStore} />} /></div>
                             <div className="delete-button"><OpenModalMenuItem itemText="Delete Store" modalComponent={<DeleteStore storeId={userStore.id} />} /></div>
                         </div>
-                        <div><FaLocationDot style={{ color: '#FC3A90' }} /> {userStore.location}</div>
-                        <div className="bubble-container">{userStore.description}</div>
+                        {userStore.location && <div><FaLocationDot style={{ color: '#FC3A90' }} /> {userStore.location}</div>}
+                        <div className="bubble-container">{userStore.description ? userStore.description : `Welcome to ${userStore.name}!~~`}</div>
                     </div>
                 </div>
 
