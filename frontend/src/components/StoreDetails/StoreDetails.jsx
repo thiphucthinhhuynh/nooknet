@@ -62,7 +62,7 @@ const StoreDetails = () => {
                                 <div>
                                     <div id="item-name">{item.name}</div>
                                     <div>{item.category}</div>
-                                    <div>{item.price === 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
+                                    <div>{item.price == 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
                                 </div>
                             </Link>
                         </div>
