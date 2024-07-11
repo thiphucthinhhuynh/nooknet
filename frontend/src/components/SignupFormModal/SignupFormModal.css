@@ -4,6 +4,21 @@
     border-radius: 20px;
     max-height: 65vh; /* Set maximum height to 70% of the viewport height */
     overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
+    box-sizing: border-box;
+}
+
+.signup-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.signup-modal::-webkit-scrollbar-thumb {
+    background: #888; /* Customize scrollbar thumb color */
+    border-radius: 10px; /* Match border radius */
+    height: 40px; /* Shorten the scrollbar thumb */
+}
+
+.signup-modal::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Customize scrollbar thumb hover color */
 }
 
 .signup-modal h1 {

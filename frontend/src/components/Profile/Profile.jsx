@@ -108,7 +108,7 @@ const Profile = () => {
 
 
                                             <div>
-                                                <div>{item.name}</div>
+                                                <div id="item-name">{item.name}</div>
                                                 <div>{item.category}</div>
                                                 <div>{item.price === 1 ? <div>1<BearCoin />coin</div> : <div>{item.price}<BearCoin />coins</div>}</div>
                                             </div>
