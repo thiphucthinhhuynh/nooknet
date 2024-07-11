@@ -13,7 +13,7 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
 
     const dispatch = useDispatch();
 
-    const isFormInvalid = !name || !price || !quantity || !category;
+    // const isFormInvalid = !name || !price || !quantity || !category;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,7 +53,7 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
                         onChange={(e) => setName(e.target.value)}
                     />
                     {validationErrors.name && <p className="errors">{validationErrors.name}</p>}
-                    <label>Description</label>
+                    <label>Description (Optional)</label>
                     <textarea
                         name="description"
                         placeholder="Description"
@@ -101,7 +101,8 @@ const UpdateItem = ({ item, onCancel, storeId }) => {
 
                 <div id="button">
                     <button id="cancel" type="button" onClick={onCancel}>Cancel</button>
-                    <button id="update-item" type="submit" disabled={isFormInvalid}>Update Now</button>
+                    {/* <button id="update-item" type="submit" disabled={isFormInvalid}>Update Now</button> */}
+                    <button id="update-item" type="submit">Update Now</button>
                 </div>
             </form>
         </div>
