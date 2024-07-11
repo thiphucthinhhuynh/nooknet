@@ -17,17 +17,6 @@ const ItemDetails = () => {
             .then(() => { setIsLoaded(true) });
     }, [dispatch, itemId]);
 
-    useEffect(() => {
-        if (isLoaded && item) {
-            console.log('Item Price:', item.price);
-            console.log('Type of Item Price:', typeof item.price);
-        }
-    }, [isLoaded, item]);
-
-    if (!isLoaded || !item) {
-        return <div>Loading...</div>;
-    }
-
     return (
         isLoaded &&
         <div className="item-details-container">
@@ -42,7 +31,8 @@ const ItemDetails = () => {
                 <div>{item.name}</div>
                 <div>{item.category}</div>
                 <div>{item.description}</div>
-                <div>{item.price === 1 ? <div>1<BearCoin />coin</div> : <div>{item.price}<BearCoin />coins</div>}</div>
+                <div>{item.price == 1 ? <div>1<BearCoin />coin</div> : <div>{item.price}<BearCoin />coins</div>}</div>
+                <div>Type of Item Price: {typeof item.price}</div>
                 <div>Quantity: {item.quantity}</div>
             </div>
         </div>
