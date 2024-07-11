@@ -119,6 +119,12 @@
     gap: 4vw;
 }
 
+#item-tile .item-info #item-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: rgb(253, 127, 148);
+}
+
 .newspaper {
     color: green;
     /* color: rgb(254, 108, 133); */
