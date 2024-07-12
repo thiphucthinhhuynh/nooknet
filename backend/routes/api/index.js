@@ -5,7 +5,7 @@ const { restoreUser } = require("../../utils/auth.js");
 const storesRouter = require('./stores.js');
 const itemsRouter = require('./items.js');
 const searchRouter = require('./search.js');
-
+const likeRouter = require('./likes.js');
 
 // Connect restoreUser middleware to the API router
     // If current user session is valid, set req.user to the user in the database
@@ -21,6 +21,7 @@ router.post('/test', (req, res) => {
 router.use('/stores', storesRouter);
 router.use('/items', itemsRouter);
 router.use('/search', searchRouter);
+router.use('/likes', likeRouter);
 
 module.exports = router;
 
