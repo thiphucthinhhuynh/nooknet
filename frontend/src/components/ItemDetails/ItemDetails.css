@@ -11,9 +11,12 @@
 
 .item-details-container .item-pic {
     max-width: 40%;
-    width: 100%; /* Make the image take the full width of its container */
-    height: auto; /* Maintain the aspect ratio */
-    object-fit: cover; /* Ensure the image covers the container without distortion */
+    width: 100%;
+    /* Make the image take the full width of its container */
+    height: auto;
+    /* Maintain the aspect ratio */
+    object-fit: cover;
+    /* Ensure the image covers the container without distortion */
 }
 
 .item-details-container #item-info {
@@ -24,17 +27,67 @@
     gap: 1vh;
 }
 
-.item-details-container #item-info > div {
+.item-details-container #item-info>div {
     margin-bottom: 1vh;
 }
 
-.item-details-container #item-info > div:nth-child(1) {
+.item-details-container #item-info>div:nth-child(1) {
     font-size: 1.4em;
     font-weight: bold;
     color: rgb(253, 127, 148);
 }
 
-.item-details-container #item-info > div:nth-child(3) {
+.item-details-container #item-info>div:nth-child(3) {
     max-width: 30vw;
     word-wrap: break-word;
+}
+
+.like-container {
+    position: relative;
+
+}
+
+.like-container ul {
+    list-style-type: none;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 200px; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    width: 200px; /* Set a width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+}
+
+.like-container li {
+    padding: 5px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.like-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.like-container::-webkit-scrollbar-thumb {
+    background: #888; /* Customize scrollbar thumb color */
+    border-radius: 10px; /* Match border radius */
+}
+
+.like-container::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Customize scrollbar thumb hover color */
+}
+
+.like-count-container {
+    display: flex;
+    align-items: center;
+    width: 100px; /* Set a fixed width */
+    justify-content: space-between;
+}
+
+.like-count-container p {
+    margin: 0;
+    white-space: nowrap; /* Prevent the text from wrapping */
 }

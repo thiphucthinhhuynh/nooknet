@@ -27,50 +27,48 @@ const ItemDetails = () => {
     }, [dispatch, itemId]);
 
     const handleLike = () => {
-        dispatch(likeItem(itemId));
+        dispatch(likeItem(itemId))
+            .then(() => dispatch(fetchItemLikes(itemId)));
     };
 
     const handleUnlike = (likeId) => {
-        dispatch(unlikeItem(likeId));
+        dispatch(unlikeItem(likeId))
+            .then(() => dispatch(fetchItemLikes(itemId)));
     };
 
     const userHasLiked = likes.some((like) => like.userId === sessionUser.id);
 
     return (
         isLoaded &&
-        <>
-            <div className="item-details-container">
-                <img
-                    src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
-                        ? item.ItemImages[0].url
-                        : defaultItemPic}
-                    className="item-pic"
-                />
+        <div className="item-details-container">
+            <img
+                src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
+                    ? item.ItemImages[0].url
+                    : defaultItemPic}
+                className="item-pic"
+            />
 
-                <div id="item-info">
-                    <div>{item.name}</div>
-                    <div>{item.category}</div>
-                    <div>{item.description}</div>
-                    <div>{item.price == 1 ? <div>1<BearCoin />coin</div> : <div>{item.price}<BearCoin />coins</div>}</div>
-                    <div>Quantity: {item.quantity}</div>
-                </div>
-
-                <div>
-                    <LikeButton
-                        userHasLiked={userHasLiked}
-                        handleLike={handleLike}
-                        handleUnlike={() => handleUnlike(likes.find((like) => like.userId === sessionUser.id).id)}
-                    />
-                    <p>{likes.length} {likes.length == 1 ? 'Like' : 'Likes'}</p>
-                    <ul>{likes.map((like) => (
-                        <li key={like.id}>{like.User?.username}</li>
-                    ))}
-                    </ul>
-                </div>
-
+            <div id="item-info">
+                <div>{item.name}</div>
+                <div>{item.category}</div>
+                <div>{item.description}</div>
+                <div>{item.price == 1 ? <div>1<BearCoin />coin</div> : <div>{item.price}<BearCoin />coins</div>}</div>
+                <div>Quantity: {item.quantity}</div>
             </div>
 
-        </>
+            <div className="like-container">
+                <LikeButton
+                    userHasLiked={userHasLiked}
+                    handleLike={handleLike}
+                    handleUnlike={() => handleUnlike(likes.find((like) => like.userId === sessionUser.id).id)}
+                />
+                <p className="like-count-container">{likes.length} {likes.length == 1 ? 'Like' : 'Likes'}</p>
+                <ul>{likes.map((like) => (
+                    <li key={like.id}>{like.User?.username}</li>
+                ))}
+                </ul>
+            </div>
+        </div>
     );
 };
 
