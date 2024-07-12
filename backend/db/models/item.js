@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
     /**
@@ -15,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'storeId'
       });
       Item.hasMany(models.ItemImage, {
+        foreignKey: 'itemId',
+        onDelete: 'CASCADE'
+      });
+      Item.hasMany(models.Like, {
         foreignKey: 'itemId',
         onDelete: 'CASCADE'
       });

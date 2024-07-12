@@ -1,5 +1,4 @@
 'use strict';
-
 const { Model, Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
@@ -15,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'ownerId',
         onDelete: 'CASCADE'
       });
-
+      User.hasMany(models.Like, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
     }
   }
 
