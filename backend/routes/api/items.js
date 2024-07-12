@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
 const { validateItem } = require('../../utils/validation');
-const { Item, ItemImage, Store, Like } = require('../../db/models');
+const { Item, ItemImage, Store, Like, User } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //                                  View all Items                                      //

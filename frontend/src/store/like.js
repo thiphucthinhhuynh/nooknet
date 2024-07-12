@@ -23,7 +23,7 @@ const removeLike = (likeId) => ({
 
 // Thunks
 export const fetchItemLikes = (itemId) => async (dispatch) => {
-    const response = fetch(`/api/items/${itemId}/likes`);
+    const response = await fetch(`/api/items/${itemId}/likes`);
 
     if (response.ok) {
         const likes = await response.json();
@@ -32,7 +32,7 @@ export const fetchItemLikes = (itemId) => async (dispatch) => {
 };
 
 export const likeItem = (itemId) => async (dispatch) => {
-    const response = csrfFetch(`/api/items/${itemId}/likes`, { method: 'POST' });
+    const response = await csrfFetch(`/api/items/${itemId}/likes`, { method: 'POST' });
 
     if (response.ok) {
         const newLike = await response.json();
@@ -40,7 +40,7 @@ export const likeItem = (itemId) => async (dispatch) => {
     }
 };
 
-export const unlikeItem = (itemId) => async (dispatch) => {
+export const unlikeItem = (likeId) => async (dispatch) => {
     const response = await csrfFetch(`/api/likes/${likeId}`, { method: 'DELETE' });
 
     if (response.ok) {
