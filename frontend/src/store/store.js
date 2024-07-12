@@ -4,12 +4,14 @@ import sessionReducer from './session';
 import itemReducer from './item.js';
 import userStoreReducer from './userStore.js';
 import searchReducer from './search.js';
+import likeReducer from './like.js';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   itemState: itemReducer,
   userStoreState: userStoreReducer,
-  searchState: searchReducer
+  searchState: searchReducer,
+  likeState: likeReducer
 });
 
 let enhancer;
