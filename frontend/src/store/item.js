@@ -70,9 +70,7 @@ export const deleteItem = (itemId) => async (dispatch) => {
 export const updateItem = (formData, itemId) => async (dispatch) => {
     const response = await csrfFetch(`/api/items/${itemId}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
     });
 
