@@ -6,7 +6,7 @@ const { FollowRequest } = require('../../db/models');
 // --------------------------------------------------------------------------------------//
 //                                     Follow a User                                    //
 // ------------------------------------------------------------------------------------//
-router.get('/', async (req, res, next) => {
+router.post('/follow', async (req, res, next) => {
     const { senderId, receiverId } = req.body;
     try {
         const follow = await FollowRequest.create({ senderId, receiverId });

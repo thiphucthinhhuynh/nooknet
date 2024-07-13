@@ -12,9 +12,9 @@ const followUser = (follow) => ({
     follow
 });
 
-const unfollowUser = (userId) => ({
+const unfollowUser = (receiverId) => ({
     type: UNFOLLOW_USER,
-    userId
+    receiverId
 });
 
 const setFollowers = (followers) => ({
@@ -29,7 +29,7 @@ const setFollowees = (followees) => ({
 
 // Thunks
 export const follow = (senderId, receiverId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/follow`, {
+    const response = await csrfFetch(`/api/requests/follow`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ senderId, receiverId })
@@ -42,7 +42,7 @@ export const follow = (senderId, receiverId) => async (dispatch) => {
 };
 
 export const unfollow = (senderId, receiverId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/unfollow`, {
+    const response = await csrfFetch(`/api/requests/unfollow`, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ senderId, receiverId })
@@ -79,7 +79,7 @@ const followReducer = (state = initialState, action) => {
         case FOLLOW_USER:
             return {
                 ...state,
-                followees: [state.followees, action.type]
+                followees: [...state.followees, action.type]
             };
         case UNFOLLOW_USER:
             return {

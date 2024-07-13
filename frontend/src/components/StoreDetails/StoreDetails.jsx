@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchStoreDetails } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
+import FollowButton from '../FollowButton';
+import { fetchFollowers, fetchFollowees } from '../../store/follow.js';
 
 const StoreDetails = () => {
     const { storeId } = useParams();
@@ -16,6 +18,8 @@ const StoreDetails = () => {
     const items = useSelector((state) => state.itemState.allItems);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
     const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
+    const followers = useSelector(state => state.followState.followers);
+    const followees = useSelector(state => state.followState.followees);
 
     useEffect(() => {
         dispatch(fetchStoreDetails(storeId));
@@ -27,12 +31,43 @@ const StoreDetails = () => {
         }
     }, [dispatch, store]);
 
+    useEffect(() => {
+        if (store && store.Owner) {
+            console.log('Fetching followers and followees for user ID:', store.Owner.id);
+            dispatch(fetchFollowers(store.Owner.id));
+            dispatch(fetchFollowees(store.Owner.id));
+        } else {
+            console.log('Store or Owner is undefined:', store);
+        }
+    }, [dispatch, store]);
+
     if (!store) {
         return <div>Loading...</div>;
     }
 
     return (
         <div className="store-details">
+
+            <div className="follow-section">
+                <FollowButton receiverId={store.Owner.id} />
+                <div>
+                    <p>Followers</p>
+                    <ul>
+                        {followers.map(follower => (
+                            <li key={follower.senderId}>{follower.Sender?.username}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <p>Following</p>
+                    <ul>
+                        {followees.map(followee => (
+                            <li key={followee.receiverId}>{followee.Receiver?.username}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+
             <div className="store-section">
                 <div id="store-stat">
                     <img src={store.Owner?.profilePic ? store.Owner.profilePic : defaultProfilePic} alt={`${store.username}'s Profile Picture`} className="profile-pic" />

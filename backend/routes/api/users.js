@@ -28,7 +28,6 @@ const validateSignup = [
     handleValidationErrors
 ];
 
-
 // Sign up
 router.post('/', validateSignup, async (req, res) => {
     const { email, password, username } = req.body;
@@ -43,11 +42,8 @@ router.post('/', validateSignup, async (req, res) => {
 
     await setTokenCookie(res, safeUser);
 
-    return res.json({
-        user: safeUser
-    });
-}
-);
+    return res.json({ user: safeUser });
+});
 
 // --------------------------------------------------------------------------------------//
 //                           Get Followers (Senders) of a User                          //
@@ -55,7 +51,10 @@ router.post('/', validateSignup, async (req, res) => {
 router.get('/:userId/followers', async (req, res, next) => {
     const { userId } = req.params;
     try {
-        const followers = await FollowRequest.findAll({ where: { receiverId: userId } });
+        const followers = await FollowRequest.findAll({
+            where: { receiverId: userId },
+            include: [{ model: User, as: 'Sender' }]
+        });
         return res.status(200).json(followers);
     } catch (error) {
         next(error);
@@ -68,7 +67,10 @@ router.get('/:userId/followers', async (req, res, next) => {
 router.get('/:userId/followees', async (req, res, next) => {
     const { userId } = req.params;
     try {
-        const followees = await FollowRequest.findAll({ where: { senderId: userId } });
+        const followees = await FollowRequest.findAll({
+            where: { senderId: userId },
+            include: [{ model: User, as: 'Receiver' }]
+        });
         return res.status(200).json(followees);
     } catch (error) {
         next(error);

@@ -46,7 +46,7 @@ router.get('/:storeId', async (req, res, next) => {
     try {
         const { storeId } = req.params;
         const store = await Store.findByPk(storeId, {
-            include: [{ model: User, as: 'Owner', attributes: ['profilePic', 'username'] }]
+            include: [{ model: User, as: 'Owner', attributes: ['id', 'profilePic', 'username'] }]
         });
 
         if (!store) {
