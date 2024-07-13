@@ -1,64 +1,32 @@
 'use strict';
 
-const { Like } = require('../models');
+const { FollowRequest } = require('../models');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // Define the schema in options object
+  options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-const demoLikes = [
+const demoFollowRequests = [
   {
-    userId: 1,
-    itemId: 1
+    senderId: 1,
+    receiverId: 3
   },
   {
-    userId: 1,
-    itemId: 2
+    senderId: 1,
+    receiverId: 4
   },
   {
-    userId: 1,
-    itemId: 5
+    senderId: 2,
+    receiverId: 1
   },
   {
-    userId: 2,
-    itemId: 1
+    senderId: 2,
+    receiverId: 4
   },
   {
-    userId: 2,
-    itemId: 2
-  },
-  {
-    userId: 3,
-    itemId: 9
-  },
-  {
-    userId: 3,
-    itemId: 10
-  },
-  {
-    userId: 3,
-    itemId: 11
-  },
-  {
-    userId: 4,
-    itemId: 1
-  },
-  {
-    userId: 4,
-    itemId: 5
-  },
-  {
-    userId: 4,
-    itemId: 6
-  },
-  {
-    userId: 4,
-    itemId: 7
-  },
-  {
-    userId: 4,
-    itemId: 8
+    senderId: 4,
+    receiverId: 3
   }
 ];
 
@@ -74,7 +42,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await Like.bulkCreate(demoLikes, { validate: true });
+    await FollowRequest.bulkCreate(demoFollowRequests, { validate: true });
   },
 
   async down(queryInterface, Sequelize) {
@@ -84,7 +52,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {}); // queryInterface.bulkDelete(modelName, where, options)
      */
-    options.tableName = 'Likes';
+    options.tableName = 'FollowRequests';
     return queryInterface.bulkDelete(options, null, {});
   }
 };

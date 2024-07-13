@@ -2,7 +2,7 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Store extends Model {
+  class FollowRequest extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -10,37 +10,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Store.belongsTo(models.User, { as: 'Owner', foreignKey: 'ownerId' });
-      Store.hasMany(models.Item, { foreignKey: 'storeId', onDelete: 'CASCADE' });
+      FollowRequest.belongsTo(models.User, { as: 'Sender', foreignKey: 'senderId' });
+      FollowRequest.belongsTo(models.User, { as: 'Receiver', foreignKey: 'receiverId' });
     }
   }
-  Store.init({
-    ownerId: {
+  FollowRequest.init({
+    senderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: true
       }
     },
-    name: {
-      type: DataTypes.STRING,
+    receiverId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        notNull: true,
-        notEmpty: true
+        notNull: true
       }
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   }, {
     sequelize,
-    modelName: 'Store',
+    modelName: 'FollowRequest',
   });
-  return Store;
+  return FollowRequest;
 };
