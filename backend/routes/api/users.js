@@ -4,7 +4,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, FollowRequest } = require('../../db/models');
 
 const router = express.Router();
 
@@ -48,5 +48,31 @@ router.post('/', validateSignup, async (req, res) => {
     });
 }
 );
+
+// --------------------------------------------------------------------------------------//
+//                           Get Followers (Senders) of a User                          //
+// ------------------------------------------------------------------------------------//
+router.get('/:userId/followers', async (req, res, next) => {
+    const { userId } = req.params;
+    try {
+        const followers = await FollowRequest.findAll({ where: { receiverId: userId } });
+        return res.status(200).json(followers);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
+//                           Get Followees (Receivers) of a User                        //
+// ------------------------------------------------------------------------------------//
+router.get('/:userId/followees', async (req, res, next) => {
+    const { userId } = req.params;
+    try {
+        const followees = await FollowRequest.findAll({ where: { senderId: userId } });
+        return res.status(200).json(followees);
+    } catch (error) {
+        next(error);
+    }
+});
 
 module.exports = router;
