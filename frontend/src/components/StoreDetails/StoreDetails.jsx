@@ -33,11 +33,8 @@ const StoreDetails = () => {
 
     useEffect(() => {
         if (store && store.Owner) {
-            console.log('Fetching followers and followees for user ID:', store.Owner.id);
             dispatch(fetchFollowers(store.Owner.id));
             dispatch(fetchFollowees(store.Owner.id));
-        } else {
-            console.log('Store or Owner is undefined:', store);
         }
     }, [dispatch, store]);
 

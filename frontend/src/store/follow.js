@@ -79,12 +79,12 @@ const followReducer = (state = initialState, action) => {
         case FOLLOW_USER:
             return {
                 ...state,
-                followees: [...state.followees, action.type]
+                followers: [...state.followers, action.follow]
             };
         case UNFOLLOW_USER:
             return {
                 ...state,
-                followees: state.followees.filter(followee => followee.id !== action.userId)
+                followers: state.followers.filter(follower => follower.receiverId !== action.receiverId)
             };
         case SET_FOLLOWERS:
             return {
