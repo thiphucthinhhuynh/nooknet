@@ -26,14 +26,14 @@ const ItemDetails = () => {
         dispatch(fetchItemLikes(itemId));
     }, [dispatch, itemId]);
 
-    const handleLike = () => {
-        dispatch(likeItem(itemId))
-            .then(() => dispatch(fetchItemLikes(itemId)));
+    const handleLike = async () => {
+        await dispatch(likeItem(itemId))
+        await dispatch(fetchItemLikes(itemId));
     };
 
-    const handleUnlike = (likeId) => {
-        dispatch(unlikeItem(likeId))
-            .then(() => dispatch(fetchItemLikes(itemId)));
+    const handleUnlike = async (likeId) => {
+        await dispatch(unlikeItem(likeId))
+        await dispatch(fetchItemLikes(itemId));
     };
 
     const userHasLiked = likes.some((like) => like.userId === sessionUser.id);

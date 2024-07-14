@@ -6,10 +6,11 @@ const storesRouter = require('./stores.js');
 const itemsRouter = require('./items.js');
 const searchRouter = require('./search.js');
 const likeRouter = require('./likes.js');
+const followRouter = require('./follow.js');
 
 // Connect restoreUser middleware to the API router
-    // If current user session is valid, set req.user to the user in the database
-    // If current user session is not valid, set req.user to null
+// If current user session is valid, set req.user to the user in the database
+// If current user session is not valid, set req.user to null
 router.use(restoreUser);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -22,6 +23,7 @@ router.use('/stores', storesRouter);
 router.use('/items', itemsRouter);
 router.use('/search', searchRouter);
 router.use('/likes', likeRouter);
+router.use('/requests', followRouter);
 
 module.exports = router;
 

@@ -5,13 +5,15 @@ import itemReducer from './item.js';
 import userStoreReducer from './userStore.js';
 import searchReducer from './search.js';
 import likeReducer from './like.js';
+import followReducer from './follow.js';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   itemState: itemReducer,
   userStoreState: userStoreReducer,
   searchState: searchReducer,
-  likeState: likeReducer
+  likeState: likeReducer,
+  followState: followReducer
 });
 
 let enhancer;
