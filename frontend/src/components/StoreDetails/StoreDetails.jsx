@@ -18,6 +18,7 @@ const StoreDetails = () => {
     const items = useSelector((state) => state.itemState.allItems);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
     const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
+    const sessionUser = useSelector(state => state.session.user);
     const followers = useSelector(state => state.followState.followers);
     const followees = useSelector(state => state.followState.followees);
 
@@ -46,12 +47,12 @@ const StoreDetails = () => {
         <div className="store-details">
 
             <div className="follow-section">
-                <FollowButton receiverId={store.Owner.id} />
+                <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />
                 <div>
                     <p>Followers</p>
                     <ul>
                         {followers.map(follower => (
-                            <li key={follower.senderId}>{follower.Sender?.username}</li>
+                            <li key={follower.id}>{follower.Sender?.username}</li>
                         ))}
                     </ul>
                 </div>
@@ -59,7 +60,7 @@ const StoreDetails = () => {
                     <p>Following</p>
                     <ul>
                         {followees.map(followee => (
-                            <li key={followee.receiverId}>{followee.Receiver?.username}</li>
+                            <li key={followee.id}>{followee.Receiver?.username}</li>
                         ))}
                     </ul>
                 </div>

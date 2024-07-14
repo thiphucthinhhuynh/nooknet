@@ -12,9 +12,9 @@ const followUser = (follow) => ({
     follow
 });
 
-const unfollowUser = (receiverId) => ({
+const unfollowUser = (doomedRequestId) => ({
     type: UNFOLLOW_USER,
-    receiverId
+    doomedRequestId
 });
 
 const setFollowers = (followers) => ({
@@ -49,7 +49,8 @@ export const unfollow = (senderId, receiverId) => async (dispatch) => {
     });
 
     if (response.ok) {
-        dispatch(unfollowUser(receiverId));
+        const doomedRequestId = await response.json();
+        dispatch(unfollowUser(doomedRequestId));
     }
 };
 
@@ -84,7 +85,7 @@ const followReducer = (state = initialState, action) => {
         case UNFOLLOW_USER:
             return {
                 ...state,
-                followers: state.followers.filter(follower => follower.receiverId !== action.receiverId)
+                followers: state.followers.filter(follower => follower.doomedRequestId !== action.doomedRequestId)
             };
         case SET_FOLLOWERS:
             return {

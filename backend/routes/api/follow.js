@@ -22,8 +22,10 @@ router.post('/follow', async (req, res, next) => {
 router.delete('/unfollow', async (req, res, next) => {
     const { senderId, receiverId } = req.body;
     try {
-        await FollowRequest.destroy({ where: { senderId, receiverId } });
-        return res.status(204).send();
+        const doomedRequest = await FollowRequest.findOne({ where: { senderId, receiverId } });
+        const doomedRequestId = doomedRequest.id;
+        await doomedRequest.destroy();
+        return res.status(200).json({ doomedRequestId: doomedRequestId });
     } catch (error) {
         next(error);
     }
