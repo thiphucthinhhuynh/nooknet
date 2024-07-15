@@ -12,7 +12,8 @@ import Likes from './components/Likes';
 import StoreDetails from './components/StoreDetails';
 import CreateItem from './components/CreateItem';
 import SearchResults from './components/SearchResults';
-
+import ProfileItemTiles from './components/ProfileItemTiles';
+import StoreReviews from './components/StoreReviews';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -75,7 +76,20 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element:
-          <Profile />
+          <>
+            <Profile />
+            <Outlet />
+          </>,
+        children: [
+          {
+            path: 'listings',
+            element: <ProfileItemTiles />
+          },
+          {
+            path: 'reviews',
+            element: <StoreReviews />
+          }
+        ]
       },
       {
         path: 'likes',

@@ -2,12 +2,28 @@ import './ProfileItemTiles.css';
 import BearCoin from '../BearCoin';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import { getStoreByCurrentUser } from '../../store/userStore.js';
+import { getItemsByStore } from '../../store/item.js';
 import UpdateItem from '../UpdateItem';
 import DeleteItem from '../DeleteItem';
 
-const ItemTiles = ({ items, userStore }) => {
+const ItemTiles = () => {
     const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
+    const dispatch = useDispatch();
+    const userStore = useSelector((state) => state.userStoreState.currentStore);
+    const items = useSelector((state) => state.itemState.allItems);
+
+    useEffect(() => {
+        dispatch(getStoreByCurrentUser());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (userStore && userStore.id) {
+            dispatch(getItemsByStore(userStore.id));
+        }
+    }, [dispatch, userStore]);
 
     const [updatingItemId, setUpdatingItemId] = useState(null);
     const updateItemRef = useRef(null); // Ref for the UpdateItem component

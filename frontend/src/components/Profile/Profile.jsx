@@ -1,32 +1,23 @@
 import './Profile.css';
-import { FaNewspaper } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
-import { getItemsByStore } from '../../store/item.js';
 import CreateStore from '../CreateStore';
 import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
-import ProfileItemTiles from '../ProfileItemTiles';
+import ProfileNavBar from '../ProfileNavBar';
 
 const Profile = () => {
     const dispatch = useDispatch();
     const userStore = useSelector((state) => state.userStoreState.currentStore);
     const sessionUser = useSelector((state) => state.session.user);
-    const items = useSelector((state) => state.itemState.allItems);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
 
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
     }, [dispatch]);
-
-    useEffect(() => {
-        if (userStore && userStore.id) {
-            dispatch(getItemsByStore(userStore.id));
-        }
-    }, [dispatch, userStore]);
 
     return (
         userStore ?
@@ -48,9 +39,12 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
+                <ProfileNavBar />
 
-                <ProfileItemTiles items={items} userStore={userStore} />
+                {/* <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
+
+                <ProfileItemTiles items={items} userStore={userStore} /> */}
+
             </div>
             : (<div className="create-store-button"><OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} /></div>)
     );

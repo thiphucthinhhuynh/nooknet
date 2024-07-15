@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import { GoHome } from "react-icons/go";
 import { GoPerson } from "react-icons/go";
 import { PiStorefrontLight } from "react-icons/pi";
-import { FiThumbsUp } from "react-icons/fi";
-
+import { GoHeart } from 'react-icons/go';
 
 const Sidebar = () => {
     const sessionUser = useSelector((state) => state.session.user);
@@ -17,7 +16,7 @@ const Sidebar = () => {
             {sessionUser &&
                 (<>
                     <NavLink to="/profile"><GoPerson /> Your store</NavLink>
-                    <NavLink to="/likes"><FiThumbsUp /> Likes</NavLink>
+                    <NavLink to="/likes"><GoHeart /> Likes</NavLink>
                 </>)}
         </div>
     );

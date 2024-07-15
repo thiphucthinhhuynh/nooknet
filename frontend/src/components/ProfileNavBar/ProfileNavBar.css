@@ -1,0 +1,15 @@
+.profile-navbar {
+    /* color: rgb(254, 108, 133); */
+    font-size: 1.2em;
+    /* border-bottom: 1px dashed rgb(254, 108, 133); */
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px
+}
+
+.profile-navbar .active {
+    color: green;
+    border-bottom: 2px solid green;
+}

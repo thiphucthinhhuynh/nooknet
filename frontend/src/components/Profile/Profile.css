@@ -92,19 +92,6 @@
     top: 0.5vh;
 } */
 
-.newspaper {
-    color: green;
-    /* color: rgb(254, 108, 133); */
-    font-size: 1.5em;
-    border-bottom: 1px dashed green;
-    /* border-bottom: 1px dashed rgb(254, 108, 133); */
-}
-
-.newspaper #icon {
-    position: relative;
-    top: 0.5vh;
-}
-
 .create-store-button {
     position: relative;
     top: 10vh;
