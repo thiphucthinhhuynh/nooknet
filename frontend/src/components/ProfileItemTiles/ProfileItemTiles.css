@@ -1,8 +1,3 @@
-.item-section {
-    max-width: 60%;
-    margin: 5vh auto;
-}
-
 #item-tile .item-pic {
     max-width: 40%;
     width: 100%; /* Make the image take the full width of its container */

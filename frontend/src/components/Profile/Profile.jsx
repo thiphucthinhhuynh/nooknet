@@ -1,5 +1,6 @@
 import './Profile.css';
 import { FaLocationDot } from "react-icons/fa6";
+import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
@@ -9,15 +10,24 @@ import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
 import ProfileNavBar from '../ProfileNavBar';
 
+import { getItemsByStore } from '../../store/item.js';
+
 const Profile = () => {
-    const dispatch = useDispatch();
-    const userStore = useSelector((state) => state.userStoreState.currentStore);
-    const sessionUser = useSelector((state) => state.session.user);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
+    const dispatch = useDispatch();
+    const sessionUser = useSelector((state) => state.session.user);
+    const userStore = useSelector((state) => state.userStoreState.currentStore);
+    const items = useSelector((state) => state.itemState.allItems);
 
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (userStore && userStore.id) {
+            dispatch(getItemsByStore(userStore.id));
+        }
+    }, [dispatch, userStore]);
 
     return (
         userStore ?
@@ -40,10 +50,7 @@ const Profile = () => {
                 </div>
 
                 <ProfileNavBar />
-
-                {/* <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
-
-                <ProfileItemTiles items={items} userStore={userStore} /> */}
+                <Outlet context={{ items, userStore }} />
 
             </div>
             : (<div className="create-store-button"><OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} /></div>)
