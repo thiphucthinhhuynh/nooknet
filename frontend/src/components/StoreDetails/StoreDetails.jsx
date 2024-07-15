@@ -1,8 +1,6 @@
 import './StoreDetails.css';
-import BearCoin from '../BearCoin';
 import { FaNewspaper } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -10,6 +8,7 @@ import { fetchStoreDetails } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
 import FollowButton from '../FollowButton';
 import { fetchFollowers, fetchFollowees } from '../../store/follow.js';
+import StoreItemTiles from '../StoreItemTiles';
 
 const StoreDetails = () => {
     const { storeId } = useParams();
@@ -17,7 +16,6 @@ const StoreDetails = () => {
     const store = useSelector((state) => state.userStoreState.storeDetails);
     const items = useSelector((state) => state.itemState.allItems);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
-    const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
     const sessionUser = useSelector(state => state.session.user);
     const followers = useSelector(state => state.followState.followers);
     const followees = useSelector(state => state.followState.followees);
@@ -80,28 +78,7 @@ const StoreDetails = () => {
             </div>
 
             <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
-            <div className="item-section">
-                {items.map((item) => (
-                    <span key={item.id}>
-                        <div id="item-tile">
-                            <Link to={`/items/${item.id}`} className="item-info">
-                                <img
-                                    src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
-                                        ? item.ItemImages[0].url
-                                        : defaultItemPic}
-                                    className="item-pic"
-                                />
-
-                                <div>
-                                    <div id="item-name">{item.name}</div>
-                                    <div>{item.category}</div>
-                                    <div>{item.price == 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
-                                </div>
-                            </Link>
-                        </div>
-                    </span>
-                ))}
-            </div>
+            <StoreItemTiles items={items} />
 
         </div>
     );
