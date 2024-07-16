@@ -29,7 +29,7 @@ function Navigation({ isLoaded }) {
                 {isLoaded && sessionUser && userStore &&
                     <>
                         <Link to={`/stores/${userStore.id}/create-item`} className="create-item-button"><HiMiniPencilSquare className="pencil-icon" /> Add Listing</Link>
-                        <img src={userStore.Owner?.profilePic ? userStore.Owner.profilePic : defaultProfilePic} alt={`${sessionUser.username}'s Profile Picture`} className="profile-pic" onClick={() => navigate('/profile')} />
+                        <img src={userStore.Owner?.profilePic ? userStore.Owner.profilePic : defaultProfilePic} alt={`${sessionUser.username}'s Profile Picture`} className="profile-pic" onClick={() => navigate('/profile/listings')} />
                     </>
                 }
                 {isLoaded && <ProfileButton className="profile-button" user={sessionUser} />}

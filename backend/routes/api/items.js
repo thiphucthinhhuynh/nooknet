@@ -108,6 +108,30 @@ router.get('/:itemId/likes', async (req, res, next) => {
 });
 
 // --------------------------------------------------------------------------------------//
+//                    Get all Items which are Liked by Current User                     //
+// ------------------------------------------------------------------------------------//
+router.get('/liked-items', async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+
+        const likedItems = await Item.findAll({
+            include: [
+                {
+                    model: Like,
+                    where: { userId },
+                    attributes: []
+                },
+                { model: ItemImage }
+            ]
+        });
+
+        return res.status(200).json(likedItems);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
 //                                     Like an Item                                     //
 // ------------------------------------------------------------------------------------//
 router.post('/:itemId/likes', requireAuth, async (req, res, next) => {
