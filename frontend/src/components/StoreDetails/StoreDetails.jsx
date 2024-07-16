@@ -1,6 +1,6 @@
 import './StoreDetails.css';
-import { FaNewspaper } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -8,7 +8,8 @@ import { fetchStoreDetails } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
 import FollowButton from '../FollowButton';
 import { fetchFollowers, fetchFollowees } from '../../store/follow.js';
-import StoreItemTiles from '../StoreItemTiles';
+import ProfileNavBar from '../ProfileNavBar';
+
 
 const StoreDetails = () => {
     const { storeId } = useParams();
@@ -77,8 +78,8 @@ const StoreDetails = () => {
                 </div>
             </div>
 
-            <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
-            <StoreItemTiles items={items} />
+            <ProfileNavBar />
+            <Outlet context={{ items }} />
 
         </div>
     );

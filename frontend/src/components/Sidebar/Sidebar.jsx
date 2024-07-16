@@ -15,7 +15,7 @@ const Sidebar = () => {
             <NavLink to="/stores"><PiStorefrontLight /> Stores</NavLink>
             {sessionUser &&
                 (<>
-                    <NavLink to="/profile"><GoPerson /> Your store</NavLink>
+                    <NavLink to="/profile/listings"><GoPerson /> Your store</NavLink>
                     <NavLink to="/likes"><GoHeart /> Likes</NavLink>
                 </>)}
         </div>

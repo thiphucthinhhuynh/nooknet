@@ -5,12 +5,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
+import { getItemsByStore } from '../../store/item.js';
 import CreateStore from '../CreateStore';
 import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
 import ProfileNavBar from '../ProfileNavBar';
 
-import { getItemsByStore } from '../../store/item.js';
 
 const Profile = () => {
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";

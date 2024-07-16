@@ -5,8 +5,7 @@
     flex-direction: row;
     justify-content: flex-start;
     gap: 20px;
-    box-shadow: 0 -2px 0 0 #f1f1f1 inset; /* This creates a pseudo border 2px up */
-    /* If we want to apply the shadow inside the box:
+    box-shadow: 0 -2px 0 0 #f1f1f1 inset; /* This creates a pseudo border 2px up
     box-shadow: [horizontal offset] [vertical offset] [blur radius] [spread radius] [color] inset;
     inset: This keyword indicates that the shadow should be applied inside the element */
 }

@@ -1,9 +1,11 @@
 import './StoreItemTiles.css';
 import BearCoin from '../BearCoin';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
-const StoreItemTiles = ({ items }) => {
+const StoreItemTiles = () => {
     const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
+
+    const { items } = useOutletContext();
 
     return (
         <div className="item-section">

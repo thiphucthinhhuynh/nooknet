@@ -14,6 +14,7 @@ import CreateItem from './components/CreateItem';
 import SearchResults from './components/SearchResults';
 import ProfileItemTiles from './components/ProfileItemTiles';
 import StoreReviews from './components/StoreReviews';
+import StoreItemTiles from './components/StoreItemTiles';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -65,11 +66,21 @@ const router = createBrowserRouter([
           },
           {
             path: ':storeId',
-            element: <StoreDetails />
-          },
-          {
-            path: ':storeId/create-item',
-            element: <CreateItem />
+            element: <StoreDetails />,
+            children: [
+              {
+                path: 'create-item',
+                element: <CreateItem />
+              },
+              {
+                path: 'listings',
+                element: <StoreItemTiles />
+              },
+              {
+                path: 'reviews',
+                element: <StoreReviews />
+              }
+            ]
           }
         ]
       },
@@ -78,6 +89,10 @@ const router = createBrowserRouter([
         element:
           <Profile />,
         children: [
+          // {
+          //   index: true,
+          //   element: <ProfileItemTiles />
+          // },
           {
             path: 'listings',
             element: <ProfileItemTiles />

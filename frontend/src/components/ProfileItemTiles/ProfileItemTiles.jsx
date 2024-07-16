@@ -6,8 +6,9 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import UpdateItem from '../UpdateItem';
 import DeleteItem from '../DeleteItem';
 
-const ItemTiles = () => {
+const ProfileItemTiles = () => {
     const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
+
     const { userStore, items } = useOutletContext();
 
     const [updatingItemId, setUpdatingItemId] = useState(null);
@@ -79,4 +80,5 @@ const ItemTiles = () => {
         </div>
     );
 }
-export default ItemTiles;
+
+export default ProfileItemTiles;
