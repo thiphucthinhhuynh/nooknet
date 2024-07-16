@@ -2,7 +2,7 @@ import './Likes.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLikedItems } from '../../store/item.js';
-import StoreItemTiles from '../StoreItemTiles';
+import ItemTileList from '../ItemTileList';
 
 const Likes = () => {
     const dispatch = useDispatch();
@@ -13,8 +13,8 @@ const Likes = () => {
     }, [dispatch]);
 
     return (
-        <div>
-            <StoreItemTiles items={likedItems} />
+        <div className="like-page">
+            <ItemTileList items={likedItems} />
         </div>
     );
 };
