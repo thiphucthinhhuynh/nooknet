@@ -63,9 +63,11 @@ const ItemDetails = () => {
                     handleUnlike={() => handleUnlike(likes.find((like) => like.userId === sessionUser.id).id)}
                 />
                 <p className="like-count-container">{likes.length} {likes.length == 1 ? 'Like' : 'Likes'}</p>
-                <ul>{likes.map((like) => (
-                    <li key={like.id}>{like.User?.username}</li>
-                ))}
+                <ul>
+                    <li style={{ fontWeight: 'bold' }}>Likes</li>
+                    {likes.map((like) => (
+                        <li key={like.id}>{like.User?.username}</li>
+                    ))}
                 </ul>
             </div>
         </div>
