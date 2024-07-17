@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Store, { foreignKey: 'ownerId', onDelete: 'CASCADE' });
       User.hasMany(models.Like, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      User.hasMany(models.Review, { foreignKey: 'userId', onDelete: 'CASCADE' });
       User.hasMany(models.FollowRequest, { foreignKey: 'senderId', onDelete: 'CASCADE' });
       User.hasMany(models.FollowRequest, { foreignKey: 'receiverId', onDelete: 'CASCADE' });
     }

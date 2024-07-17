@@ -2,7 +2,7 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Store extends Model {
+  class Review extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -10,38 +10,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Store.belongsTo(models.User, { as: 'Owner', foreignKey: 'ownerId' });
-      Store.hasMany(models.Item, { foreignKey: 'storeId', onDelete: 'CASCADE' });
-      Store.hasMany(models.Review, { foreignKey: 'storeId', onDelete: 'CASCADE' });
+      Review.belongsTo(models.User, { foreignKey: 'userId' });
+      Review.belongsTo(models.Store, { foreignKey: 'storeId' });
     }
   }
-  Store.init({
-    ownerId: {
+  Review.init({
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: true
       }
     },
-    name: {
-      type: DataTypes.STRING,
+    storeId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        notNull: true,
-        notEmpty: true
+        notNull: true
       }
     },
-    description: {
+    body: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: true
+    stars: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: true
+      }
     }
   }, {
     sequelize,
-    modelName: 'Store',
+    modelName: 'Review',
   });
-  return Store;
+  return Review;
 };
