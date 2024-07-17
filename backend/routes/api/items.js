@@ -19,6 +19,31 @@ router.get('/', async (req, res, next) => {
 });
 
 // --------------------------------------------------------------------------------------//
+//                    Get all Items which are Liked by Current User                     //
+// ------------------------------------------------------------------------------------//
+router.get('/liked-items', requireAuth, async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        console.log(`Fetching liked items for user ID: ${userId}`);
+
+        const likedItems = await Item.findAll({
+            include: [
+                {
+                    model: Like,
+                    where: { userId },
+                    attributes: []
+                },
+                { model: ItemImage }
+            ]
+        });
+
+        return res.status(200).json(likedItems);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
 //                       Get details of an Item from an Item id                         //
 // ------------------------------------------------------------------------------------//
 router.get('/:itemId', async (req, res, next) => {
