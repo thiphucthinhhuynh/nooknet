@@ -22,7 +22,7 @@ const removeReview = (reviewId) => ({
 });
 
 // Thunks
-export const getReviewByStore = (storeId) => async (dispatch) => {
+export const getReviewsByStore = (storeId) => async (dispatch) => {
     const response = await fetch(`/api/stores/${storeId}/reviews`);
 
     if (response.ok) {

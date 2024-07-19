@@ -186,7 +186,7 @@ router.get('/:storeId/reviews', async (req, res, next) => {
 
     try {
         const reviews = await Review.findAll({
-            where: storeId,
+            where: { storeId },
             include: [
                 { model: User, attributes: ['id', 'username', 'profilePic'] }
             ]

@@ -1,9 +1,9 @@
 import './Profile.css';
 import { FaLocationDot } from "react-icons/fa6";
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
 import CreateStore from '../CreateStore';
