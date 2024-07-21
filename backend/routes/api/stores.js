@@ -27,7 +27,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     try {
         const store = await Store.findOne({
             where: { ownerId: userId },
-            include: [{ model: User, as: 'Owner', attributes: ['profilePic'] }]
+            include: [{ model: User, as: 'Owner', attributes: ['id', 'profilePic'] }]
         });
 
         if (!store) {

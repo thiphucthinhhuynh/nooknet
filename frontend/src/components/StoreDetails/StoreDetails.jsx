@@ -46,7 +46,7 @@ const StoreDetails = () => {
         <div className="store-details">
 
             <div className="follow-section">
-                <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />
+                {sessionUser && <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />}
                 <div>
                     <p>Followers</p>
                     <ul>
