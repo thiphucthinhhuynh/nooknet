@@ -1,9 +1,9 @@
 import './CreateReview.css';
-import { FaStar } from "react-icons/fa6";
+import { FaStar, FaRegStar } from "react-icons/fa6";
 import { useModal } from '../../context/Modal';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createNewReview } from '../../store/review.js';
+import { createNewReview, getReviewsByStore } from '../../store/review.js';
 
 const CreateReview = ({ userId, storeId }) => {
     const { closeModal } = useModal();
@@ -39,6 +39,7 @@ const CreateReview = ({ userId, storeId }) => {
         }
 
         await dispatch(createNewReview(newReviewData, storeId));
+        await dispatch(getReviewsByStore(storeId));
 
         closeModal();
     };
@@ -54,11 +55,13 @@ const CreateReview = ({ userId, storeId }) => {
 
                         return (
                             <span key={star}
-                                className={`star ${isFilled ? 'filled' : ""}`}
+                                className="star"
                                 onMouseEnter={() => setHoverating(star)}
                                 onMouseLeave={() => setHoverating(0)}
                                 onClick={() => setRating(star)}
-                            ><FaStar /></span>
+                            >
+                                {isFilled ? <FaStar /> : <FaRegStar />}
+                            </span>
                         );
                     })}
                 </div>

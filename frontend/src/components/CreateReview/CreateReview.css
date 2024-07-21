@@ -13,14 +13,9 @@
 
 .star {
     margin-right: 2px;
-    color: grey;
+    color: rgb(255, 200, 35);
     font-size: 24px;
     cursor: pointer;
-}
-
-.star:hover,
-.star.filled {
-    color: rgb(255, 229, 35);
 }
 
 .create-review-form button {

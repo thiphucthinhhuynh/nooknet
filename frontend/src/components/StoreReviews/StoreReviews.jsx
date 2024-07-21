@@ -1,4 +1,5 @@
 import './StoreReviews.css';
+import { FaStar, FaRegStar } from "react-icons/fa6";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -21,19 +22,37 @@ const StoreReviews = () => {
         dispatch(getReviewsByStore(storeId));
     }, [dispatch, storeId]);
 
+    const lastedReviews = [...reviews].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    const renderStars = (rating) => {
+        const starsArray = [];
+
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                starsArray.push(<FaStar key={i} className="star-icon" />);
+            } else {
+                starsArray.push(<FaRegStar key={i} className="star-icon" />);
+            }
+        }
+        return starsArray;
+    };
+
     return (
-        <div>
-            <h1>Hi from StoreReviews</h1>
+        <div className="review-container">
 
             {!isOwner && !hasPostedReview &&
-                <OpenModalMenuItem itemText="Write a Review" modalComponent={<CreateReview userId={sessionUser.id} storeId={storeId} />} />}
+                <div className="button"><OpenModalMenuItem itemText="Write a Review" modalComponent={<CreateReview userId={sessionUser.id} storeId={storeId} />} /></div>}
 
-            {reviews.reverse().map(({ id, body, User }) => {
-                const isReviewer = sessionUser.id === User.id;
+            <p className="header">Reviews</p>
+            {lastedReviews.map(({ id, body, stars, User }) => {
+
+                // This boolean for adding UpdateReview and DeleteReview later on
+                // const isReviewer = sessionUser.id === User.id;
 
                 return (
-                    <div key={id}>
+                    <div key={id} className="review-tile">
                         <div>{User.username}</div>
+                        <div >{renderStars(stars)}</div> {/* Render stars */}
                         <div>{body}</div>
                     </div>
                 );

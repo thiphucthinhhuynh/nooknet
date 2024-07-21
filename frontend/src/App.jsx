@@ -14,6 +14,7 @@ import CreateItem from './components/CreateItem';
 import SearchResults from './components/SearchResults';
 import ProfileItemTiles from './components/ProfileItemTiles';
 import StoreReviews from './components/StoreReviews';
+import CurrentStoreReviews from './components/CurrentStoreReviews';
 import StoreItemTiles from './components/StoreItemTiles';
 
 function Layout() {
@@ -99,7 +100,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'reviews',
-            element: <StoreReviews />
+            element: <CurrentStoreReviews />
           }
         ]
       },
