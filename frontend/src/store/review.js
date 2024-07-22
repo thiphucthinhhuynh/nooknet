@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf.js';
 const LOAD_ALL_REVIEWS = 'review/LOAD_REVIEWS';
 const ADD_REVIEW = 'review/ADD_REVIEW';
 const REMOVE_REVIEW = 'review/REMOVE_REVIEW';
+const LOAD_USER_REVIEWS = 'review/LOAD_USER_REVIEWS';
 
 // Action Creators
 const loadAllReviews = (reviews) => ({
@@ -21,6 +22,11 @@ const removeReview = (reviewId) => ({
     reviewId
 });
 
+const loadUserReviews = (reviews) => ({
+    type: LOAD_USER_REVIEWS,
+    reviews
+});
+
 // Thunks
 export const getReviewsByStore = (storeId) => async (dispatch) => {
     const response = await fetch(`/api/stores/${storeId}/reviews`);
@@ -28,6 +34,15 @@ export const getReviewsByStore = (storeId) => async (dispatch) => {
     if (response.ok) {
         const reviews = await response.json();
         dispatch(loadAllReviews(reviews));
+    }
+};
+
+export const getUserReviews = () => async (dispatch) => {
+    const response = await csrfFetch('/api/reviews/current');
+
+    if (response.ok) {
+        const reviews = await response.json();
+        dispatch(loadUserReviews(reviews));
     }
 };
 
@@ -68,7 +83,7 @@ export const updateReview = (formData, reviewId) => async (dispatch) => {
 };
 
 // Redux Reducer
-const initialState = { allReviews: [] };
+const initialState = { allReviews: [], userReviews: [] };
 
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -77,19 +92,26 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 allReviews: action.reviews
             };
+        case LOAD_USER_REVIEWS:
+            return {
+                ...state,
+                userReviews: action.reviews
+            };
         case ADD_REVIEW: {
             const newState = {
                 ...state,
                 allReviews: state.allReviews.map((review) =>
-                    review.id === action.review.id ? action.review : review
-                )
+                    review.id === action.review.id ? action.review : review),
+                userReviews: state.userReviews.map((review) =>
+                    review.id === action.review.id ? action.review : review)
             };
             return newState;
         }
         case REMOVE_REVIEW:
             return {
                 ...state,
-                allReviews: state.allReviews.filter((review) => review.id !== action.reviewId)
+                allReviews: state.allReviews.filter((review) => review.id !== action.reviewId),
+                userReviews: state.userReviews.filter((review) => review.id !== action.reviewId)
             };
         default:
             return state;

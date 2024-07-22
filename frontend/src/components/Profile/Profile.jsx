@@ -50,7 +50,7 @@ const Profile = () => {
                 </div>
 
                 <ProfileNavBar />
-                <Outlet context={{ items, userStore }} />
+                <Outlet context={{ items, userStore, sessionUser }} />
 
             </div>
             : (<div className="create-store-button"><OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} /></div>)

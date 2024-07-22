@@ -12,7 +12,7 @@
 }
 
 .current-store-reviews .button.inactive {
-    border: 2px solid green;
+    border: 2px solid rgb(253, 127, 148);
     background-color: transparent;
-    color: green;
+    color: rgb(253, 127, 148);
 }

@@ -4,6 +4,22 @@ const { requireAuth } = require('../../utils/auth.js');
 const { Review, Store } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
+//                  View the Reviews written by the Current User                        //
+// ------------------------------------------------------------------------------------//
+router.get('/current', requireAuth, async (req, res, next) => {
+    try {
+        const reviews = await Review.findAll({
+            where: { userId: req.user.id },
+            include: [{ model: Store }]
+        });
+
+        return res.status(200).json(reviews);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
 //                                   Update a Review                                    //
 // ------------------------------------------------------------------------------------//
 router.put('/:reviewId', requireAuth, async (req, res, next) => {
