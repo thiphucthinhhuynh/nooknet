@@ -36,7 +36,7 @@ const ItemDetails = () => {
         await dispatch(fetchItemLikes(itemId));
     };
 
-    const userHasLiked = likes.some((like) => like.userId === sessionUser.id);
+    const userHasLiked = likes.some((like) => like.userId === sessionUser?.id);
 
     return (
         isLoaded &&
