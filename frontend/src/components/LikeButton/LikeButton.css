@@ -1,0 +1,33 @@
+.like-button {
+    position: relative;
+    display: inline-block;
+}
+
+.like-button #filled-heart {
+    color: rgb(255, 66, 101);
+    font-size: 24px;
+}
+
+.like-button #empty-heart {
+    font-size: 24px;
+}
+
+.leaf-animation {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    font-size: 24px;
+    color: rgb(40, 119, 82);
+    animation: flyUp 1s ease-in-out;
+}
+
+@keyframes flyUp {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1.7);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0, -40px) scale(0.5);
+    }
+}

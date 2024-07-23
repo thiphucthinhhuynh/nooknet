@@ -12,7 +12,10 @@ import Likes from './components/Likes';
 import StoreDetails from './components/StoreDetails';
 import CreateItem from './components/CreateItem';
 import SearchResults from './components/SearchResults';
-
+import ProfileItemTiles from './components/ProfileItemTiles';
+import StoreReviews from './components/StoreReviews';
+import CurrentStoreReviews from './components/CurrentStoreReviews';
+import StoreItemTiles from './components/StoreItemTiles';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -64,18 +67,42 @@ const router = createBrowserRouter([
           },
           {
             path: ':storeId',
-            element: <StoreDetails />
-          },
-          {
-            path: ':storeId/create-item',
-            element: <CreateItem />
+            element: <StoreDetails />,
+            children: [
+              {
+                path: 'create-item',
+                element: <CreateItem />
+              },
+              {
+                path: 'listings',
+                element: <StoreItemTiles />
+              },
+              {
+                path: 'reviews',
+                element: <StoreReviews />
+              }
+            ]
           }
         ]
       },
       {
         path: 'profile',
         element:
-          <Profile />
+          <Profile />,
+        children: [
+          // {
+          //   index: true,
+          //   element: <ProfileItemTiles />
+          // },
+          {
+            path: 'listings',
+            element: <ProfileItemTiles />
+          },
+          {
+            path: 'reviews',
+            element: <CurrentStoreReviews />
+          }
+        ]
       },
       {
         path: 'likes',

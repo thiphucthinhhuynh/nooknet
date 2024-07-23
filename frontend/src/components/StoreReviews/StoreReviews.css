@@ -1,0 +1,27 @@
+.review-container .button {
+    list-style-type: none;
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    padding: 8px 15px;
+    width: fit-content;
+    margin-top: 3vh
+}
+
+.review-container .header {
+    padding-left: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.review-tile {
+    border-bottom: 2px solid #f1f1f1;
+    padding: 10px;
+}
+
+.star-icon {
+    color: rgb(255, 200, 35);
+}

@@ -1,12 +1,20 @@
 import './Likes.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLikedItems } from '../../store/item.js';
+import ItemTileList from '../ItemTileList';
 
 const Likes = () => {
+    const dispatch = useDispatch();
+    const likedItems = useSelector(state => state.itemState.likedItems);
 
-    window.alert('This feature is coming soon!');
+    useEffect(() => {
+        dispatch(fetchLikedItems());
+    }, [dispatch]);
 
     return (
-        <div>
-            <h1>Hi from Likes</h1>
+        <div className="like-page">
+            <ItemTileList items={likedItems} />
         </div>
     );
 };

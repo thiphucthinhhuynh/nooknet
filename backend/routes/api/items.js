@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
 const { validateItem } = require('../../utils/validation');
-const { Item, ItemImage, Store } = require('../../db/models');
+const { Item, ItemImage, Store, Like, User } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //                                  View all Items                                      //
@@ -13,6 +13,31 @@ router.get('/', async (req, res, next) => {
             include: [{ model: ItemImage }]
         });
         return res.status(200).json(items);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
+//                    Get all Items which are Liked by Current User                     //
+// ------------------------------------------------------------------------------------//
+router.get('/liked-items', requireAuth, async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        console.log(`Fetching liked items for user ID: ${userId}`);
+
+        const likedItems = await Item.findAll({
+            include: [
+                {
+                    model: Like,
+                    where: { userId },
+                    attributes: []
+                },
+                { model: ItemImage }
+            ]
+        });
+
+        return res.status(200).json(likedItems);
     } catch (error) {
         next(error);
     }
@@ -63,8 +88,6 @@ router.put('/:itemId', requireAuth, validateItem, async (req, res, next) => {
     }
 });
 
-
-
 // --------------------------------------------------------------------------------------//
 //                                 Delete an Item                                       //
 // ------------------------------------------------------------------------------------//
@@ -85,6 +108,41 @@ router.delete('/:itemId', requireAuth, async (req, res, next) => {
 
         await item.destroy();
         return res.status(200).json({ message: 'Item deleted successfully.' });
+    } catch (error) {
+        next(error);
+    }
+});
+
+/*  ─── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───  ‧₊˚❀༉‧₊˚.  ─── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───  ‧₊˚❀༉‧₊˚.  ─── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ─── */
+// --------------------------------------------------------------------------------------//
+//                              Get all Likes for an Item                               //
+// ------------------------------------------------------------------------------------//
+router.get('/:itemId/likes', async (req, res, next) => {
+    try {
+        const { itemId } = req.params;
+
+        const likes = await Like.findAll({
+            where: { itemId },
+            include: [{ model: User, attributes: ['id', 'username'] }]
+        });
+
+        return res.status(200).json(likes);
+    } catch (error) {
+        next(error)
+    }
+});
+
+// --------------------------------------------------------------------------------------//
+//                                     Like an Item                                     //
+// ------------------------------------------------------------------------------------//
+router.post('/:itemId/likes', requireAuth, async (req, res, next) => {
+    try {
+        const { itemId } = req.params;
+        const userId = req.user.id;
+
+        const like = await Like.create({ userId, itemId });
+
+        return res.status(201).json(like);
     } catch (error) {
         next(error);
     }

@@ -1,31 +1,23 @@
 import './Profile.css';
-// import { HiMiniPencilSquare } from "react-icons/hi2";
-import BearCoin from '../BearCoin';
-import { FaNewspaper } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
 import CreateStore from '../CreateStore';
 import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
-import UpdateItem from '../UpdateItem';
-import DeleteItem from '../DeleteItem';
+import ProfileNavBar from '../ProfileNavBar';
 
 
 const Profile = () => {
-    const dispatch = useDispatch();
-    const userStore = useSelector((state) => state.userStoreState.currentStore);
-    const sessionUser = useSelector((state) => state.session.user);
-    const items = useSelector((state) => state.itemState.allItems);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
-    const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
-
-    const [updatingItemId, setUpdatingItemId] = useState(null);
-    const updateItemRef = useRef(null); // Ref for the UpdateItem component
+    const dispatch = useDispatch();
+    const sessionUser = useSelector((state) => state.session.user);
+    const userStore = useSelector((state) => state.userStoreState.currentStore);
+    const items = useSelector((state) => state.itemState.allItems);
 
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
@@ -36,30 +28,6 @@ const Profile = () => {
             dispatch(getItemsByStore(userStore.id));
         }
     }, [dispatch, userStore]);
-
-    const handleUpdateItemClick = (itemId) => {
-        setUpdatingItemId(itemId);
-    };
-
-    const handleCancelUpdateItem = () => {
-        setUpdatingItemId(null);
-    };
-
-    // Detect clicks outside the UpdateItem component
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (updateItemRef.current && !updateItemRef.current.contains(event.target)) {
-                setUpdatingItemId(null);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [updateItemRef]);
-
 
     return (
         userStore ?
@@ -81,50 +49,9 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
-                <div className="item-section">
-                    {/* <Link to={`/stores/${userStore.id}/create-item`} className="create-item-button"><HiMiniPencilSquare className="pencil-icon" /> Add Listing</Link> */}
+                <ProfileNavBar />
+                <Outlet context={{ items, userStore, sessionUser }} />
 
-                    {items.map((item) => (
-                        <span key={item.id}>
-
-                            {updatingItemId === item.id ?
-                                (
-                                    <div ref={updateItemRef}>
-                                        <UpdateItem item={item} onCancel={handleCancelUpdateItem} storeId={userStore.id} />
-                                    </div>
-                                ) :
-                                (
-
-                                    <div id="item-tile">
-                                        <Link to={`/items/${item.id}`} className="item-info">
-                                            {/* <img src={item.ItemImages[0]?.url ? item.ItemImages[0]?.url : defaultItemPic} className="item-pic" /> */}
-                                            <img
-                                                src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
-                                                    ? item.ItemImages[0].url
-                                                    : defaultItemPic}
-                                                className="item-pic"
-                                            />
-
-
-                                            <div>
-                                                <div id="item-name">{item.name}</div>
-                                                <div>{item.category}</div>
-                                                <div>{item.price == 1 ? <div>1<BearCoin />coin</div> : <div>{item.price}<BearCoin />coins</div>}</div>
-                                            </div>
-                                        </Link>
-
-                                        <div>
-                                            <div className="update-item-button" onClick={() => handleUpdateItemClick(item.id)}>Update Item</div>
-                                            <div className="delete-item-button"><OpenModalMenuItem itemText="Delete Item" modalComponent={<DeleteItem item={item} storeId={userStore.id} />} /></div>
-                                        </div>
-                                    </div>
-
-                                )}
-
-                        </span>
-                    ))}
-                </div>
             </div>
             : (<div className="create-store-button"><OpenModalMenuItem itemText="Create a Store" modalComponent={<CreateStore />} /></div>)
     );

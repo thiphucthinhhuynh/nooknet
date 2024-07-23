@@ -1,13 +1,15 @@
 import './StoreDetails.css';
-import BearCoin from '../BearCoin';
-import { FaNewspaper } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchStoreDetails } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
+import FollowButton from '../FollowButton';
+import { fetchFollowers, fetchFollowees } from '../../store/follow.js';
+import ProfileNavBar from '../ProfileNavBar';
+
 
 const StoreDetails = () => {
     const { storeId } = useParams();
@@ -15,7 +17,9 @@ const StoreDetails = () => {
     const store = useSelector((state) => state.userStoreState.storeDetails);
     const items = useSelector((state) => state.itemState.allItems);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
-    const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
+    const sessionUser = useSelector(state => state.session.user);
+    const followers = useSelector(state => state.followState.followers);
+    const followees = useSelector(state => state.followState.followees);
 
     useEffect(() => {
         dispatch(fetchStoreDetails(storeId));
@@ -27,12 +31,40 @@ const StoreDetails = () => {
         }
     }, [dispatch, store]);
 
+    useEffect(() => {
+        if (store && store.Owner) {
+            dispatch(fetchFollowers(store.Owner.id));
+            dispatch(fetchFollowees(store.Owner.id));
+        }
+    }, [dispatch, store]);
+
     if (!store) {
         return <div>Loading...</div>;
     }
 
     return (
         <div className="store-details">
+
+            <div className="follow-section">
+                {sessionUser && <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />}
+                <div>
+                    <p>Followers</p>
+                    <ul>
+                        {followers.map(follower => (
+                            <li key={follower.id}>{follower.Sender?.username}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <p>Following</p>
+                    <ul>
+                        {followees.map(followee => (
+                            <li key={followee.id}>{followee.Receiver?.username}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+
             <div className="store-section">
                 <div id="store-stat">
                     <img src={store.Owner?.profilePic ? store.Owner.profilePic : defaultProfilePic} alt={`${store.username}'s Profile Picture`} className="profile-pic" />
@@ -46,29 +78,8 @@ const StoreDetails = () => {
                 </div>
             </div>
 
-            <div className="newspaper" ><FaNewspaper id="icon" /> Listings</div>
-            <div className="item-section">
-                {items.map((item) => (
-                    <span key={item.id}>
-                        <div id="item-tile">
-                            <Link to={`/items/${item.id}`} className="item-info">
-                                <img
-                                    src={Array.isArray(item.ItemImages) && item.ItemImages.length > 0
-                                        ? item.ItemImages[0].url
-                                        : defaultItemPic}
-                                    className="item-pic"
-                                />
-
-                                <div>
-                                    <div id="item-name">{item.name}</div>
-                                    <div>{item.category}</div>
-                                    <div>{item.price == 1 ? '1 Bear coin' : <div>{item.price}<BearCoin />coins</div>}</div>
-                                </div>
-                            </Link>
-                        </div>
-                    </span>
-                ))}
-            </div>
+            <ProfileNavBar />
+            <Outlet context={{ items }} />
 
         </div>
     );

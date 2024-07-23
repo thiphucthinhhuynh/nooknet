@@ -1,6 +1,6 @@
 .profile-page {
     max-width: 60%;
-    margin: 0 auto;
+    margin: 4vh auto;
     /* border: 1px solid pink; */
 }
 
@@ -91,74 +91,6 @@
     position: relative;
     top: 0.5vh;
 } */
-
-#item-tile .item-pic {
-    max-width: 40%;
-    width: 100%; /* Make the image take the full width of its container */
-    height: auto; /* Maintain the aspect ratio */
-    object-fit: cover /* Ensure the image covers the container without distortion */
-}
-
-#item-tile {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 1px solid transparent;
-    border-radius: 15px;
-    background-color: #f1f1f1;
-    padding: 25px;
-    box-sizing: border-box; /* Ensures padding and border are included in the width */
-    padding-left: 0;
-    gap: 10px;
-    margin: 30px 0
-}
-
-#item-tile .item-info {
-    display: flex;
-    flex-direction: row;
-    gap: 4vw;
-}
-
-#item-tile .item-info #item-name {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: rgb(253, 127, 148);
-}
-
-.newspaper {
-    color: green;
-    /* color: rgb(254, 108, 133); */
-    font-size: 1.5em;
-    border-bottom: 1px dashed green;
-    /* border-bottom: 1px dashed rgb(254, 108, 133); */
-}
-
-.newspaper #icon {
-    position: relative;
-    top: 0.5vh;
-}
-
-.update-item-button,
-.delete-item-button {
-    list-style-type: none;
-    width: 100px;
-    margin: 10px;
-    border-radius: 20px;
-    padding: 8px 0;
-    padding-left: 17px;
-}
-
-.update-item-button {
-    border: 2px solid green;
-    background-color: green;
-    color: white;
-}
-
-.delete-item-button {
-    border: 2px solid black;
-    background-color: transparent;
-    color: black;
-}
 
 .create-store-button {
     position: relative;

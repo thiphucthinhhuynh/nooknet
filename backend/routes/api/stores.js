@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js');
 const { validateItem } = require('../../utils/validation');
-const { Store, Item, ItemImage, User } = require('../../db/models');
+const { Store, Item, ItemImage, User, Review } = require('../../db/models');
 
 // --------------------------------------------------------------------------------------//
 //                                   View all Stores                                    //
@@ -22,11 +22,12 @@ router.get('/', async (req, res, next) => {
 //                  View the Store owned by the Current User                            //
 // ------------------------------------------------------------------------------------//
 router.get('/current', requireAuth, async (req, res, next) => {
+    const userId = req.user.id;
+
     try {
-        const userId = req.user.id;
         const store = await Store.findOne({
             where: { ownerId: userId },
-            include: [{ model: User, as: 'Owner', attributes: ['profilePic'] }]
+            include: [{ model: User, as: 'Owner', attributes: ['id', 'profilePic'] }]
         });
 
         if (!store) {
@@ -43,10 +44,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
 //                       Get details of a Store from a Store id                         //
 // ------------------------------------------------------------------------------------//
 router.get('/:storeId', async (req, res, next) => {
+    const { storeId } = req.params;
+
     try {
-        const { storeId } = req.params;
         const store = await Store.findByPk(storeId, {
-            include: [{ model: User, as: 'Owner', attributes: ['profilePic', 'username'] }]
+            include: [{ model: User, as: 'Owner', attributes: ['id', 'profilePic', 'username'] }]
         });
 
         if (!store) {
@@ -63,10 +65,10 @@ router.get('/:storeId', async (req, res, next) => {
 //                                     Create a Store                                   //
 // ------------------------------------------------------------------------------------//
 router.post('/', requireAuth, async (req, res, next) => {
-    try {
-        const { name, description, location } = req.body;
-        const ownerId = req.user.id;
+    const { name, description, location } = req.body;
+    const ownerId = req.user.id;
 
+    try {
         const newStore = await Store.create({ ownerId, name, description, location });
         return res.status(201).json(newStore);
     } catch (error) {
@@ -78,10 +80,10 @@ router.post('/', requireAuth, async (req, res, next) => {
 //                                      Update a Store                                  //
 // ------------------------------------------------------------------------------------//
 router.put('/:storeId', requireAuth, async (req, res, next) => {
-    try {
-        const { storeId } = req.params;
-        const { name, description, location } = req.body;
+    const { storeId } = req.params;
+    const { name, description, location } = req.body;
 
+    try {
         let store = await Store.findByPk(storeId);
 
         if (!store) {
@@ -104,8 +106,9 @@ router.put('/:storeId', requireAuth, async (req, res, next) => {
 //                                    Delete a Store                                    //
 // ------------------------------------------------------------------------------------//
 router.delete('/:storeId', requireAuth, async (req, res, next) => {
+    const { storeId } = req.params;
+
     try {
-        const { storeId } = req.params;
         const store = await Store.findByPk(storeId);
 
         if (!store) {
@@ -129,8 +132,9 @@ router.delete('/:storeId', requireAuth, async (req, res, next) => {
 //                            View all Items of a specific Store                        //
 // ------------------------------------------------------------------------------------//
 router.get('/:storeId/items', async (req, res, next) => {
+    const { storeId } = req.params;
+
     try {
-        const { storeId } = req.params;
         const store = await Store.findByPk(storeId);
 
         if (!store) {
@@ -151,10 +155,10 @@ router.get('/:storeId/items', async (req, res, next) => {
 //                              Create an Item for a Store                              //
 // ------------------------------------------------------------------------------------//
 router.post('/:storeId/items', requireAuth, validateItem, async (req, res, next) => {
-    try {
-        const { storeId } = req.params;
-        const { name, description, price, quantity, category } = req.body;
+    const { storeId } = req.params;
+    const { name, description, price, quantity, category } = req.body;
 
+    try {
         const store = await Store.findByPk(storeId);
 
         if (!store) {
@@ -168,6 +172,42 @@ router.post('/:storeId/items', requireAuth, validateItem, async (req, res, next)
 
         const newItem = await Item.create({ storeId, name, description, price, quantity, category });
         return res.status(201).json(newItem);
+    } catch (error) {
+        next(error);
+    }
+});
+
+/*  ─── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───  ‧₊˚❀༉‧₊˚.  ─── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───  ‧₊˚❀༉‧₊˚.  ─── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ─── */
+// --------------------------------------------------------------------------------------//
+//                            View all Reviews of a specific Store                      //
+// ------------------------------------------------------------------------------------//
+router.get('/:storeId/reviews', async (req, res, next) => {
+    const { storeId } = req.params;
+
+    try {
+        const reviews = await Review.findAll({
+            where: { storeId },
+            include: [
+                { model: User, attributes: ['id', 'username', 'profilePic'] }
+            ]
+        });
+
+        return res.status(200).json(reviews);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// --------------------------------------------------------------------------------------//
+//                              Create an Review for a Store                             //
+// ------------------------------------------------------------------------------------//
+router.post('/:storeId/reviews', requireAuth, async (req, res, next) => {
+    const { storeId } = req.params;
+    const { userId, body, stars } = req.body;
+
+    try {
+        const newReview = await Review.create({ userId, storeId, body, stars });
+        return res.status(201).json(newReview);
     } catch (error) {
         next(error);
     }

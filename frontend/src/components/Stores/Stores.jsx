@@ -19,7 +19,7 @@ const Stores = () => {
 
             {stores.map((store) => (
                 <span key={store.id} className="store-tile">
-                    <Link to={`/stores/${store.id}`} >
+                    <Link to={`/stores/${store.id}/listings`} >
                         <div>{store.name}</div>
                         <img src={store.Owner?.profilePic ? store.Owner.profilePic : defaultProfilePic} alt={`${store.username}'s Profile Picture`} className="profile-pic" />
                         <div>{store.Owner?.username}</div>
