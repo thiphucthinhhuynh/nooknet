@@ -20,6 +20,7 @@ const StoreDetails = () => {
     const sessionUser = useSelector(state => state.session.user);
     const followers = useSelector(state => state.followState.followers);
     const followees = useSelector(state => state.followState.followees);
+    const isOwner = store.Owner.id === sessionUser.id;
 
     useEffect(() => {
         dispatch(fetchStoreDetails(storeId));
@@ -45,34 +46,38 @@ const StoreDetails = () => {
     return (
         <div className="store-details">
 
-            <div className="follow-section">
-                {sessionUser && <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />}
-                <div>
-                    <p>Followers</p>
-                    <ul>
-                        {followers.map(follower => (
-                            <li key={follower.id}>{follower.Sender?.username}</li>
-                        ))}
-                    </ul>
-                </div>
-                <div>
-                    <p>Following</p>
-                    <ul>
-                        {followees.map(followee => (
-                            <li key={followee.id}>{followee.Receiver?.username}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-
             <div className="store-section">
                 <div id="store-stat">
                     <img src={store.Owner?.profilePic ? store.Owner.profilePic : defaultProfilePic} alt={`${store.username}'s Profile Picture`} className="profile-pic" />
-                    <div>{store.Owner?.username}</div>
+                    <div id="username">{store.Owner?.username}</div>
+
+                    <div id="follow-section">
+                        {/* {sessionUser && <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />} */}
+                        <div>
+                            <p>{followers.length} Followers</p>
+                            <ul>
+                                {followers.map(follower => (
+                                    <li key={follower.id}>{follower.Sender?.username}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div>
+                            <p>{followees.length} Following</p>
+                            <ul>
+                                {followees.map(followee => (
+                                    <li key={followee.id}>{followee.Receiver?.username}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div id="store-info">
-                    <div>{store.name}</div>
+                    <div id="header">
+                        <div id="name">{store.name}</div>
+                        {sessionUser && !isOwner && <div><FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} /></div>}
+                    </div>
                     {store.location && <div><FaLocationDot style={{ color: '#FC3A90' }} /> {store.location}</div>}
                     <div className="bubble-container">{store.description ? store.description : `Welcome to ${store.name}!~~`}</div>
                 </div>
