@@ -20,11 +20,11 @@ const FollowButton = ({ senderId, receiverId }) => {
     };
 
     return (
-        <div className="follow-button">
+        <div className="follow">
             {isFollowing ? (
-                <div onClick={handleUnfollow} id="unfollow">Unfollow</div>
+                <button onClick={handleUnfollow} id="unfollow">Unfollow</button>
             ) : (
-                <div onClick={handleFollow} id="follow">Follow</div>
+                <button onClick={handleFollow} id="follow">Follow</button>
             )}
         </div>
     );

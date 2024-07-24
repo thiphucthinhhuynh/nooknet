@@ -10,6 +10,7 @@ import CreateStore from '../CreateStore';
 import UpdateStore from '../UpdateStore';
 import DeleteStore from '../DeleteStore';
 import ProfileNavBar from '../ProfileNavBar';
+import { fetchFollowers, fetchFollowees } from '../../store/follow.js';
 
 
 const Profile = () => {
@@ -18,6 +19,8 @@ const Profile = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const userStore = useSelector((state) => state.userStoreState.currentStore);
     const items = useSelector((state) => state.itemState.allItems);
+    const followers = useSelector((state) => state.followState.followers);
+    const followees = useSelector((state) => state.followState.followees);
 
     useEffect(() => {
         dispatch(getStoreByCurrentUser());
@@ -29,18 +32,44 @@ const Profile = () => {
         }
     }, [dispatch, userStore]);
 
+    useEffect(() => {
+        dispatch(fetchFollowers(userStore.id));
+        dispatch(fetchFollowees(userStore.id));
+    }, [dispatch]);
+
     return (
         userStore ?
             <div className="profile-page">
                 <div className="store-section">
                     <div id="store-stat">
                         <img src={userStore.Owner?.profilePic ? userStore.Owner.profilePic : defaultProfilePic} alt={`${sessionUser.username}'s Profile Picture`} className="profile-pic" />
-                        <div>{sessionUser.username}</div>
+                        <div id="username">{sessionUser.username}</div>
+
+                        <div id="follow-section">
+                            {/* {sessionUser && <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />} */}
+                            <div>
+                                <p>{followers.length} Followers</p>
+                                <ul>
+                                    {followers.map(follower => (
+                                        <li key={follower.id}>{follower.Sender?.username}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <p>{followees.length} Following</p>
+                                <ul>
+                                    {followees.map(followee => (
+                                        <li key={followee.id}>{followee.Receiver?.username}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div id="store-info">
                         <div>
-                            <div>{userStore.name}</div>
+                            <div id="name">{userStore.name}</div>
                             <div className="update-button"><OpenModalMenuItem itemText="Update Store" modalComponent={<UpdateStore storeId={userStore.id} sessionUser={sessionUser} userStore={userStore} />} /></div>
                             <div className="delete-button"><OpenModalMenuItem itemText="Delete Store" modalComponent={<DeleteStore storeId={userStore.id} />} /></div>
                         </div>

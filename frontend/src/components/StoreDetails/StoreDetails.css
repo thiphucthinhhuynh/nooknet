@@ -3,3 +3,29 @@
     margin: 4vh auto;
     /* border: 1px solid pink; */
 }
+
+#store-info #header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#name {
+    margin-right: 10px;
+    font-size: 1.9em;
+    font-weight: bold;
+}
+
+#username {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#store-stat #follow-section p {
+    font-size: 1.1em;
+    color: rgb(253, 127, 148);
+}
+
+#store-stat #follow-section p:hover {
+    cursor: pointer;
+}

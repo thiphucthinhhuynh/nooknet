@@ -1,0 +1,23 @@
+.follow button {
+    border-radius: 20px;
+    width: fit-content;
+    padding: 4px 14px;
+}
+
+.follow #follow {
+    border: 2px solid rgb(253, 127, 148);
+    background-color: transparent;
+    color: rgb(253, 127, 148);
+}
+
+.follow #follow:hover {
+    border: 2px solid rgb(253, 127, 148);
+    background-color: rgb(253, 127, 148);
+    color: white;
+}
+
+.follow #unfollow {
+    border: 2px solid rgb(253, 127, 148);
+    background-color: rgb(253, 127, 148);
+    color: white;
+}
