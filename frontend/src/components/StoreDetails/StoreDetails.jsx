@@ -1,7 +1,7 @@
 import './StoreDetails.css';
 import { FaLocationDot } from "react-icons/fa6";
 import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchStoreDetails } from '../../store/userStore.js';
@@ -12,6 +12,8 @@ import ProfileNavBar from '../ProfileNavBar';
 
 
 const StoreDetails = () => {
+    const [showFollower, setShowFollower] = useState(false);
+    const [showFollowing, setShowFollowing] = useState(false);
     const { storeId } = useParams();
     const dispatch = useDispatch();
     const store = useSelector((state) => state.userStoreState.storeDetails);
@@ -20,7 +22,7 @@ const StoreDetails = () => {
     const sessionUser = useSelector(state => state.session.user);
     const followers = useSelector(state => state.followState.followers);
     const followees = useSelector(state => state.followState.followees);
-    const isOwner = store.Owner.id === sessionUser.id;
+    const isOwner = store?.Owner?.id === sessionUser.id;
 
     useEffect(() => {
         dispatch(fetchStoreDetails(storeId));
@@ -39,6 +41,33 @@ const StoreDetails = () => {
         }
     }, [dispatch, store]);
 
+    const followerRef = useRef();
+    const followingRef = useRef();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (followerRef.current && !followerRef.current.contains(event.target)); {
+                setShowFollower(false);
+            }
+            if (followingRef.current && !followingRef.current.contains(event.target)) {
+                setShowFollowing(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => { document.removeEventListener('mousedonw', handleClickOutside) };
+    }, []);
+
+    const handleToggleFollower = () => {
+        setShowFollower(!showFollower);
+        setShowFollowing(false);
+    };
+
+    const handleToggleFollowing = () => {
+        setShowFollowing(!showFollowing);
+        setShowFollower(false);
+    };
+
     if (!store) {
         return <div>Loading...</div>;
     }
@@ -53,21 +82,23 @@ const StoreDetails = () => {
 
                     <div id="follow-section">
                         {/* {sessionUser && <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />} */}
-                        <div>
-                            <p>{followers.length} Followers</p>
-                            <ul>
+                        <div id="follower" ref={followerRef}>
+                            <p onClick={handleToggleFollower}>{followers.length} Followers</p>
+                            {showFollower && <ul>
+                                <li style={{ fontWeight: 'bold' }}>Followers</li>
                                 {followers.map(follower => (
                                     <li key={follower.id}>{follower.Sender?.username}</li>
                                 ))}
-                            </ul>
+                            </ul>}
                         </div>
-                        <div>
-                            <p>{followees.length} Following</p>
-                            <ul>
+                        <div id="following" ref={followingRef}>
+                            <p onClick={handleToggleFollowing}>{followees.length} Following</p>
+                            {showFollowing && <ul>
+                                <li style={{ fontWeight: 'bold' }}>Following</li>
                                 {followees.map(followee => (
                                     <li key={followee.id}>{followee.Receiver?.username}</li>
                                 ))}
-                            </ul>
+                            </ul>}
                         </div>
                     </div>
 

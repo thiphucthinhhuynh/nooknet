@@ -1,6 +1,6 @@
 import './ItemDetails.css';
 import BearCoin from '../BearCoin';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchItemDetails } from '../../store/item.js';
@@ -10,6 +10,7 @@ import { fetchItemLikes, likeItem, unlikeItem } from '../../store/like.js';
 
 const ItemDetails = () => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [showLike, setShowLike] = useState(false);
     const { itemId } = useParams();
     const dispatch = useDispatch();
     const item = useSelector((state) => state.itemState.itemDetails);
@@ -38,6 +39,19 @@ const ItemDetails = () => {
 
     const userHasLiked = likes.some((like) => like.userId === sessionUser?.id);
 
+    const likeRef = useRef();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!likeRef.current.contains(event.target)) {
+                setShowLike(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => { document.removeEventListener('mousedown', handleClickOutside) };
+    }, []);
+
     return (
         isLoaded &&
         <div className="item-details-container">
@@ -56,19 +70,18 @@ const ItemDetails = () => {
                 <div>Quantity: {item.quantity}</div>
             </div>
 
-            <div className="like-container">
+            <div className="like-container" ref={likeRef}>
                 <LikeButton
                     userHasLiked={userHasLiked}
                     handleLike={handleLike}
                     handleUnlike={() => handleUnlike(likes.find((like) => like.userId === sessionUser.id).id)}
-                />
-                <p className="like-count-container">{likes.length} {likes.length == 1 ? 'Like' : 'Likes'}</p>
-                <ul>
+                /><p className="like-count-container" onClick={() => setShowLike(!showLike)}>{likes.length} {likes.length == 1 ? 'Like' : 'Likes'}</p>
+                {showLike && <ul>
                     <li style={{ fontWeight: 'bold' }}>Likes</li>
                     {likes.map((like) => (
                         <li key={like.id}>{like.User?.username}</li>
                     ))}
-                </ul>
+                </ul>}
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import './Profile.css';
 import { FaLocationDot } from "react-icons/fa6";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStoreByCurrentUser } from '../../store/userStore.js';
 import { getItemsByStore } from '../../store/item.js';
@@ -14,6 +14,8 @@ import { fetchFollowers, fetchFollowees } from '../../store/follow.js';
 
 
 const Profile = () => {
+    const [showFollower, setShowFollower] = useState(false);
+    const [showFollowing, setShowFollowing] = useState(false);
     const defaultProfilePic = "https://i.imghippo.com/files/YShri1720077342.jpg";
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
@@ -30,12 +32,39 @@ const Profile = () => {
         if (userStore && userStore.id) {
             dispatch(getItemsByStore(userStore.id));
         }
-    }, [dispatch, userStore]);
+    }, [dispatch, userStore, userStore.id]);
 
     useEffect(() => {
         dispatch(fetchFollowers(userStore.id));
         dispatch(fetchFollowees(userStore.id));
-    }, [dispatch]);
+    }, [dispatch, userStore.id]);
+
+    const followerRef = useRef();
+    const followingRef = useRef();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (followerRef.current && !followerRef.current.contains(event.target)); {
+                setShowFollower(false);
+            }
+            if (followingRef.current && !followingRef.current.contains(event.target)) {
+                setShowFollowing(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => { document.removeEventListener('mousedonw', handleClickOutside) };
+    }, []);
+
+    const handleToggleFollower = () => {
+        setShowFollower(!showFollower);
+        setShowFollowing(false);
+    };
+
+    const handleToggleFollowing = () => {
+        setShowFollowing(!showFollowing);
+        setShowFollower(false);
+    };
 
     return (
         userStore ?
@@ -47,21 +76,25 @@ const Profile = () => {
 
                         <div id="follow-section">
                             {/* {sessionUser && <FollowButton senderId={sessionUser.id} receiverId={store.Owner.id} />} */}
-                            <div>
-                                <p>{followers.length} Followers</p>
-                                <ul>
-                                    {followers.map(follower => (
-                                        <li key={follower.id}>{follower.Sender?.username}</li>
-                                    ))}
-                                </ul>
+                            <div id="follower" ref={followerRef}>
+                                <p onClick={handleToggleFollower}>{followers.length} Followers</p>
+                                {showFollower &&
+                                    <ul>
+                                        <li style={{ fontWeight: 'bold' }}>Followers</li>
+                                        {followers.map(follower => (
+                                            <li key={follower.id}>{follower.Sender?.username}</li>
+                                        ))}
+                                    </ul>}
                             </div>
-                            <div>
-                                <p>{followees.length} Following</p>
-                                <ul>
-                                    {followees.map(followee => (
-                                        <li key={followee.id}>{followee.Receiver?.username}</li>
-                                    ))}
-                                </ul>
+                            <div id="following" ref={followingRef}>
+                                <p onClick={handleToggleFollowing}>{followees.length} Following</p>
+                                {showFollowing &&
+                                    <ul>
+                                        <li style={{ fontWeight: 'bold' }}>Following</li>
+                                        {followees.map(followee => (
+                                            <li key={followee.id}>{followee.Receiver?.username}</li>
+                                        ))}
+                                    </ul>}
                             </div>
                         </div>
 
