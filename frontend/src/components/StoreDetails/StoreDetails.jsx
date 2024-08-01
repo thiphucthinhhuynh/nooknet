@@ -22,7 +22,7 @@ const StoreDetails = () => {
     const sessionUser = useSelector(state => state.session.user);
     const followers = useSelector(state => state.followState.followers);
     const followees = useSelector(state => state.followState.followees);
-    const isOwner = store?.Owner?.id === sessionUser.id;
+    const isOwner = store?.Owner?.id === sessionUser?.id;
 
     useEffect(() => {
         dispatch(fetchStoreDetails(storeId));
