@@ -32,12 +32,12 @@ const Profile = () => {
         if (userStore && userStore.id) {
             dispatch(getItemsByStore(userStore.id));
         }
-    }, [dispatch, userStore, userStore.id]);
+    }, [dispatch, userStore]);
 
     useEffect(() => {
-        dispatch(fetchFollowers(userStore.id));
-        dispatch(fetchFollowees(userStore.id));
-    }, [dispatch, userStore.id]);
+        dispatch(fetchFollowers(userStore?.id));
+        dispatch(fetchFollowees(userStore?.id));
+    }, [dispatch, userStore?.id]);
 
     const followerRef = useRef();
     const followingRef = useRef();
