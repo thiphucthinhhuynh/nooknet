@@ -14,8 +14,8 @@ const StoreReviews = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const thisStore = useSelector((state) => state.userStoreState.storeDetails);
     const reviews = useSelector((state) => state.reviewState.allReviews);
-    const isOwner = thisStore.Owner.id === sessionUser.id;
-    const hasPostedReview = reviews.some(review => review.userId === sessionUser.id && review.storeId == storeId);
+    const isOwner = thisStore.Owner.id === sessionUser?.id;
+    const hasPostedReview = reviews.some(review => review.userId === sessionUser?.id && review.storeId == storeId);
 
     useEffect(() => {
         dispatch(fetchStoreDetails(storeId));
@@ -41,7 +41,7 @@ const StoreReviews = () => {
         <div className="review-container">
 
             {!isOwner && !hasPostedReview &&
-                <div className="button"><OpenModalMenuItem itemText="Write a Review" modalComponent={<CreateReview userId={sessionUser.id} storeId={storeId} />} /></div>}
+                <div className="button"><OpenModalMenuItem itemText="Write a Review" modalComponent={<CreateReview userId={sessionUser?.id} storeId={storeId} />} /></div>}
 
             <p className="header">Reviews</p>
             {lastedReviews.map(({ id, body, stars, User }) => {
