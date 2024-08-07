@@ -19,7 +19,7 @@
 
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-![DALL·E 3](https://img.shields.io/badge/DALL%C2%B7E-3-blue) (for generating demo images used in this project)
+![DALL·E 3](https://img.shields.io/badge/DALL%20%E2%80%A2%20E-3-pink?style=for-the-badge) (for generating demo images used in this project)
 
 ## Getting Started
 
