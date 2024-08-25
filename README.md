@@ -1,11 +1,11 @@
 # NOOKNET
 
 ## Documentation
-## [Feature List/MVP List](https://github.com/thiphucthinhhuynh/nooknet/wiki/Feature-List-MVP-List)
-## [User Stories](https://github.com/thiphucthinhhuynh/nooknet/wiki/User-Stories)
-## [Database Schema](https://github.com/thiphucthinhhuynh/nooknet/wiki/Database-Schema)
-## [API Documentation](https://github.com/thiphucthinhhuynh/nooknet/wiki/API-Documentation)
-## [Wireframes](https://github.com/thiphucthinhhuynh/nooknet/wiki/Wireframes)
+* [Feature List/MVP List](https://github.com/thiphucthinhhuynh/nooknet/wiki/Feature-List-MVP-List)
+* [User Stories](https://github.com/thiphucthinhhuynh/nooknet/wiki/User-Stories)
+* [Database Schema](https://github.com/thiphucthinhhuynh/nooknet/wiki/Database-Schema)
+* [API Documentation](https://github.com/thiphucthinhhuynh/nooknet/wiki/API-Documentation)
+* [Wireframes](https://github.com/thiphucthinhhuynh/nooknet/wiki/Wireframes)
 
 ## Link to Live Site
 
