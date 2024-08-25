@@ -8,6 +8,7 @@
 * [Wireframes](https://github.com/thiphucthinhhuynh/nooknet/wiki/Wireframes)
 
 ## Link to Live Site
+https://nooknet.onrender.com/
 
 ## Technologies used
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
