@@ -1,15 +1,5 @@
 # NOOKNET
 
-## Documentation
-* [Feature List/MVP List](https://github.com/thiphucthinhhuynh/nooknet/wiki/Feature-List-MVP-List)
-* [User Stories](https://github.com/thiphucthinhhuynh/nooknet/wiki/User-Stories)
-* [Database Schema](https://github.com/thiphucthinhhuynh/nooknet/wiki/Database-Schema)
-* [API Documentation](https://github.com/thiphucthinhhuynh/nooknet/wiki/API-Documentation)
-* [Wireframes](https://github.com/thiphucthinhhuynh/nooknet/wiki/Wireframes)
-
-## Link to Live Site
-https://nooknet.onrender.com/
-
 ## Technologies used
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
@@ -28,6 +18,13 @@ https://nooknet.onrender.com/
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ![DALL·E 3](https://img.shields.io/badge/DALL%20%E2%80%A2%20E-3-pink?style=for-the-badge) (for generating demo images used in this project)
+
+## Documentation
+* [Feature List/MVP List](https://github.com/thiphucthinhhuynh/nooknet/wiki/Feature-List-MVP-List)
+* [User Stories](https://github.com/thiphucthinhhuynh/nooknet/wiki/User-Stories)
+* [Database Schema](https://github.com/thiphucthinhhuynh/nooknet/wiki/Database-Schema)
+* [API Documentation](https://github.com/thiphucthinhhuynh/nooknet/wiki/API-Documentation)
+* [Wireframes](https://github.com/thiphucthinhhuynh/nooknet/wiki/Wireframes)
 
 ## Getting Started
 
@@ -52,3 +49,6 @@ https://nooknet.onrender.com/
 
 * Start the frontend server
   * `npm run dev`
+
+## Link to Live Site
+https://nooknet.onrender.com/
