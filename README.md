@@ -26,6 +26,9 @@
 * [API Documentation](https://github.com/thiphucthinhhuynh/nooknet/wiki/API-Documentation)
 * [Wireframes](https://github.com/thiphucthinhhuynh/nooknet/wiki/Wireframes)
 
+## Link to Live Site
+https://nooknet.onrender.com/
+
 ## Getting Started
 
 * Clone this repository
@@ -50,5 +53,4 @@
 * Start the frontend server
   * `npm run dev`
 
-## Link to Live Site
-https://nooknet.onrender.com/
+
