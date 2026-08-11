@@ -4,7 +4,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 
-function LoginFormModal() {
+function LoginFormModal({ message }) {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
@@ -44,6 +44,7 @@ function LoginFormModal() {
     return (
         <div className="login-modal">
             <h1>Log In</h1>
+            {message && <p className="login-alert">{message}</p>}
             <form onSubmit={handleSubmit}>
                 <div className="login-input">
                     <label>Username or Email</label>
@@ -66,7 +67,10 @@ function LoginFormModal() {
                 <button type="submit" disabled={!isFormValid}>Log In</button>
             </form>
 
-            <a href="#" onClick={handleDemoLogin}>Demo User</a>
+            <div className="demo-login">
+                <p>Want to explore quickly?</p>
+                <a href="#" onClick={handleDemoLogin}>Continue as Demo User</a>
+            </div>
         </div>
     );
 }

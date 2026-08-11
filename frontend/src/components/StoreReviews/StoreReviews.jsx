@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateReview from '../CreateReview';
+import LoginFormModal from '../LoginFormModal';
 import { fetchStoreDetails } from '../../store/userStore.js';
 import { getReviewsByStore } from '../../store/review.js';
 
@@ -41,7 +42,16 @@ const StoreReviews = () => {
         <div className="review-container">
 
             {!isOwner && !hasPostedReview &&
-                <div className="button"><OpenModalMenuItem itemText="Write a Review" modalComponent={<CreateReview userId={sessionUser?.id} storeId={storeId} />} /></div>}
+                <div className="button">
+                    <OpenModalMenuItem
+                        itemText="Write a Review"
+                        modalComponent={
+                            sessionUser
+                                ? <CreateReview userId={sessionUser.id} storeId={storeId} />
+                                : <LoginFormModal message="Please log in first" />
+                        }
+                    />
+                </div>}
 
             <p className="header">Reviews</p>
             {lastedReviews.map(({ id, body, stars, User }) => {

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchItemDetails } from '../../store/item.js';
 import LikeButton from '../LikeButton';
+import LoginFormModal from '../LoginFormModal';
+import { useModal } from '../../context/Modal';
 import { fetchItemLikes, likeItem, unlikeItem } from '../../store/like.js';
 
 
@@ -17,6 +19,7 @@ const ItemDetails = () => {
     const defaultItemPic = "https://i.imghippo.com/files/WF7he1720243556.png";
     const sessionUser = useSelector((state) => state.session.user);
     const likes = useSelector((state) => state.likeState.likes);
+    const { setModalContent } = useModal();
 
     useEffect(() => {
         dispatch(fetchItemDetails(itemId))
@@ -28,6 +31,10 @@ const ItemDetails = () => {
     }, [dispatch, itemId]);
 
     const handleLike = async () => {
+        if (!sessionUser) {
+            setModalContent(<LoginFormModal message="Please log in first" />);
+            return;
+        }
         await dispatch(likeItem(itemId))
         await dispatch(fetchItemLikes(itemId));
     };
